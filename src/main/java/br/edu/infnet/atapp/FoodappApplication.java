@@ -1,4 +1,4 @@
-package br.edu.infnet.foodapp;
+package br.edu.infnet.atapp;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

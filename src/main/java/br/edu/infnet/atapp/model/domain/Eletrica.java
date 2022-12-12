@@ -1,12 +1,12 @@
-package br.edu.infnet.foodapp.model.domain;
+package br.edu.infnet.atapp.model.domain;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.StringJoiner;
 
-import br.edu.infnet.foodapp.model.exceptions.CircuitoInvalidoException;
-import br.edu.infnet.foodapp.model.exceptions.PrecoBaseInvalidoException;
+import br.edu.infnet.atapp.model.exceptions.CircuitoInvalidoException;
+import br.edu.infnet.atapp.model.exceptions.PrecoBaseInvalidoException;
 
 public class Eletrica extends Servico {
 	

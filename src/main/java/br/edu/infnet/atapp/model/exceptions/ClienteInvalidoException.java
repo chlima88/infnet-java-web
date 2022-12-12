@@ -1,4 +1,4 @@
-package br.edu.infnet.foodapp.model.exceptions;
+package br.edu.infnet.atapp.model.exceptions;
 
 
 public class ClienteInvalidoException extends Exception {

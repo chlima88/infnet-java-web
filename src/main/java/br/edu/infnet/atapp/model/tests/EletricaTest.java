@@ -1,8 +1,8 @@
-package br.edu.infnet.foodapp.model.tests;
+package br.edu.infnet.atapp.model.tests;
 
-import br.edu.infnet.foodapp.model.domain.Eletrica;
-import br.edu.infnet.foodapp.model.exceptions.CircuitoInvalidoException;
-import br.edu.infnet.foodapp.model.exceptions.PrecoBaseInvalidoException;
+import br.edu.infnet.atapp.model.domain.Eletrica;
+import br.edu.infnet.atapp.model.exceptions.CircuitoInvalidoException;
+import br.edu.infnet.atapp.model.exceptions.PrecoBaseInvalidoException;
 
 public class EletricaTest {
 

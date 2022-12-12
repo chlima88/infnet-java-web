@@ -1,6 +1,6 @@
-package br.edu.infnet.foodapp.model.domain;
+package br.edu.infnet.atapp.model.domain;
 
-import br.edu.infnet.foodapp.model.exceptions.ClienteInvalidoException;
+import br.edu.infnet.atapp.model.exceptions.ClienteInvalidoException;
 
 public class Cliente {
 

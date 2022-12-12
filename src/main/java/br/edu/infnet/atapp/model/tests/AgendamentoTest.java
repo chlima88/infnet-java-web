@@ -1,16 +1,18 @@
-package br.edu.infnet.foodapp.model.tests;
+package br.edu.infnet.atapp.model.tests;
 
-import br.edu.infnet.foodapp.model.domain.Agendamento;
-import br.edu.infnet.foodapp.model.domain.Cliente;
-import br.edu.infnet.foodapp.model.domain.Eletrica;
-import br.edu.infnet.foodapp.model.domain.Lanternagem;
-import br.edu.infnet.foodapp.model.domain.Mecanica;
-import br.edu.infnet.foodapp.model.exceptions.CategoriaInvalidaException;
-import br.edu.infnet.foodapp.model.exceptions.CircuitoInvalidoException;
-import br.edu.infnet.foodapp.model.exceptions.ClienteInvalidoException;
-import br.edu.infnet.foodapp.model.exceptions.DuracaoAtendimentoException;
-import br.edu.infnet.foodapp.model.exceptions.PrecoBaseInvalidoException;
-import br.edu.infnet.foodapp.model.exceptions.TamanhoInvalidoException;
+import br.edu.infnet.atapp.model.domain.Agendamento;
+import br.edu.infnet.atapp.model.domain.Cliente;
+import br.edu.infnet.atapp.model.domain.Eletrica;
+import br.edu.infnet.atapp.model.domain.Lanternagem;
+import br.edu.infnet.atapp.model.domain.Mecanica;
+import br.edu.infnet.atapp.model.exceptions.CategoriaInvalidaException;
+import br.edu.infnet.atapp.model.exceptions.CircuitoInvalidoException;
+import br.edu.infnet.atapp.model.exceptions.ClienteIndefinidoException;
+import br.edu.infnet.atapp.model.exceptions.ClienteInvalidoException;
+import br.edu.infnet.atapp.model.exceptions.DuracaoAtendimentoException;
+import br.edu.infnet.atapp.model.exceptions.PrecoBaseInvalidoException;
+import br.edu.infnet.atapp.model.exceptions.ServicoIndefinidoException;
+import br.edu.infnet.atapp.model.exceptions.TamanhoInvalidoException;
 
 public class AgendamentoTest {
 
@@ -85,9 +87,23 @@ public class AgendamentoTest {
 			System.out.println(error.getMessage());
 		}		
 
-		a1.imprimir();
-		a2.imprimir();
-		a3.imprimir();
+		try {
+			a1.imprimir();			
+		} catch (ClienteIndefinidoException | ServicoIndefinidoException error) {
+			System.out.println("A1: " + error.getMessage());
+		}
+		
+		try {
+			a2.imprimir();			
+		} catch (ClienteIndefinidoException | ServicoIndefinidoException error) {
+			System.out.println("A2: " + error.getMessage());
+		}
+		
+		try {
+			a3.imprimir();			
+		} catch (ClienteIndefinidoException | ServicoIndefinidoException error) {
+			System.out.println("A3: " + error.getMessage());
+		}
 	}
 
 }

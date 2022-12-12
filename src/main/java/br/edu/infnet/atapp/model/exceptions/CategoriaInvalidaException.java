@@ -1,4 +1,4 @@
-package br.edu.infnet.foodapp.model.exceptions;
+package br.edu.infnet.atapp.model.exceptions;
 
 public class CategoriaInvalidaException extends Exception {
 	private static final long serialVersionUID = 1L;

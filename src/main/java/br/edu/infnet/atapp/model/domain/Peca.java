@@ -1,4 +1,4 @@
-package br.edu.infnet.foodapp.model.domain;
+package br.edu.infnet.atapp.model.domain;
 
 public class Peca {
 

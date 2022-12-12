@@ -1,11 +1,13 @@
-package br.edu.infnet.foodapp.model.domain;
+package br.edu.infnet.atapp.model.domain;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-import br.edu.infnet.foodapp.model.exceptions.DuracaoAtendimentoException;
+import br.edu.infnet.atapp.model.exceptions.ClienteIndefinidoException;
+import br.edu.infnet.atapp.model.exceptions.DuracaoAtendimentoException;
+import br.edu.infnet.atapp.model.exceptions.ServicoIndefinidoException;
 
 public class Agendamento {
 	
@@ -79,7 +81,16 @@ public class Agendamento {
 		
 	}
 	
-	public void imprimir() {
+	public void imprimir() throws ClienteIndefinidoException, ServicoIndefinidoException {
+		
+		if (this.cliente == null ) {
+			throw new ClienteIndefinidoException("E necessário atribuir um cliente ao agendamento");
+		}
+		
+		if (this.servicos.size() == 0) {
+			throw new ServicoIndefinidoException("E necessario atribuir um servico ao agendamento");
+		}
+		
 		System.out.println("");
 		System.out.println("Cliente: " + this.cliente);
 		System.out.println("Agendamento: " + this.toString());

@@ -1,4 +1,4 @@
-package br.edu.infnet.foodapp.model.exceptions;
+package br.edu.infnet.atapp.model.exceptions;
 
 public class CircuitoInvalidoException extends Exception {
 	private static final long serialVersionUID = 1L;

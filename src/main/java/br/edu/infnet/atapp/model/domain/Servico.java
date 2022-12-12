@@ -1,6 +1,6 @@
-package br.edu.infnet.foodapp.model.domain;
+package br.edu.infnet.atapp.model.domain;
 
-import br.edu.infnet.foodapp.model.exceptions.PrecoBaseInvalidoException;
+import br.edu.infnet.atapp.model.exceptions.PrecoBaseInvalidoException;
 
 public abstract class Servico {
 
