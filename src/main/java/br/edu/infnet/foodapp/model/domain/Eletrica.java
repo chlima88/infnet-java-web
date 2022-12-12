@@ -1,7 +1,12 @@
 package br.edu.infnet.foodapp.model.domain;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import java.util.StringJoiner;
 
+import br.edu.infnet.foodapp.model.exceptions.CircuitoInvalidoException;
 import br.edu.infnet.foodapp.model.exceptions.PrecoBaseInvalidoException;
 
 public class Eletrica extends Servico {
@@ -56,7 +61,13 @@ public class Eletrica extends Servico {
 		return this.circuitoDanificado;
 	}
 
-	public void setCircuitoDanificado(String circuitoDanificado) {
+	public void setCircuitoDanificado(String circuitoDanificado) throws CircuitoInvalidoException {
+		List<String> validOptions = new ArrayList<String>(Arrays.asList("luzes","ignicao","arranque","acessorios"));
+		
+		if (!validOptions.contains(circuitoDanificado)) {
+			throw new CircuitoInvalidoException("O coircuito informando e invalido.");
+		}
+		
 		this.circuitoDanificado = circuitoDanificado;
 	}
 	

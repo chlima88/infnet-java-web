@@ -1,6 +1,7 @@
 package br.edu.infnet.foodapp.model.tests;
 
 import br.edu.infnet.foodapp.model.domain.Eletrica;
+import br.edu.infnet.foodapp.model.exceptions.CircuitoInvalidoException;
 import br.edu.infnet.foodapp.model.exceptions.PrecoBaseInvalidoException;
 
 public class EletricaTest {
@@ -22,7 +23,7 @@ public class EletricaTest {
 			System.out.println("E2: " + e2);		
 			System.out.println("E2 Mao de obra: " + e2.obterPrecoMaoDeObra());
 			System.out.println("E2 Preco final: " + e2.obterPrecoFinal());
-		} catch (PrecoBaseInvalidoException error) {
+		} catch (PrecoBaseInvalidoException | CircuitoInvalidoException error) {
 			System.out.println(error.getMessage());
 		}
 		
@@ -33,7 +34,7 @@ public class EletricaTest {
 			System.out.println("E3: " + e3);
 			System.out.println("E3 Mao de obra: " + e3.obterPrecoMaoDeObra());
 			System.out.println("E3 Preco final: " + e3.obterPrecoFinal());
-		} catch (PrecoBaseInvalidoException error) {
+		} catch (PrecoBaseInvalidoException | CircuitoInvalidoException error) {
 			System.out.println(error.getMessage());
 		}
 		
