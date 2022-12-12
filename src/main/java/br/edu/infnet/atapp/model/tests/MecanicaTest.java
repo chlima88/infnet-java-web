@@ -8,40 +8,43 @@ public class MecanicaTest {
 
 	public static void main(String[] args) {
 		
-		/*
-		 * Casos de tests
-		 * 
-		 * 1 - Categoria invalida
-		 * 
-		 * */ 
-		
 		try {
-			Mecanica m1 = new Mecanica("Alinhamento", "M01", 200, false);
-			System.out.println("M1: " + m1);
+			System.out.println("\r\nTest case 1: Instanciar Mecanica com sucesso\r\n"
+					+ "Saida Esperada: classe instanciada\r\n");
+			Mecanica servico = new Mecanica("Alinhamento", "M01", 200, false);
+			System.out.println(servico);
 		} catch (PrecoBaseInvalidoException error) {
-			System.out.println("M1: " + error.getMessage());
+			System.out.println("Servico: " + error.getMessage());
 		}
 		
-		try {		
-			Mecanica m2 = new Mecanica("Troca de oleo", "M02", 150, true);
-			m2.setCategoriaServico("revisar");
-			m2.setProblemaMotor(false);
-			System.out.println("M2: " + m2);
-			System.out.println("M2 Mao de obra: " + m2.obterPrecoMaoDeObra());
-			System.out.println("M2 preco final: " + m2.obterPrecoFinal());
+		try {
+			System.out.println("\r\nTest case 2: Definir uma categoria invalida\r\n"
+					+ "Saida Esperada: mensagem de erro\r\n");
+			Mecanica servico = new Mecanica("Troca de oleo", "M02", 150, true);
+			servico.setCategoriaServico("xxxx");
+			servico.setProblemaMotor(false);
+			System.out.println("Servico: " + servico);
+			System.out.println("Servico Mao de obra: " + servico.obterPrecoMaoDeObra());
+			System.out.println("Servico preco final: " + servico.obterPrecoFinal());
 		} catch (PrecoBaseInvalidoException | CategoriaInvalidaException error) {
-			System.out.println("M2: " + error.getMessage());
+			System.out.println("Servico: " + error.getMessage());
 		}
 		
 		try { 
-			Mecanica m3 = new Mecanica("Substituicao bloco motor","L03",800, false);
-			m3.setCategoriaServico("manutencao");
-			m3.setProblemaMotor(true);
-			System.out.println("M3: " + m3);
-			System.out.println("M3 Mao de obra: " + m3.obterPrecoMaoDeObra());
-			System.out.println("M3 Preco final: " + m3.obterPrecoFinal());
+			System.out.println("\r\nTest case 3: Validar o ajuste do preco devido a taxa de problema no motor\r\n"
+					+ "Saida Esperada: Maior preco final quando problemaMotor é igual a true\r\n");
+			Mecanica servico = new Mecanica("Substituicao bloco motor","L03",800, false);
+			servico.setCategoriaServico("manutencao");
+			servico.setProblemaMotor(false);
+			System.out.println("Servico (com taxa): " + servico);
+			System.out.println("Servico Mao de obra (com taxa): " + servico.obterPrecoMaoDeObra());
+			System.out.println("Servico preco final (com taxa): " + servico.obterPrecoFinal());
+			servico.setProblemaMotor(true);
+			System.out.println("Servico (sem taxa): " + servico);
+			System.out.println("Servico Mao de obra (sem taxa): " + servico.obterPrecoMaoDeObra());
+			System.out.println("Servico preco final (sem taxa): " + servico.obterPrecoFinal());
 		} catch (PrecoBaseInvalidoException | CategoriaInvalidaException error) {
-			System.out.println("M3: " + error.getMessage());
+			System.out.println("Servico: " + error.getMessage());
 		}
 	}
 
