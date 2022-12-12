@@ -8,6 +8,10 @@ import br.edu.infnet.foodapp.model.exceptions.PrecoBaseInvalidoException;
 public class ServiceTest {
 
 	public static void main(String[] args) {
+		
+		// Casos de teste
+		// 1 - Testar preços invalidos
+		// 2 - Validar calculo do terceirizado 
 
 		try {
 			Eletrica e1 = new Eletrica("Revisão Eletrica", "L01", 100, false);
