@@ -2,6 +2,7 @@ package br.edu.infnet.foodapp.model.domain;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Agendamento {
@@ -16,6 +17,7 @@ public class Agendamento {
 	public Agendamento() {
 		this.data = LocalDateTime.now();
 		this.duracaoEmMinutos = 0;
+		this.servicos = new ArrayList<Servico>();
 	}
 
 
@@ -35,14 +37,6 @@ public class Agendamento {
 		this.cliente = cliente;
 	}
 
-	public List<Servico> getServico() {
-		return this.servicos;
-	}
-
-	public void setServico(List<Servico> servicos) {
-		this.servicos = servicos;
-	}
-
 	public LocalDateTime getData() {
 		return this.data;
 	}	
@@ -54,17 +48,31 @@ public class Agendamento {
 	public void setConfirmado(boolean confirmado) {
 		this.confirmado = confirmado;
 	}
+	
+	public List<Servico> getServicos() {
+		return this.servicos;
+	}
+
+	public void setServicos(Servico servicos) {
+		this.servicos.add(servicos);
+	}
 
 	@Override
 	public String toString() { 
 		
 		DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd/MM/YY HH:mm");
 		
-		return String.format("%s;%s;%d;%s", 
+		return String.format("%s;%d;%s", 
 				this.data.format(dateFormat), 
-				this.cliente.getNome(),
 				this.duracaoEmMinutos,
 				this.confirmado ? "Sim" : "Não");
 		
+	}
+	
+	public void imprimir() {
+		System.out.println("");
+		System.out.println("Cliente: " + this.cliente);
+		System.out.println("Agendamento: " + this.toString());
+		System.out.println("Qtd. Servicos: " + this.servicos.size());
 	}
 }

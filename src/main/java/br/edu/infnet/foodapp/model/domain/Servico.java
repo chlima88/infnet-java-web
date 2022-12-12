@@ -1,27 +1,24 @@
 package br.edu.infnet.foodapp.model.domain;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public abstract class Servico {
 
 	private String nome;
 	private String codigo;
 	private float precoBase;
-	private List<Peca> pecasSubstituidas;
+	private boolean terceirizado;
 	
-	public Servico(String nome, String codigo, float precoBase) {
+	public Servico(String nome, String codigo, float precoBase, boolean terceirizado) {
+
 		this.nome = nome;
 		this.codigo = codigo;
 		this.precoBase = precoBase;
-		this.pecasSubstituidas = new ArrayList<Peca>();
+		this.terceirizado = terceirizado;
 	}
 	
-	public abstract float obterPrecoPecas();
 	public abstract float obterPrecoMaoDeObra();
 	
 	public float obterPrecoFinal() {
-		return this.obterPrecoPecas() + this.obterPrecoMaoDeObra();
+		return this.terceirizado ? this.obterPrecoMaoDeObra() * 1.2f : this.obterPrecoMaoDeObra();
 	};	
 
 	public String getNome() {
@@ -36,15 +33,6 @@ public abstract class Servico {
 		return this.precoBase;
 	}
 	
-	public List<Peca> getPecasSubstituidas() {
-		return this.pecasSubstituidas;
-	}
-	
-	public void setPecasSubstituidas(List<Peca> pecas) {
-		this.pecasSubstituidas = pecas;
-	}
-
-	
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
@@ -54,6 +42,8 @@ public abstract class Servico {
 		sb.append(this.nome);
 		sb.append(";");
 		sb.append(this.precoBase);
+		sb.append(";");
+		sb.append(this.terceirizado);
 		
 		return sb.toString();
 	}

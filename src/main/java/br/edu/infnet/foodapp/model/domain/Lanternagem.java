@@ -8,24 +8,11 @@ public class Lanternagem extends Servico {
 	private String localDanificado;
 		
 	
-	public Lanternagem(String nome, String codigo, float precoBase) {
-		super(nome, codigo, precoBase);
+	public Lanternagem(String nome, String codigo, float precoBase, boolean terceirizado) {
+		super(nome, codigo, precoBase, terceirizado);
 	}
 
-	public Lanternagem(String nome, String codigo, float preco, String tamanhoAvaria, String localDanificado) {
-		this(nome, codigo, preco);
-		this.tamanhoAvaria = tamanhoAvaria;
-		this.localDanificado = localDanificado;
-	}
 	
-	@Override
-	public float obterPrecoPecas() {
-		float preco = 0;
-		for (Peca peca: super.getPecasSubstituidas()) {
-			preco += peca.getPreco();
-		}
-		return preco;
-	}
 
 	@Override
 	public float obterPrecoMaoDeObra() {		
