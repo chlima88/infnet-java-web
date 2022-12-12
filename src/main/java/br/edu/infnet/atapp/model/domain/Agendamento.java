@@ -2,7 +2,6 @@ package br.edu.infnet.atapp.model.domain;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
 
 import br.edu.infnet.atapp.model.exceptions.ClienteIndefinidoException;
@@ -18,10 +17,20 @@ public class Agendamento {
 	private List<Servico> servicos;
 	
 	
-	public Agendamento() {
+	public Agendamento(Cliente cliente, List<Servico> servicos) throws ClienteIndefinidoException, ServicoIndefinidoException {
+		
+		if (cliente == null) {
+			throw new ClienteIndefinidoException("E necessário atribuir um cliente ao agendamento");	
+		}
+		
+		if (servicos == null) {
+			throw new ServicoIndefinidoException("E necessario atribuir um servico ao agendamento");
+		}
+		
 		this.data = LocalDateTime.now();
 		this.duracaoEmMinutos = 0;
-		this.servicos = new ArrayList<Servico>();
+		this.cliente = cliente;
+		this.servicos = servicos;
 	}
 
 
@@ -31,7 +40,7 @@ public class Agendamento {
 
 	public void setDuracaoEmMinutos(int duracaoEmMinutos) throws DuracaoAtendimentoException {
 		if (duracaoEmMinutos <= 0 ) {
-			throw new DuracaoAtendimentoException("A duracao do atendimento deve ser maior qur zero.");
+			throw new DuracaoAtendimentoException("A duracao do atendimento deve ser maior que zero.");
 		}
 		this.duracaoEmMinutos = duracaoEmMinutos;
 	}
@@ -39,11 +48,7 @@ public class Agendamento {
 	public Cliente getCliente() {
 		return this.cliente;
 	}
-
-	public void setCliente(Cliente cliente) {
-		this.cliente = cliente;
-	}
-
+	
 	public LocalDateTime getData() {
 		return this.data;
 	}	
@@ -60,14 +65,6 @@ public class Agendamento {
 		return this.servicos;
 	}
 
-	public void adicionarServico(Servico servico) {
-		this.servicos.add(servico);
-	}
-	
-	public void removerServico(Servico servico) {
-		int index = this.servicos.indexOf(servico);
-		this.servicos.remove(index);
-	}
 
 	@Override
 	public String toString() { 
@@ -81,16 +78,36 @@ public class Agendamento {
 		
 	}
 	
-	public void imprimir() throws ClienteIndefinidoException, ServicoIndefinidoException {
+	public String obterPedido() {
 		
-		if (this.cliente == null ) {
-			throw new ClienteIndefinidoException("E necessário atribuir um cliente ao agendamento");
+		DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd/MM/YY HH:mm");
+		
+		StringBuilder sb = new StringBuilder();
+		
+		
+		float orcamento = 0;
+		for (Servico servico: this.servicos) {
+			orcamento += servico.obterPrecoMaoDeObra();
 		}
 		
-		if (this.servicos.size() == 0) {
-			throw new ServicoIndefinidoException("E necessario atribuir um servico ao agendamento");
-		}
+		sb.append(this.data.format(dateFormat));
+		sb.append(";");
+		sb.append(this.duracaoEmMinutos);
+		sb.append(";");
+		sb.append(this.confirmado ? "Sim" : "Não");
+		sb.append(";");
+		sb.append(this.cliente);
+		sb.append(";");
+		sb.append(this.servicos.size());
+		sb.append(";");
+		sb.append(orcamento);
+		sb.append("\r\n");
 		
+		return sb.toString(); 
+	}
+	
+	public void imprimir() {
+
 		System.out.println("");
 		System.out.println("Cliente: " + this.cliente);
 		System.out.println("Agendamento: " + this.toString());
