@@ -1,28 +1,36 @@
 package br.edu.infnet.foodapp.model.tests;
 
 import br.edu.infnet.foodapp.model.domain.Mecanica;
+import br.edu.infnet.foodapp.model.exceptions.CategoriaInvalidaException;
 import br.edu.infnet.foodapp.model.exceptions.PrecoBaseInvalidoException;
 
 public class MecanicaTest {
 
 	public static void main(String[] args) {
 		
+		/*
+		 * Casos de tests
+		 * 
+		 * 1 - Categoria invalida
+		 * 
+		 * */ 
+		
 		try {
 			Mecanica m1 = new Mecanica("Alinhamento", "M01", 200, false);
 			System.out.println("M1: " + m1);
 		} catch (PrecoBaseInvalidoException error) {
-			System.out.println(error.getMessage());
+			System.out.println("M1: " + error.getMessage());
 		}
 		
 		try {		
 			Mecanica m2 = new Mecanica("Troca de oleo", "M02", 150, true);
-			m2.setCategoriaServico("revisao");
+			m2.setCategoriaServico("revisar");
 			m2.setProblemaMotor(false);
 			System.out.println("M2: " + m2);
 			System.out.println("M2 Mao de obra: " + m2.obterPrecoMaoDeObra());
 			System.out.println("M2 preco final: " + m2.obterPrecoFinal());
-		} catch (PrecoBaseInvalidoException error) {
-			System.out.println(error.getMessage());
+		} catch (PrecoBaseInvalidoException | CategoriaInvalidaException error) {
+			System.out.println("M2: " + error.getMessage());
 		}
 		
 		try { 
@@ -32,8 +40,8 @@ public class MecanicaTest {
 			System.out.println("M3: " + m3);
 			System.out.println("M3 Mao de obra: " + m3.obterPrecoMaoDeObra());
 			System.out.println("M3 Preco final: " + m3.obterPrecoFinal());
-		} catch (PrecoBaseInvalidoException error) {
-			System.out.println(error.getMessage());
+		} catch (PrecoBaseInvalidoException | CategoriaInvalidaException error) {
+			System.out.println("M3: " + error.getMessage());
 		}
 	}
 

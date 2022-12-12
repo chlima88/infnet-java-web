@@ -5,6 +5,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.edu.infnet.foodapp.model.exceptions.DuracaoAtendimentoException;
+
 public class Agendamento {
 	
 	private LocalDateTime data;
@@ -25,7 +27,10 @@ public class Agendamento {
 		return this.duracaoEmMinutos;
 	}
 
-	public void setDuracaoEmMinutos(int duracaoEmMinutos) {
+	public void setDuracaoEmMinutos(int duracaoEmMinutos) throws DuracaoAtendimentoException {
+		if (duracaoEmMinutos <= 0 ) {
+			throw new DuracaoAtendimentoException("A duracao do atendimento deve ser maior qur zero.");
+		}
 		this.duracaoEmMinutos = duracaoEmMinutos;
 	}
 
@@ -53,8 +58,13 @@ public class Agendamento {
 		return this.servicos;
 	}
 
-	public void setServicos(Servico servicos) {
-		this.servicos.add(servicos);
+	public void adicionarServico(Servico servico) {
+		this.servicos.add(servico);
+	}
+	
+	public void removerServico(Servico servico) {
+		int index = this.servicos.indexOf(servico);
+		this.servicos.remove(index);
 	}
 
 	@Override
@@ -74,5 +84,10 @@ public class Agendamento {
 		System.out.println("Cliente: " + this.cliente);
 		System.out.println("Agendamento: " + this.toString());
 		System.out.println("Qtd. Servicos: " + this.servicos.size());
+		System.out.println("Servicos: ");
+		
+		for (Servico servico: this.servicos ) {
+			System.out.println("   - " + servico.getNome() );
+		}
 	}
 }

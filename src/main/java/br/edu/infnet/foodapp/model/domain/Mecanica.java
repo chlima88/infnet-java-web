@@ -1,7 +1,11 @@
 package br.edu.infnet.foodapp.model.domain;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.StringJoiner;
 
+import br.edu.infnet.foodapp.model.exceptions.CategoriaInvalidaException;
 import br.edu.infnet.foodapp.model.exceptions.PrecoBaseInvalidoException;
 
 public class Mecanica extends Servico {
@@ -12,7 +16,6 @@ public class Mecanica extends Servico {
 
 	public Mecanica(String nome, String codigo, float precoBase, boolean terceirizado) throws PrecoBaseInvalidoException {
 		super(nome, codigo, precoBase, terceirizado);
-		this.categoriaServico = null;
 		this.problemaMotor = false;
 	}
 
@@ -44,7 +47,13 @@ public class Mecanica extends Servico {
 		return categoriaServico;
 	}
 
-	public void setCategoriaServico(String categoriaServico) {
+	public void setCategoriaServico(String categoriaServico) throws CategoriaInvalidaException {
+		List<String> validOptions = new ArrayList<String>(Arrays.asList("revisao","troca","manutencao"));
+	
+	if (!validOptions.contains(categoriaServico.toLowerCase())) {
+		throw new CategoriaInvalidaException("Categoria invalida ["+categoriaServico+"]. "
+				+ "Opcoes validas: " + validOptions);
+	}
 		this.categoriaServico = categoriaServico;
 	}
 

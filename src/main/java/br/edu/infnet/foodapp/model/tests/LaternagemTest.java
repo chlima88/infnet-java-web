@@ -17,7 +17,7 @@ public class LaternagemTest {
 
 		try {
 			Lanternagem l1 = new Lanternagem("Recuperação de Paralama", "L01", 100, false);
-			l1.setTamanhoAvaria("P");
+			l1.setTamanhoAvaria("F");
 			System.out.println("L1: " + l1);
 		} catch (PrecoBaseInvalidoException | TamanhoInvalidoException error) {
 			System.out.println("L1: " + error.getMessage());

@@ -2,7 +2,6 @@ package br.edu.infnet.foodapp.model.domain;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.StringJoiner;
 
@@ -65,7 +64,8 @@ public class Eletrica extends Servico {
 		List<String> validOptions = new ArrayList<String>(Arrays.asList("luzes","ignicao","arranque","acessorios"));
 		
 		if (!validOptions.contains(circuitoDanificado)) {
-			throw new CircuitoInvalidoException("O circuito informado e invalido.");
+			throw new CircuitoInvalidoException("O circuito informado invalido ["+ circuitoDanificado +"]. "
+					+ "Opcoes validas: " + validOptions);
 		}
 		
 		this.circuitoDanificado = circuitoDanificado;

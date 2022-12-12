@@ -62,7 +62,8 @@ public class Lanternagem extends Servico {
 		List<String> validOptions = new ArrayList<String>(Arrays.asList("P","M","G"));
 	
 		if (!validOptions.contains(tamanhoAvaria)) {
-			throw new TamanhoInvalidoException("Tamanho Invalido. O tamanho deve ser P, M ou G.");
+			throw new TamanhoInvalidoException("Tamanho Invalido ["+ tamanhoAvaria +"]. "
+					+ "Opcoes validas: " + validOptions);
 		}
 
 		this.tamanhoAvaria = tamanhoAvaria;
