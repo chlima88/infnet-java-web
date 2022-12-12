@@ -8,11 +8,16 @@ public class EletricaTest {
 
 	public static void main(String[] args) {
 		
+		// Casos de teste
+		// 1 - Instancia sem utilização de setters
+		// 2 - Incendio false/true -> validar calculo
+		// 3 - Circuito invalido -> Exibir erro
+		
 		try {
 			Eletrica e1 = new Eletrica("Revisão Eletrica", "L01", 100, false);
 			System.out.println("E1: " + e1);
 		} catch (PrecoBaseInvalidoException error) {
-			System.out.println(error.getMessage());
+			System.out.println("E1: " + error.getMessage());
 		}
 		
 		
@@ -24,7 +29,7 @@ public class EletricaTest {
 			System.out.println("E2 Mao de obra: " + e2.obterPrecoMaoDeObra());
 			System.out.println("E2 Preco final: " + e2.obterPrecoFinal());
 		} catch (PrecoBaseInvalidoException | CircuitoInvalidoException error) {
-			System.out.println(error.getMessage());
+			System.out.println("E2: " + error.getMessage());
 		}
 		
 		try {
@@ -35,7 +40,7 @@ public class EletricaTest {
 			System.out.println("E3 Mao de obra: " + e3.obterPrecoMaoDeObra());
 			System.out.println("E3 Preco final: " + e3.obterPrecoFinal());
 		} catch (PrecoBaseInvalidoException | CircuitoInvalidoException error) {
-			System.out.println(error.getMessage());
+			System.out.println("E3: " + error.getMessage());
 		}
 		
 	}

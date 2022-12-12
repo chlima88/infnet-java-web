@@ -65,7 +65,7 @@ public class Eletrica extends Servico {
 		List<String> validOptions = new ArrayList<String>(Arrays.asList("luzes","ignicao","arranque","acessorios"));
 		
 		if (!validOptions.contains(circuitoDanificado)) {
-			throw new CircuitoInvalidoException("O coircuito informando e invalido.");
+			throw new CircuitoInvalidoException("O circuito informado e invalido.");
 		}
 		
 		this.circuitoDanificado = circuitoDanificado;
