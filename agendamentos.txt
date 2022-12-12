@@ -1,0 +1,10 @@
+M;Alinhamento;M01;200;false;manutencao;false
+A;120;Sim;cliente1;11111;1@cliente.com
+M;Troca de oleo;M02;150;true;revisao;false
+E;Reparo circuito luzes;L02;350;true;luzes;false
+A;120;Não;cliente2;22222;2@cliente.com
+L;Recuperação de Portamalas;L02;500;true;traseira;G
+A;120;Não;cliente3;3333333;3@cliente.com
+M;Substituicao bloco motor;L03;800;false;manutencao;true
+L;Recuperação de Portamalas;L02;500;true;traseira;G
+A;120;Não;cliente4;444444;4@cliente.com
