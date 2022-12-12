@@ -1,5 +1,7 @@
 package br.edu.infnet.foodapp.model.domain;
 
+import br.edu.infnet.foodapp.model.exceptions.PrecoBaseInvalidoException;
+
 public abstract class Servico {
 
 	private String nome;
@@ -7,8 +9,12 @@ public abstract class Servico {
 	private float precoBase;
 	private boolean terceirizado;
 	
-	public Servico(String nome, String codigo, float precoBase, boolean terceirizado) {
-
+	public Servico(String nome, String codigo, float precoBase, boolean terceirizado) throws PrecoBaseInvalidoException {
+		
+		if (precoBase <= 0) {
+			throw new PrecoBaseInvalidoException("O preco deve ser superior a zero.");
+		}
+		
 		this.nome = nome;
 		this.codigo = codigo;
 		this.precoBase = precoBase;

@@ -2,13 +2,15 @@ package br.edu.infnet.foodapp.model.domain;
 
 import java.util.StringJoiner;
 
+import br.edu.infnet.foodapp.model.exceptions.PrecoBaseInvalidoException;
+
 public class Lanternagem extends Servico {
 	
 	private String tamanhoAvaria; //P,M,G
 	private String localDanificado;
 		
 	
-	public Lanternagem(String nome, String codigo, float precoBase, boolean terceirizado) {
+	public Lanternagem(String nome, String codigo, float precoBase, boolean terceirizado) throws PrecoBaseInvalidoException {
 		super(nome, codigo, precoBase, terceirizado);
 	}
 

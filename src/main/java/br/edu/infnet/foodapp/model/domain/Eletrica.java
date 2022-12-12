@@ -2,13 +2,15 @@ package br.edu.infnet.foodapp.model.domain;
 
 import java.util.StringJoiner;
 
+import br.edu.infnet.foodapp.model.exceptions.PrecoBaseInvalidoException;
+
 public class Eletrica extends Servico {
 	
 	private String circuitoDanificado; // ignição, arranque, luzes, acessorios
 	private boolean incendio;
 
 
-	public Eletrica(String nome, String codigo, float preco, boolean terceirizado) {
+	public Eletrica(String nome, String codigo, float preco, boolean terceirizado) throws PrecoBaseInvalidoException {
 		super(nome, codigo, preco, terceirizado);
 		this.incendio = false;
 	}
