@@ -1,8 +1,12 @@
 package br.edu.infnet.foodapp.model.domain;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.StringJoiner;
 
 import br.edu.infnet.foodapp.model.exceptions.PrecoBaseInvalidoException;
+import br.edu.infnet.foodapp.model.exceptions.TamanhoInvalidoException;
 
 public class Lanternagem extends Servico {
 	
@@ -54,7 +58,13 @@ public class Lanternagem extends Servico {
 		return this.tamanhoAvaria;
 	}
 
-	public void setTamanhoAvaria(String tamanhoAvaria) {
+	public void setTamanhoAvaria(String tamanhoAvaria) throws TamanhoInvalidoException {		
+		List<String> validOptions = new ArrayList<String>(Arrays.asList("P","M","G"));
+	
+		if (!validOptions.contains(tamanhoAvaria)) {
+			throw new TamanhoInvalidoException("Tamanho Invalido. O tamanho deve ser P, M ou G.");
+		}
+
 		this.tamanhoAvaria = tamanhoAvaria;
 	}
 	

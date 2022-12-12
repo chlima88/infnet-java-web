@@ -5,10 +5,15 @@ import br.edu.infnet.foodapp.model.domain.Cliente;
 import br.edu.infnet.foodapp.model.domain.Lanternagem;
 import br.edu.infnet.foodapp.model.domain.Mecanica;
 import br.edu.infnet.foodapp.model.exceptions.PrecoBaseInvalidoException;
+import br.edu.infnet.foodapp.model.exceptions.TamanhoInvalidoException;
 
 public class AgendamentoTest {
 
 	public static void main(String[] args) {
+		
+		// Casos de teste
+		// 1 - duracaoEmMinutos menor ou igual a zero
+		// 2 - suporte a um ou multiplos servicos
 		
 		Cliente c1 = new Cliente("cliente1","11111","1@cliente.com");
 		Cliente c2 = new Cliente("cliente2","2222","2@cliente.com");
@@ -54,7 +59,7 @@ public class AgendamentoTest {
 			l2.setLocalDanificado("Traseira");
 			l2.setTamanhoAvaria("G");
 			a3.setServicos(l2);
-		} catch (PrecoBaseInvalidoException error) {
+		} catch (PrecoBaseInvalidoException | TamanhoInvalidoException error) {
 			System.out.println(error.getMessage());
 		}		
 

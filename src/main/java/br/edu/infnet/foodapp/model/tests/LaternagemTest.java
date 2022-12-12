@@ -2,17 +2,25 @@ package br.edu.infnet.foodapp.model.tests;
 
 import br.edu.infnet.foodapp.model.domain.Lanternagem;
 import br.edu.infnet.foodapp.model.exceptions.PrecoBaseInvalidoException;
+import br.edu.infnet.foodapp.model.exceptions.TamanhoInvalidoException;
 
 public class LaternagemTest {
 
 	public static void main(String[] args) {
+		
+		/* Casos de Teste 
+		 * 
+		 * 1 - Tentar utilizar tamanhos validos e invalidos 
+		 * 
+		 * */
+		
 
 		try {
 			Lanternagem l1 = new Lanternagem("Recuperação de Paralama", "L01", 100, false);
 			l1.setTamanhoAvaria("P");
 			System.out.println("L1: " + l1);
-		} catch (PrecoBaseInvalidoException error) {
-			System.out.println(error.getMessage());
+		} catch (PrecoBaseInvalidoException | TamanhoInvalidoException error) {
+			System.out.println("L1: " + error.getMessage());
 		}
 		
 		try {
@@ -22,8 +30,8 @@ public class LaternagemTest {
 			System.out.println("L2: " + l2);
 			System.out.println("L2 Mao de obra: " + l2.obterPrecoMaoDeObra());
 			System.out.println("L2 preco final: " + l2.obterPrecoFinal());
-		} catch (PrecoBaseInvalidoException error) {
-			System.out.println(error.getMessage());
+		} catch (PrecoBaseInvalidoException | TamanhoInvalidoException error) {
+			System.out.println("L2: " + error.getMessage());
 		}
 		
 		try {
@@ -33,8 +41,8 @@ public class LaternagemTest {
 			System.out.println("L3: " + l3);
 			System.out.println("L3 Mao de obra: " + l3.obterPrecoMaoDeObra());
 			System.out.println("L3 Preco final: " + l3.obterPrecoFinal());
-		} catch (PrecoBaseInvalidoException error) {
-			System.out.println(error.getMessage());
+		} catch (PrecoBaseInvalidoException | TamanhoInvalidoException error) {
+			System.out.println("L3: " + error.getMessage());
 		}
 		
 	}
