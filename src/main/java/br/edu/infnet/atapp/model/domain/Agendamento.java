@@ -87,7 +87,7 @@ public class Agendamento {
 		
 		float orcamento = 0;
 		for (Servico servico: this.servicos) {
-			orcamento += servico.obterPrecoMaoDeObra();
+			orcamento += servico.obterPrecoFinal();
 		}
 		
 		sb.append(this.data.format(dateFormat));
