@@ -6,26 +6,24 @@ public class LaternagemTest {
 
 	public static void main(String[] args) {
 
-		Lanternagem b1 = new Lanternagem("Recuperação de Paralama", "L01", 100);
+		Lanternagem l1 = new Lanternagem("Recuperação de Paralama", "L01", 100, false);
+		l1.setTamanhoAvaria("P");
+		System.out.println("L1: " + l1);
 		
-		Lanternagem b2 = new Lanternagem("Recuperação de Portamalas", "L02", 500);
-		b2.setLocalDanificado("Traseira");
-		b2.setTamanhoAvaria("G");
+		Lanternagem l2 = new Lanternagem("Recuperação de Portamalas", "L02", 500, true);
+		l2.setLocalDanificado("Traseira");
+		l2.setTamanhoAvaria("G");
+		System.out.println("L2: " + l2);
+		System.out.println("L2 Mao de obra: " + l2.obterPrecoMaoDeObra());
+		System.out.println("L2 preco final: " + l2.obterPrecoFinal());
 		
-		Lanternagem b3 = new Lanternagem(
-				"Recuperacao de Porta",
-				"L03",
-				350,
-				"G",
-				"Frontal Direita"
-				);
+		Lanternagem l3 = new Lanternagem("Recuperacao de Porta","L03",350,false);
+		l3.setLocalDanificado("Frontal Direita");
+		l3.setTamanhoAvaria("M");
+		System.out.println("L3: " + l3);
+		System.out.println("L3 Mao de obra: " + l3.obterPrecoMaoDeObra());
+		System.out.println("L3 Preco final: " + l3.obterPrecoFinal());
 		
-		System.out.println(b1);
-		System.out.println(b2);
-		System.out.println(b3);
-		
-		System.out.println(b2.obterPrecoMaoDeObra());
-		System.out.println(b2.obterPrecoFinal());
 	}
 
 }
