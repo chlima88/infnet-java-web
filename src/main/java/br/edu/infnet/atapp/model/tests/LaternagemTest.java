@@ -8,41 +8,46 @@ public class LaternagemTest {
 
 	public static void main(String[] args) {
 		
-		/* Casos de Teste 
-		 * 
-		 * 1 - Tentar utilizar tamanhos validos e invalidos 
-		 * 
-		 * */
+		try {
+			System.out.println("\r\nTest case 1: Instanciar Lanternagem com sucesso\r\n"
+					+ "Saida Esperada: classe instanciada\r\n");
+			Lanternagem servico = new Lanternagem("Recuperação de Paralama", "L01", 100, false);
+			servico.setLocalDanificado("Traseira");
+			servico.setTamanhoAvaria("G");
+			System.out.println("Servico: " + servico);
+		} catch (PrecoBaseInvalidoException | TamanhoInvalidoException error) {
+			System.out.println("Servico: " + error.getMessage());
+		}
 		
 
 		try {
-			Lanternagem l1 = new Lanternagem("Recuperação de Paralama", "L01", 100, false);
-			l1.setTamanhoAvaria("F");
-			System.out.println("L1: " + l1);
+			System.out.println("\r\nTest case 2: Definir um tamanho invalido para avaria\r\n"
+					+ "Saida Esperada: mensagem de erro\r\n");
+			Lanternagem servico = new Lanternagem("Recuperação de Paralama", "L01", 100, false);
+			servico.setTamanhoAvaria("F");
 		} catch (PrecoBaseInvalidoException | TamanhoInvalidoException error) {
-			System.out.println("L1: " + error.getMessage());
+			System.out.println("Servico: " + error.getMessage());
 		}
 		
 		try {
-			Lanternagem l2 = new Lanternagem("Recuperação de Portamalas", "L02", 500, true);
-			l2.setLocalDanificado("Traseira");
-			l2.setTamanhoAvaria("G");
-			System.out.println("L2: " + l2);
-			System.out.println("L2 Mao de obra: " + l2.obterPrecoMaoDeObra());
-			System.out.println("L2 preco final: " + l2.obterPrecoFinal());
+			System.out.println("\r\nTest case 3: Validar o ajuste do valor de acordo com tamanhoAvaria\r\n"
+					+ "Saida Esperada: diferentes valores para P, M e G\r\n");
+			Lanternagem servico = new Lanternagem("Recuperação de Portamalas", "L02", 500, true);
+			servico.setLocalDanificado("Traseira");
+			servico.setTamanhoAvaria("P");
+			System.out.println("Servico: " + servico);
+			System.out.println("Servico Mao de obra: " + servico.obterPrecoMaoDeObra());
+			System.out.println("Servico preco final: " + servico.obterPrecoFinal());
+			servico.setTamanhoAvaria("M");
+			System.out.println("Servico: " + servico);
+			System.out.println("Servico Mao de obra: " + servico.obterPrecoMaoDeObra());
+			System.out.println("Servico preco final: " + servico.obterPrecoFinal());
+			servico.setTamanhoAvaria("G");
+			System.out.println("Servico: " + servico);
+			System.out.println("Servico Mao de obra: " + servico.obterPrecoMaoDeObra());
+			System.out.println("Servico preco final: " + servico.obterPrecoFinal());
 		} catch (PrecoBaseInvalidoException | TamanhoInvalidoException error) {
-			System.out.println("L2: " + error.getMessage());
-		}
-		
-		try {
-			Lanternagem l3 = new Lanternagem("Recuperacao de Porta","L03",350,false);
-			l3.setLocalDanificado("Frontal Direita");
-			l3.setTamanhoAvaria("M");
-			System.out.println("L3: " + l3);
-			System.out.println("L3 Mao de obra: " + l3.obterPrecoMaoDeObra());
-			System.out.println("L3 Preco final: " + l3.obterPrecoFinal());
-		} catch (PrecoBaseInvalidoException | TamanhoInvalidoException error) {
-			System.out.println("L3: " + error.getMessage());
+			System.out.println("Servico: " + error.getMessage());
 		}
 		
 	}
