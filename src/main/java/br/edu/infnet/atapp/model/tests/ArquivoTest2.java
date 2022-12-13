@@ -23,12 +23,12 @@ import br.edu.infnet.atapp.model.exceptions.PrecoBaseInvalidoException;
 import br.edu.infnet.atapp.model.exceptions.ServicoIndefinidoException;
 import br.edu.infnet.atapp.model.exceptions.TamanhoInvalidoException;
 
-public class ArquivoTest {
+public class ArquivoTest2 {
 
 	public static void main(String[] args) {
 
 		try {
-			String arquivo = "agendamentos.txt";
+			String arquivo = "agendamentos2.txt";
 			
 			try {
 				FileReader fileReader = new FileReader(arquivo);
@@ -56,6 +56,10 @@ public class ArquivoTest {
 								agendamento = new Agendamento(cliente, servicos);
 								agendamento.setConfirmado("sim".equalsIgnoreCase(dados[2]) ? true : false );
 								agendamento.setDuracaoEmMinutos(Integer.valueOf(dados[1]));
+
+								fileW.write(agendamento.obterPedido());
+								
+								servicos = new ArrayList<Servico>();
 								
 							} catch (DuracaoAtendimentoException 
 									| ClienteIndefinidoException 
@@ -130,7 +134,6 @@ public class ArquivoTest {
 					}
 					linha = file.readLine();
 				}
-				fileW.write(agendamento.obterPedido());
 				
 				fileW.close();
 				file.close();
