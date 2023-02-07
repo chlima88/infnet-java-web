@@ -2,35 +2,37 @@ package br.edu.infnet.atapp.model.domain;
 
 public class Usuario {
 
-	String nome;
-	String email;
-	String senha;
+	private String nome;
+	private String email;
+	private String senha;
+	private String[] caracteristicas;
+	private String tipo;
+	private String setor;
 	
-	public Usuario(String nome, String email, String senha) {
+	public Usuario(
+			String nome,
+			String email,
+			String senha,
+			String[] caracteristicas,
+			String tipo,
+			String setor
+		) {
 		this.nome = nome;
 		this.email = email;
 		this.senha = senha;
+		this.caracteristicas = caracteristicas;
+		this.tipo = tipo;
+		this.setor = setor;
 	}
 		
-	public String getNome() {
-		return nome;
-	}
-
-
-	public String getEmail() {
-		return email;
-	}
-
-
-	public String getSenha() {
-		return senha;
-	}
-
 
 	public String toString() {
-		return "Nome: " + nome + "; " +
+		return "nome: " + nome + "; " +
 				"email: " + email + "; " +
-				"senha: " + senha;
+				"senha: " + senha + "; " +
+				"caracteristicas: " + caracteristicas.toString() + "; " + 
+				"tipo: " + tipo + "; " +
+				"setor: " + setor;
 				
 	}
 }

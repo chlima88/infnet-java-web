@@ -30,16 +30,16 @@
 				<div class="col mb-3">
 					<p>Tipo: </p>
 					<div class="form-group">
-						<input class="form-check-input" type="radio" name="tipoPadrao" name="tipoPadrao"/>
+						<input class="form-check-input" checked value="P" type="radio" name="tipo"/>
 						<label class="form-check-label" for="tipoPadrao">Padrão</label>
 					</div>
 					<div class="form-group">
-						<input class="form-check-input" type="radio" name="tipoDiretor" name="tipoDiretor"/>
+						<input class="form-check-input" value="D" type="radio" name="tipo"/>
 						<label class="form-check-label" for="tipoDiretor">Diretor</label>
 					</div>
 					<div class="form-group">
-						<input class="form-check-input" type="radio" name="tipoDatabase" name="tipoDatabase"/>
-						<label class="form-check-label" for="tipoDatabase">Database</label>
+						<input class="form-check-input" value="A" type="radio" name="tipo"/>
+						<label class="form-check-label" for="tipoDatabase">Administrador</label>
 					</div>
 				</div>
 			
@@ -48,17 +48,17 @@
 					<p>Características:</p>
 	
 					<div class="form-group">
-						<input class="form-check-input" type="checkbox" name="caracteristicasDev" id="caracteristicasDev" value="Dev" checked />
+						<input class="form-check-input" type="checkbox" name="caracteristicas" id="caracteristicasDev" value="Dev" checked />
 						<label class="form-check-label" for="caracteristicasDev">Developer</label>
 					</div>
 					
 					<div class="form-group">
-						<input class="form-check-input" type="checkbox" name="caracteristicasAnl" id="caracteristicasAnl" value="Anl"/>
+						<input class="form-check-input" type="checkbox" name="caracteristicas" id="caracteristicasAnl" value="Anl"/>
 						<label class="form-check-label" for="caracteristicasAnl">Analista</label>
 					</div>
 					
 					<div class="form-group">
-						<input class="form-check-input" type="checkbox" name="caracteristicasDev" id="caracteristicasDb" value="Dev" />
+						<input class="form-check-input" type="checkbox" name="caracteristicas" id="caracteristicasDb" value="Db" />
 						<label class="form-check-label" for="caracteristicasDb">Database</label>
 					</div>
 				
@@ -68,7 +68,7 @@
 
 				<div class="col mb-3">
 					<p>Setor:</p>
-					<select>
+					<select name="setor">
 						<option value=1>Comercial</option>
 						<option value=2>Diretoria</option>
 						<option value=3 selected>Desenvolvimento</option>
