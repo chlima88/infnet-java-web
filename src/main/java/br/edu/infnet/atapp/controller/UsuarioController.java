@@ -23,6 +23,11 @@ public class UsuarioController {
 		return "usuario/lista";
 	}
 	
+	@GetMapping(value = "/usuario/buscar")
+	public String telaBusca() {
+		return "usuario/busca";
+	}
+		
 	@PostMapping(value = "/usuario/incluir")
 	public String incluir(Usuario usuario) {
 		System.out.println("Inclusão realizada com sucesso: " + usuario);

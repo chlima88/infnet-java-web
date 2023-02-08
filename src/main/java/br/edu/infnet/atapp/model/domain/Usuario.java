@@ -1,11 +1,13 @@
 package br.edu.infnet.atapp.model.domain;
 
+import java.util.List;
+
 public class Usuario {
 
 	private String nome;
 	private String email;
 	private String senha;
-	private String[] caracteristicas;
+	private List<String> caracteristicas;
 	private String tipo;
 	private String setor;
 	
@@ -13,7 +15,7 @@ public class Usuario {
 			String nome,
 			String email,
 			String senha,
-			String[] caracteristicas,
+			List<String> caracteristicas,
 			String tipo,
 			String setor
 		) {
@@ -24,15 +26,45 @@ public class Usuario {
 		this.tipo = tipo;
 		this.setor = setor;
 	}
+	
+	public String getNome() {
+		return nome;
+	}
+
+
+	public String getEmail() {
+		return email;
+	}
+
+
+	public String getSenha() {
+		return senha;
+	}
+
+
+	public List<String> getCaracteristicas() {
+		return caracteristicas;
+	}
+
+
+	public String getTipo() {
+		return tipo;
+	}
+
+
+	public String getSetor() {
+		return setor;
+	}
 		
 
 	public String toString() {
-		return "nome: " + nome + "; " +
-				"email: " + email + "; " +
-				"senha: " + senha + "; " +
-				"caracteristicas: " + caracteristicas.toString() + "; " + 
-				"tipo: " + tipo + "; " +
-				"setor: " + setor;
+		
+		return "nome: " + this.nome + "; " +
+				"email: " + this.email + "; " +
+				"senha: " + this.senha + "; " +
+				"caracteristicas: " + this.caracteristicas + "; " + 
+				"tipo: " + this.tipo + "; " +
+				"setor: " + this.setor;
 				
 	}
 }

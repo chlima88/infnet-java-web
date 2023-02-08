@@ -13,6 +13,7 @@
 		<ul>
 			<li><a href="/usuario/incluir">Cadastro</a></li>
 			<li><a href="/usuario/listar">Listagem</a></li>
+			<li><a href="/usuario/buscar">Buscar</a></li>
 		</ul>
 		
 	</div>

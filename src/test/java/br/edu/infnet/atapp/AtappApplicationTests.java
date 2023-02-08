@@ -1,10 +1,10 @@
-package br.edu.infnet.foodapp;
+package br.edu.infnet.atapp;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class FoodappApplicationTests {
+class AtappApplicationTests {
 
 	@Test
 	void contextLoads() {
