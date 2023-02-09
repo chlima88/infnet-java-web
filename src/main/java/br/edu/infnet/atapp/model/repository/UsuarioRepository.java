@@ -29,6 +29,22 @@ public class UsuarioRepository {
 		
 	};
 	
+	public static Usuario findByEmail(String email) throws Exception {
+		
+		Usuario usuarioEncontrado = null;
+	
+		for (Usuario usuario: usuarios) {
+			if (usuario.getEmail().equalsIgnoreCase(email.toLowerCase()) ) {
+				usuarioEncontrado = usuario;				
+			}
+		};
+		
+		if (usuarioEncontrado == null) throw new Exception("Usuário não encontrado!");
+		
+		return usuarioEncontrado;
+		
+	};
+	
 	public static List<Usuario> findAll() {
 		return usuarios;
 	};

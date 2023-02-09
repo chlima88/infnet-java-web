@@ -11,6 +11,13 @@ public class Usuario {
 	private String tipo;
 	private String setor;
 	
+//	public Usuario() {};
+	
+	public Usuario(String email, String senha) {
+		this.email = email;
+		this.senha = senha;		
+	};
+	
 	public Usuario(
 			String nome,
 			String email,
@@ -19,9 +26,8 @@ public class Usuario {
 			String tipo,
 			String setor
 		) {
+		this(email, senha);
 		this.nome = nome;
-		this.email = email;
-		this.senha = senha;
 		this.caracteristicas = caracteristicas;
 		this.tipo = tipo;
 		this.setor = setor;
