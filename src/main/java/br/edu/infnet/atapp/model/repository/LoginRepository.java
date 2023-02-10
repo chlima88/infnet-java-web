@@ -11,12 +11,12 @@ public class LoginRepository {
 	static List<Usuario> logins = new ArrayList<Usuario>();
 	
 	static {
-		Usuario admin = new Usuario("admin","123");
+		Usuario admin = new Usuario("Admin", "admin","123");
 		logins.add(admin);		
 	}
 	
 	
-	public static boolean autenticar(Usuario usuario) throws Exception {
+	public static Usuario autenticar(Usuario usuario) throws Exception {
 		
 		if (!existsByEmail(usuario.getEmail())) {
 			throw new Exception("Usuario ou senha invalidos");
@@ -28,10 +28,15 @@ public class LoginRepository {
 				|| !usuarioEncontrado.getSenha().equalsIgnoreCase(usuario.getSenha())) {
 			throw new Exception("Usuario ou senha invalidos");
 		};
-		return true;
+		return usuarioEncontrado;
 	};
 	
-	private static Usuario findByEmail(String email) throws Exception {
+	public static Usuario create(String nome, String email, String senha) {
+		Usuario usuario = new Usuario(nome, email, senha);
+		return usuario;
+	};
+	
+	public static Usuario findByEmail(String email) throws Exception {
 		
 		Usuario usuarioEncontrado = null;
 		
@@ -44,7 +49,7 @@ public class LoginRepository {
 		return usuarioEncontrado;
 	};
 	
-	private static boolean existsByEmail(String email) {
+	public static boolean existsByEmail(String email) {
 		
 		for (Usuario usuario: logins) {
 			if (usuario.getEmail().equalsIgnoreCase(email)) return true;
