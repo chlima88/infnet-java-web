@@ -1,7 +1,5 @@
 package br.edu.infnet.atapp.controller;
 
-import java.util.List;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -50,16 +48,7 @@ public class UsuarioController {
 	}
 		
 	@PostMapping("/usuario/incluir")
-	public String incluir(
-			@RequestParam("nome") String nome,
-			@RequestParam("email") String email,
-			@RequestParam("senha") String senha,
-			@RequestParam("caracteristicas") List<String> caracteristicas ,
-			@RequestParam("tipo") String tipo,
-			@RequestParam("setor") String setor
-		) {
-		
-		Usuario usuario = new Usuario(nome, email, senha, caracteristicas, tipo, setor);
+	public String incluir(Usuario usuario) {
 		
 		System.out.println("Inclusão realizada com sucesso: " + usuario);
 		
@@ -67,6 +56,6 @@ public class UsuarioController {
 		
 		System.out.println(UsuarioRepository.count());
 		
-		return "redirect:/";
+		return "redirect:/usuario/listar";
 	}
 }
