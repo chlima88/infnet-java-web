@@ -9,6 +9,11 @@ public class AppController {
 
 	@GetMapping("/")
 	public String telaIndex() {
+		return "redirect:/login";
+	}
+	
+	@GetMapping("/home")
+	public String telaHome() {
 		return "index";
 	}
 	
@@ -17,5 +22,4 @@ public class AppController {
 		return "error";
 	}
 	
-
 }
