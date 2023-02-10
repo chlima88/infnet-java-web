@@ -41,7 +41,7 @@
 			</tbody>
 		</table>
         <a class="w-25 btn btn-primary" role="button" href="javascript:void(0)" onClick="history.go(-1); return false;">Voltar</a>
-        <a class="w-25 btn btn-primary" role="button" href="/">Inicio</a>
+        <a class="w-25 btn btn-primary" role="button" href="/home">Inicio</a>
 	</div>
 </body>
 </html>

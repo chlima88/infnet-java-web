@@ -12,7 +12,6 @@
 
 	<div class="container pt-5" style="width:400px;" >
 	
-	
 		<h1 class="mb-4">Login</h1>
 		<form method="post" action="login">
 			<div class="form-outline mb-4">

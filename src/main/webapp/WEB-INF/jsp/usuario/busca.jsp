@@ -18,7 +18,7 @@
 			<input class="form-control mb-3" type="text" value="1@1.com" name="email" id="email" />
 			<button class="w-25 btn btn-primary" type="submit">Buscar</button>
 			<a class="w-25 btn btn-primary" role="button" href="javascript:void(0)" onClick="history.go(-1); return false;">Voltar</a>
-			
+			<a class="w-25 btn btn-primary" role="button" href="/home">Inicio</a>
 		</form>
 	</div>
 	
