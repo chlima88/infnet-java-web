@@ -19,21 +19,21 @@ public class LoginController {
 	}
 	
 	@PostMapping("/login")
-	public String acessar(
+	public String login(
 			@RequestParam("email") String email,
 			@RequestParam("senha") String senha,
 			Model model,
 			RedirectAttributes redirectAttrs
 		) throws Exception {
 		
-		Usuario usuario = new Usuario(email, senha);
+		Usuario credentials = new Usuario(email, senha);
 		
 		try {
-			if(LoginRepository.autenticar(usuario)) {
-				String msg = "Hello " + usuario.getEmail() + "!";
-				redirectAttrs.addFlashAttribute("message", msg);
-				return "redirect:/";
-			};
+			
+			Usuario usuario = LoginRepository.autenticar(credentials);
+//		 	String msg = "Hello " + usuario.getNome() + "!";
+			redirectAttrs.addFlashAttribute("usuario", usuario);
+			return "redirect:/home";
 			
 		} catch(Exception error) {
 			model.addAttribute("erro", error.getMessage());
