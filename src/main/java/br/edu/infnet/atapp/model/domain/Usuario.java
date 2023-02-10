@@ -10,14 +10,20 @@ public class Usuario {
 	private List<String> caracteristicas;
 	private String tipo;
 	private String setor;
-	
-//	public Usuario() {};
+
+	public Usuario() {};
 	
 	public Usuario(String email, String senha) {
+		this();
 		this.email = email;
-		this.senha = senha;		
+		this.senha = senha;	
 	};
-	
+		
+	public Usuario(String nome, String email, String senha) {
+		this(email, senha);
+		this.nome = nome;			
+	}
+
 	public Usuario(
 			String nome,
 			String email,
@@ -26,42 +32,60 @@ public class Usuario {
 			String tipo,
 			String setor
 		) {
-		this(email, senha);
-		this.nome = nome;
+		this(nome, email, senha);
 		this.caracteristicas = caracteristicas;
 		this.tipo = tipo;
 		this.setor = setor;
 	}
 	
+		
 	public String getNome() {
 		return nome;
 	}
 
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
 
 	public String getEmail() {
 		return email;
 	}
 
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
 	public String getSenha() {
 		return senha;
 	}
 
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
 
 	public List<String> getCaracteristicas() {
 		return caracteristicas;
 	}
 
+	public void setCaracteristicas(List<String> caracteristicas) {
+		this.caracteristicas = caracteristicas;
+	}
 
 	public String getTipo() {
 		return tipo;
 	}
 
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
 
 	public String getSetor() {
 		return setor;
 	}
-		
+
+	public void setSetor(String setor) {
+		this.setor = setor;
+	}
 
 	public String toString() {
 		
