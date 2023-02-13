@@ -31,7 +31,7 @@ public class LoginRepository {
 		return usuarioEncontrado;
 	};
 	
-	public static Usuario create(String nome, String email, String senha) {
+	public static Usuario save(String nome, String email, String senha) {
 		Usuario usuario = new Usuario(nome, email, senha);
 		return usuario;
 	};
