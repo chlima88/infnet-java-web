@@ -32,11 +32,7 @@ public class UsuarioController {
 
 	}
 	
-	@GetMapping("/usuario/incluir")
-	public String telaCadastro() {
-		return "usuario/cadastro";
-	}
-	
+
 	@GetMapping("/usuario/listar")
 	public String telaLista() {
 		return "usuario/lista";
@@ -46,7 +42,12 @@ public class UsuarioController {
 	public String telaBusca() {
 		return "usuario/busca";
 	}
-		
+	
+	@GetMapping("/usuario/incluir")
+	public String telaCadastro() {
+		return "usuario/cadastro";
+	}
+			
 	@PostMapping("/usuario/incluir")
 	public String incluir(Usuario usuario) {
 		
@@ -56,6 +57,16 @@ public class UsuarioController {
 		
 		System.out.println(UsuarioRepository.count());
 		
+		return "redirect:/usuario/listar";
+	}
+	
+	@PostMapping("/usuario/atualizar")
+	public String atualizar(
+				@RequestParam("emailBuscado") String email, 
+				Usuario usuario
+			) throws Exception {
+		
+		UsuarioRepository.update(email, usuario);
 		return "redirect:/usuario/listar";
 	}
 }
