@@ -31,7 +31,6 @@ public class LoginController {
 		try {
 			
 			Usuario usuario = LoginRepository.autenticar(credentials);
-//		 	String msg = "Hello " + usuario.getNome() + "!";
 			redirectAttrs.addFlashAttribute("usuario", usuario);
 			return "redirect:/home";
 			
