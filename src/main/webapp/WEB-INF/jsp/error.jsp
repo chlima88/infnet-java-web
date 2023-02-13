@@ -15,8 +15,8 @@
 		 
         <p class="mb-5">${erro}</p>
 		
-		<a class="w-25 btn btn-primary" role="button" href="javascript:void(0)" onClick="history.go(-1); return false;">Voltar</a>
 		<a class="w-25 btn btn-primary" role="button" href="/">Inicio</a>
+		<a class="w-25 btn btn-primary" role="button" href="javascript:void(0)" onClick="history.go(-1); return false;">Voltar</a>
 	</div>
 </body>
 </html>
