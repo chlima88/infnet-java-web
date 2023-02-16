@@ -53,7 +53,7 @@ public class UsuarioController {
 	@PostMapping("/usuario/incluir")
 	public String incluir(
 			Usuario usuario, 
-			Model modelm, 
+			Model model, 
 			RedirectAttributes redirectAttrs
 		) throws Exception {
 		
@@ -63,21 +63,22 @@ public class UsuarioController {
 			redirectAttrs.addFlashAttribute("usuario", usuarioCadastrado);
 			return "redirect:/usuario/listar";
 		} catch(Exception error) {
-			modelm.addAttribute("erro", error.getMessage());
-			return "/error";
+			redirectAttrs.addFlashAttribute("erro", error.getMessage());
+			System.out.println(error.getMessage());
+			return "redirect:/usuario/incluir";
 		}
 		
 	}
 	
 	@PostMapping("/usuario/atualizar")
 	public String atualizar(
-				@RequestParam("emailBuscado") String email, 
+				@RequestParam("emailBuscado") String emailBuscado, 
 				Usuario usuario,
 				Model model
 			) throws Exception {
 		
 		try {
-//			UsuarioRepository.update(email, usuario);
+			UsuarioRepository.update(emailBuscado, usuario);
 			return "redirect:/usuario/listar";			 
 		} catch(Exception error) {
 			model.addAttribute("erro", error.getMessage());
