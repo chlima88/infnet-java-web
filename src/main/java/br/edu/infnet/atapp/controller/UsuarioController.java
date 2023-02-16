@@ -15,11 +15,14 @@ import br.edu.infnet.atapp.model.repository.UsuarioRepository;
 public class UsuarioController {
 	
 	@GetMapping("/usuario")
-	public String telaUsuario(@RequestParam("email") String email, Model model) throws Exception {
+	public String telaUsuario(
+			@RequestParam("email") String email, 
+			Model model,
+			RedirectAttributes redirectAttrs){
 	
-		if (email == null){
-			model.addAttribute("erro", "Um e-mail deve ser especificado na pesquisa");
-			return "/error";
+		if (email == ""){
+			redirectAttrs.addFlashAttribute("erro", "Um e-mail deve ser especificado na pesquisa");
+			return "redirect:/usuario/buscar"; 
 		} else {
 			
 			try {
@@ -27,8 +30,8 @@ public class UsuarioController {
 				model.addAttribute("usuario", usuario);
 				return "usuario/dados";
 			} catch(Exception error) {
-				model.addAttribute("erro", error.getMessage());
-				return "/error";
+				redirectAttrs.addFlashAttribute("erro", error.getMessage());
+				return "redirect:/usuario/buscar"; 
 			}
 		}
 	}
@@ -55,7 +58,7 @@ public class UsuarioController {
 			Usuario usuario, 
 			Model model, 
 			RedirectAttributes redirectAttrs
-		) throws Exception {
+		) {
 		
 		try {
 			Usuario usuarioCadastrado = UsuarioRepository.save(usuario);
@@ -74,15 +77,16 @@ public class UsuarioController {
 	public String atualizar(
 				@RequestParam("emailBuscado") String emailBuscado, 
 				Usuario usuario,
-				Model model
-			) throws Exception {
+				RedirectAttributes redirectAttrs
+			){
 		
 		try {
 			UsuarioRepository.update(emailBuscado, usuario);
 			return "redirect:/usuario/listar";			 
 		} catch(Exception error) {
-			model.addAttribute("erro", error.getMessage());
-			return "/error";
+			redirectAttrs.addFlashAttribute("erro", error.getMessage());
+			System.out.println(error.getMessage());
+			return "redirect:/usuario?email="+emailBuscado;
 		}
 	}
 	
