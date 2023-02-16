@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,6 +14,12 @@
 	<div class="container pt-5" style="width:400px;" >
 	
 		<h1 class="mb-4">Login</h1>
+    
+        <c:set var = "salary" scope = "session" value = "${2000*2}"/>
+      <c:if test = "${salary > 2000}">
+         <p>My salary is:  <c:out value = "${salary}"/><p>
+      </c:if>
+		
 		<form method="post" action="login">
 			<div class="form-outline mb-4">
 				<label class="form-label" for="email">E-mail</label>

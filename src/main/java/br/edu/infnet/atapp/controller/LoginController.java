@@ -36,7 +36,7 @@ public class LoginController {
 			
 		} catch(Exception error) {
 			redirectAttrs.addFlashAttribute("erro","Usuário ou senha inválidos");
-			return "redirect:/error";
+			return "redirect:/login";
 		}
 		
 	}
