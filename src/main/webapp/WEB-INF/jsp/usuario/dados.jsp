@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,7 +35,14 @@
     <script>
     function editar() {
     	inputList = document.getElementsByClassName("read-edit"); 
-    	for (let item of inputList) { item.classList.toggle("hidden"); }
+    	for (let item of inputList) { 
+    		item.classList.toggle("hidden");
+    	}
+    	
+    	inputs = document.getElementsByClassName("enable-disable")
+    	for (let item of inputs) {
+    		item.disabled = !item.disabled;
+    	}
 
     }
     
@@ -42,101 +50,44 @@
 	<title>Dados do Usuário</title>
 </head>
 <body>
+    <c:import url="/WEB-INF/jsp/menu.jsp" />
 	<div class="container">
-        <nav class="navbar navbar-expand-lg bg-primary navbar-dark mb-4">
-          <div class="container-fluid">
-            <a class="navbar-brand" href="/home">Home</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNavDropdown">
-              <ul class="navbar-nav">
-                <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Menu
-                  </a>
-                  <ul class="dropdown-menu">
-                    <li>
-                        <a class="dropdown-item" href="#">Geral &raquo;</a>
-                        <ul class="dropdown-menu dropdown-submenu">
-                            <li><a class="dropdown-item" href="/login">Login</a></li>
-                            <li><a class="dropdown-item" href="/error">Pagina de erro</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a class="dropdown-item" href="#">Usuários &raquo;</a>
-                        <ul class="dropdown-menu dropdown-submenu">   
-                            <li><a class="dropdown-item" href="/usuario/incluir">Cadastro</a></li>
-                            <li><a class="dropdown-item" href="/usuario/listar">Listagem</a></li>
-                            <li><a class="dropdown-item" href="/usuario/buscar">Buscar</a></li>
-                            <li><a class="dropdown-item" href="/usuario">Dados</a></li>
-                        </ul>
-                    </li>
-                  </ul>
-                  
-                </li>
-              </ul>
-            </div>
-          </div>
-        </nav>
+ 
         	
 	
     <h1 class="md-5">Informações do usuário</h1>
 	       
-		<table class="table table-hover read-edit">
-			<tbody>
-					<tr>
-						<th scope=row>Nome</th>
-						<td>${usuario.getNome()}</td>
-					</tr>
-					<tr>
-						<th scope=row>Email</th>
-						<td>${usuario.getEmail()}</td>
-					</tr>
-					<tr>
-						<th scope=row>Caracteristicas</th>
-						<td>${usuario.getCaracteristicas()}</td>
-					</tr>
-					<tr>
-						<th scope=row>Tipo</th>
-						<td>${usuario.getTipo()}</td>
-					</tr>
-					<tr>
-						<th scope=row>Setor</th>
-						<td>${usuario.getSetor()}</td>
-					</tr>
-			</tbody>
-		</table>
 
         <form action="/usuario/atualizar" method="post">
         
             <input type="hidden" value="${usuario.getEmail()}" name="emailBuscado" />
+            <input type="hidden" value="${usuario.getId()}" name="id" />
         
-            <div class="row row-cols-1 row-cols-md-4 read-edit hidden">
+            <div class="row row-cols-1 row-cols-md-4">
                 <div class="col mb-3">
                     <label class="form-label" for="nome">Nome:</label>
-                    <input class="form-control" value="${usuario.getNome()}" type="text" name="nome" />
+                    <input class="form-control enable-disable" value="${usuario.getNome()}" type="text" name="nome" disabled/>
                     
                     <label class="form-label" for="contato">E-mail: </label>
-                    <input class="form-control" value="${usuario.getEmail()}" type="email" name="email"/>
+                    <input class="form-control enable-disable" value="${usuario.getEmail()}" type="email" name="email" disabled/>
                     
                     <label class="form-label" for="documento">Senha: </label>
-                    <input class="form-control" value="${usuario.getSenha()}" type="password" name="senha"/>
+                    <input class="form-control enable-disable" value="${usuario.getSenha()}" type="password" name="senha" disabled/>
     
                 </div>
                 
                 <div class="col mb-3">
                     <p>Tipo: </p>
                     <div class="form-group">
-                        <input class="form-check-input" checked value="P" type="radio" name="tipo"/>
+                        <input class="form-check-input enable-disable" checked value="P" type="radio" name="tipo" disabled/>
                         <label class="form-check-label" for="tipoPadrao">Padrão</label>
                     </div>
                     <div class="form-group">
-                        <input class="form-check-input" value="D" type="radio" name="tipo"/>
+                        <input class="form-check-input enable-disable" value="D" type="radio" name="tipo" disabled/>
                         <label class="form-check-label" for="tipoDiretor">Diretor</label>
                     </div>
                     <div class="form-group">
-                        <input class="form-check-input" value="A" type="radio" name="tipo"/>
+                        <input class="form-check-input enable-disable" value="A" type="radio" name="tipo" disabled/>
                         <label class="form-check-label" for="tipoDatabase">Administrador</label>
                     </div>
                 </div>
@@ -146,17 +97,17 @@
                     <p>Características:</p>
     
                     <div class="form-group">
-                        <input class="form-check-input" type="checkbox" name="caracteristicas" id="caracteristicasDev" value="Dev" checked />
+                        <input class="form-check-input enable-disable" type="checkbox" name="caracteristicas" id="caracteristicasDev" value="Dev" checked disabled />
                         <label class="form-check-label" for="caracteristicasDev">Developer</label>
                     </div>
                     
                     <div class="form-group">
-                        <input class="form-check-input" type="checkbox" name="caracteristicas" id="caracteristicasAnl" value="Anl"/>
+                        <input class="form-check-input enable-disable" type="checkbox" name="caracteristicas" id="caracteristicasAnl" value="Anl" disabled/>
                         <label class="form-check-label" for="caracteristicasAnl">Analista</label>
                     </div>
                     
                     <div class="form-group">
-                        <input class="form-check-input" type="checkbox" name="caracteristicas" id="caracteristicasDb" value="Db" />
+                        <input class="form-check-input enable-disable" type="checkbox" name="caracteristicas" id="caracteristicasDb" value="Db" disabled/>
                         <label class="form-check-label" for="caracteristicasDb">Database</label>
                     </div>
                 
@@ -164,7 +115,7 @@
             
                 <div class="col mb-3">
                     <p>Setor:</p>
-                    <select name="setor">
+                    <select class="enable-disable" name="setor" disabled>
                         <option value=1>Comercial</option>
                         <option value=2>Diretoria</option>
                         <option value=3 selected>Desenvolvimento</option>
