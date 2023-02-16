@@ -4,6 +4,7 @@ import java.util.List;
 
 public class Usuario {
 
+	private Integer id;
 	private String nome;
 	private String email;
 	private String senha;
@@ -38,6 +39,14 @@ public class Usuario {
 		this.setor = setor;
 	}
 	
+	
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
 		
 	public String getNome() {
 		return nome;
@@ -89,7 +98,8 @@ public class Usuario {
 
 	public String toString() {
 		
-		return "nome: " + this.nome + "; " +
+		return "id: " + this.id + "; " +
+				"nome: " + this.nome + "; " +
 				"email: " + this.email + "; " +
 				"senha: " + this.senha + "; " +
 				"caracteristicas: " + this.caracteristicas + "; " + 
