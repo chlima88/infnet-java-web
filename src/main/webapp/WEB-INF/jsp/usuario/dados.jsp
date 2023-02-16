@@ -41,6 +41,13 @@
         	
 	
     <h1 class="md-5">Informações do usuário</h1>
+    
+        <c:if test="${not empty erro}">
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                ${erro}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </c:if>
 	       
 
         <form action="/usuario/atualizar" method="post">
@@ -64,15 +71,33 @@
                 <div class="col mb-3">
                     <p>Tipo: </p>
                     <div class="form-group">
-                        <input class="form-check-input enable-disable" checked value="P" type="radio" name="tipo" disabled/>
+                        <input
+                            class="form-check-input enable-disable"
+                            value="P"
+                            type="radio"
+                            name="tipo"
+                            ${ usuario.getTipo() == "P" ? 'checked' : '' }
+                            disabled/>
                         <label class="form-check-label" for="tipoPadrao">Padrão</label>
                     </div>
                     <div class="form-group">
-                        <input class="form-check-input enable-disable" value="D" type="radio" name="tipo" disabled/>
+                        <input
+                            class="form-check-input enable-disable"
+                            value="D"
+                            type="radio"
+                            name="tipo"
+                            ${ usuario.getTipo() == "D" ? 'checked' : '' }
+                            disabled/>
                         <label class="form-check-label" for="tipoDiretor">Diretor</label>
                     </div>
                     <div class="form-group">
-                        <input class="form-check-input enable-disable" value="A" type="radio" name="tipo" disabled/>
+                        <input
+                            class="form-check-input enable-disable"
+                            value="A"
+                            type="radio"
+                            name="tipo"
+                            ${ usuario.getTipo() == "A" ? 'checked' : '' }
+                            disabled/>
                         <label class="form-check-label" for="tipoDatabase">Administrador</label>
                     </div>
                 </div>
@@ -82,17 +107,38 @@
                     <p>Características:</p>
     
                     <div class="form-group">
-                        <input class="form-check-input enable-disable" type="checkbox" name="caracteristicas" id="caracteristicasDev" value="Dev" checked disabled />
+                        <input 
+                            class="form-check-input enable-disable" 
+                            type="checkbox"
+                            name="caracteristicas"
+                            id="caracteristicasDev"
+                            value="Dev"
+                            ${ usuario.getCaracteristicas().contains("Dev") ? 'checked' : '' }
+                            disabled />
                         <label class="form-check-label" for="caracteristicasDev">Developer</label>
                     </div>
                     
                     <div class="form-group">
-                        <input class="form-check-input enable-disable" type="checkbox" name="caracteristicas" id="caracteristicasAnl" value="Anl" disabled/>
+                        <input
+                            class="form-check-input enable-disable"
+                            type="checkbox"
+                            name="caracteristicas"
+                            id="caracteristicasAnl"
+                            value="Anl"
+                            ${ usuario.getCaracteristicas().contains("Anl") ? 'checked' : '' }
+                            disabled/>
                         <label class="form-check-label" for="caracteristicasAnl">Analista</label>
                     </div>
                     
                     <div class="form-group">
-                        <input class="form-check-input enable-disable" type="checkbox" name="caracteristicas" id="caracteristicasDb" value="Db" disabled/>
+                        <input
+                            class="form-check-input enable-disable"
+                            type="checkbox"
+                            name="caracteristicas"
+                            id="caracteristicasDb"
+                            value="Db"
+                            ${ usuario.getCaracteristicas().contains("Db") ? 'checked' : '' }
+                            disabled/>
                         <label class="form-check-label" for="caracteristicasDb">Database</label>
                     </div>
                 
@@ -101,9 +147,9 @@
                 <div class="col mb-3">
                     <p>Setor:</p>
                     <select class="enable-disable" name="setor" disabled>
-                        <option value=1>Comercial</option>
-                        <option value=2>Diretoria</option>
-                        <option value=3 selected>Desenvolvimento</option>
+                        <option value=1 ${ usuario.getSetor() == 1 ? 'selected' : '' }>Comercial</option>
+                        <option value=2 ${ usuario.getSetor() == 2 ? 'selected' : '' }>Diretoria</option>
+                        <option value=3 ${ usuario.getSetor() == 3 ? 'selected' : '' }>Desenvolvimento</option>
                     </select>
                     
                 
