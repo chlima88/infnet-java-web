@@ -3,6 +3,7 @@ package br.edu.infnet.atapp.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -26,15 +27,14 @@ public class UsuarioController {
 				return "usuario/dados";
 			} catch(Exception error) {
 				model.addAttribute("erro", error.getMessage());
+				return "/error";
 			}
-			return "/error";
 		}
-
 	}
 	
 
 	@GetMapping("/usuario/listar")
-	public String telaLista() {
+	public String telaLista(Model model) throws Exception {
 		return "usuario/lista";
 	}
 	
@@ -49,24 +49,48 @@ public class UsuarioController {
 	}
 			
 	@PostMapping("/usuario/incluir")
-	public String incluir(Usuario usuario) {
+	public String incluir(Usuario usuario, Model model) throws Exception {
 		
-		System.out.println("Inclusão realizada com sucesso: " + usuario);
+		try {
+			UsuarioRepository.save(usuario);
+			System.out.println("Inclusão realizada com sucesso: " + usuario);
+			return "redirect:/usuario/listar";
+		} catch(Exception error) {
+			model.addAttribute("erro", error.getMessage());
+			return "/error";
+		}
 		
-		UsuarioRepository.save(usuario);
-		
-		System.out.println(UsuarioRepository.count());
-		
-		return "redirect:/usuario/listar";
 	}
 	
 	@PostMapping("/usuario/atualizar")
 	public String atualizar(
 				@RequestParam("emailBuscado") String email, 
-				Usuario usuario
+				Usuario usuario,
+				Model model
 			) throws Exception {
 		
-		UsuarioRepository.update(email, usuario);
-		return "redirect:/usuario/listar";
+		try {
+//			UsuarioRepository.update(email, usuario);
+			return "redirect:/usuario/listar";			 
+		} catch(Exception error) {
+			model.addAttribute("erro", error.getMessage());
+			return "/error";
+		}
+	}
+	
+	@GetMapping("/usuario/{id}/excluir")
+	public String excluir(
+				@PathVariable("id") Integer id, 
+				Model model
+			) {
+		
+		try {
+			Usuario usuario = UsuarioRepository.delete(id);
+			System.out.println(usuario);
+			return "redirect:/usuario/listar"; 
+		} catch(Exception error) {
+			model.addAttribute("erro", error.getMessage());
+			return "/error";
+		}
 	}
 }
