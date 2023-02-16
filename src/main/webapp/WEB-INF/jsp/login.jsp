@@ -14,11 +14,12 @@
 	<div class="container pt-5" style="width:400px;" >
 	
 		<h1 class="mb-4">Login</h1>
-    
-        <c:set var = "salary" scope = "session" value = "${2000*2}"/>
-      <c:if test = "${salary > 2000}">
-         <p>My salary is:  <c:out value = "${salary}"/><p>
-      </c:if>
+		
+		<c:if test="${not empty erro}">
+		    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                ${erro}
+            </div>
+		</c:if>
 		
 		<form method="post" action="login">
 			<div class="form-outline mb-4">
