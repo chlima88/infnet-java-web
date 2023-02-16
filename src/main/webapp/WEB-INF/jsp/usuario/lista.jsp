@@ -11,6 +11,9 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <meta charset="ISO-8859-1">
 	<title>Listagem de usuários</title>
+	<style>
+	td, th { text-align: center; }
+	</style>
 </head>
 <body>
     <c:import url="/WEB-INF/jsp/menu.jsp" />
@@ -37,8 +40,8 @@
 				    <th scope="col">Id</th>
 				    <th scope="col">Nome</th>
 					<th scope="col">E-mail</th>
-					<th scope="col">Tipo</th>
 					<th scope="col">Caracteristicas</th>
+					<th scope="col">Tipo</th>
                     <th scope="col">Setor</th>
                     <th scope="col">Ação</th>
 				</tr>
