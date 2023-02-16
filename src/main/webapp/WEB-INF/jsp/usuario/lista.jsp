@@ -64,10 +64,14 @@
 	                           ${usuario.getCaracteristicas()}
 	                       </td>
 	                       <td>
-	                           ${usuario.getTipo()}
+                               ${usuario.getTipo().equals("P") ? "Padrão" : ""}
+                               ${usuario.getTipo().equals("A") ? "Administrador" : ""}
+                               ${usuario.getTipo().equals("D") ? "Diretor" : ""}
 	                       </td>
 	                       <td>
-	                           ${usuario.getSetor()}
+	                           ${usuario.getSetor().equals("1") ? "Comercial" : ""}
+	                           ${usuario.getSetor().equals("2") ? "Diretoria" : ""}
+	                           ${usuario.getSetor().equals("3") ? "Desenvolvimento" : ""}
 	                       </td>
 	                       <td>
 	                           <a href="/usuario?email=${usuario.getEmail()}">Editar</a> 
