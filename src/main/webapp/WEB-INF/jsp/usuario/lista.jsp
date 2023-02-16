@@ -1,10 +1,6 @@
-<%@page import="java.util.Collection"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<%@ page import = "br.edu.infnet.atapp.model.domain.Usuario" %>
-<%@ page import = "br.edu.infnet.atapp.model.repository.UsuarioRepository" %>
-<%@ page import = "java.util.List" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -71,12 +67,8 @@
 	                           ${usuario.getSetor()}
 	                       </td>
 	                       <td>
-	                           <a href="/usuario?email=${usuario.getEmail()}">
-	                               Editar
-	                           </a>
-	                           <a href="/usuario/${usuario.getId()}/excluir">
-	                               Excluir
-	                           </a>
+	                           <a href="/usuario?email=${usuario.getEmail()}">Editar</a> 
+	                           <a href="/usuario/${usuario.getId()}/excluir">Excluir</a>
 	                       </td>
 	                    </tr>
 		            </c:forEach> 
