@@ -1,4 +1,5 @@
 <%@page import="java.util.Collection"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ page import = "br.edu.infnet.atapp.model.domain.Usuario" %>
@@ -78,6 +79,13 @@
         
 		<h1>Listagem de usuários</h1>
 		
+        <c:if test="${not empty usuario}">
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                Usuário <strong>${usuario.getEmail()}</strong> cadastrado com sucesso!
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </c:if>
+		
 		<form method="get" action="/usuario/incluir">
 			<button class="w-25 btn btn-primary" type="submit">Novo usuário</button>
 			<a class="w-25 btn btn-primary" role="button" href="javascript:void(0)" onClick="history.go(-1); return false;">Voltar</a>
@@ -87,7 +95,7 @@
 			<thead>
 				<tr>
 				    <th scope="col">Id</th>
-					<th scope="col">Nome</th>
+				    <th scope="col">Nome</th>
 					<th scope="col">E-mail</th>
 					<th scope="col">Tipo</th>
 					<th scope="col">Caracteristicas</th>
@@ -95,48 +103,49 @@
                     <th scope="col">Ação</th>
 				</tr>
 			</thead>
-			<tbody>
-				<%
-					Collection<Usuario> usuarios = UsuarioRepository.findAll(); 
-					
-					for (Usuario usuario: usuarios) {
-				%>
-						
-				    <tr>
-                       <td>
-                            <%= usuario.getId() %>
-                       </td>
-					   <td>
-					       <%= usuario.getNome() %>
-					   </td>
-					   <td>
-                           <%= usuario.getEmail() %>
-                       </td>
-					   <td>
-                           <%= usuario.getTipo() %>
-                       </td>
-					   <td>
-                           <%= usuario.getCaracteristicas() %>
-					   </td>
-                       <td>
-                           <%= usuario.getSetor() %>
-                       </td>
-                       <td>
-                           <a href="/usuario?email=<%= usuario.getEmail() %>">
-                               Editar
-                           </a>
-                           <a href="/usuario/<%= usuario.getId() %>/excluir">
-                               Excluir
-                           </a>
-                       </td>
-					</tr>
-				   <%
-				}
-				%>
-					
-	
-			</tbody>
+			
+		    <c:if test="${not empty usuarios}" >
+		        <tbody>
+		            <c:forEach items="${usuarios}" var="usuario">
+		                <tr>
+                            <td>
+                                ${usuario.getId()}
+                            </td>
+	                        <td>
+	                            ${usuario.getNome()}
+                            </td>
+                            <td>
+                                ${usuario.getEmail()}
+                           </td>
+	                       <td>
+	                           ${usuario.getCaracteristicas()}
+	                       </td>
+	                       <td>
+	                           ${usuario.getTipo()}
+	                       </td>
+	                       <td>
+	                           ${usuario.getSetor()}
+	                       </td>
+	                       <td>
+	                           <a href="/usuario?email=${usuario.getEmail()}">
+	                               Editar
+	                           </a>
+	                           <a href="/usuario/${usuario.getId()}/excluir">
+	                               Excluir
+	                           </a>
+	                       </td>
+	                    </tr>
+		            </c:forEach> 
+		        </tbody>
+		    </c:if>
 		</table>
+		
+        <c:if test="${empty usuarios }">
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                Não há usuarios cadastarados
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </c:if>
 	
 	</div>
 
