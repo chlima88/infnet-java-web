@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,47 +31,19 @@
 	<title>Cadastro de usuários</title>
 </head>
 <body>
+    <c:import url="/WEB-INF/jsp/menu.jsp" />
 	<div class="container">
 	
-	       <nav class="navbar navbar-expand-lg bg-primary navbar-dark mb-4">
-          <div class="container-fluid">
-            <a class="navbar-brand" href="/home">Home</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNavDropdown">
-              <ul class="navbar-nav">
-                <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Menu
-                  </a>
-                  <ul class="dropdown-menu">
-                    <li>
-                        <a class="dropdown-item" href="#">Geral &raquo;</a>
-                        <ul class="dropdown-menu dropdown-submenu">
-                            <li><a class="dropdown-item" href="/login">Login</a></li>
-                            <li><a class="dropdown-item" href="/error">Pagina de erro</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a class="dropdown-item" href="#">Usuários &raquo;</a>
-                        <ul class="dropdown-menu dropdown-submenu">   
-                            <li><a class="dropdown-item" href="/usuario/incluir">Cadastro</a></li>
-                            <li><a class="dropdown-item" href="/usuario/listar">Listagem</a></li>
-                            <li><a class="dropdown-item" href="/usuario/buscar">Buscar</a></li>
-                            <li><a class="dropdown-item" href="/usuario">Dados</a></li>
-                        </ul>
-                    </li>
-                  </ul>
-                  
-                </li>
-              </ul>
-            </div>
-          </div>
-        </nav>
-        
+
 	
 		<h1>Cadastrar usuário</h1>
+		
+        <c:if test="${not empty erro}">
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>${erro}</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </c:if>
 	
 		<form action="/usuario/incluir" method="post">
 		
