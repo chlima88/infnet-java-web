@@ -25,14 +25,14 @@ public class UsuarioRepository {
 		}
 	}
 		
-	public static void save(Usuario usuario) throws Exception {
+	public static Usuario save(Usuario usuario) throws Exception {
 		
 		try {
 			findByEmail(usuario.getEmail());			
 		} catch (Exception e) {
 			usuario.setId(id);
 			usuarios.put(id++, usuario);
-			return;
+			return usuario;
 		} 
 		throw new Exception("E-mail ja cadastrado!");
 
