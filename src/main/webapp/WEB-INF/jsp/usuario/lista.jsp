@@ -40,47 +40,14 @@
 	<title>Listagem de usuários</title>
 </head>
 <body>
+    <c:import url="/WEB-INF/jsp/menu.jsp" />
 	<div class="container">
-        <nav class="navbar navbar-expand-lg bg-primary navbar-dark mb-4">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="/home">Home</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNavDropdown">
-	                <ul class="navbar-nav">
-	                    <li class="nav-item dropdown">
-	                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-	                            Menu
-	                        </a>
-	                        <ul class="dropdown-menu">
-		                        <li>
-		                            <a class="dropdown-item" href="#">Geral &raquo;</a>
-		                            <ul class="dropdown-menu dropdown-submenu">
-		                                <li><a class="dropdown-item" href="/login">Login</a></li>
-		                                <li><a class="dropdown-item" href="/error">Pagina de erro</a></li>
-		                            </ul>
-		                        </li>
-		                        <li>
-		                            <a class="dropdown-item" href="#">Usuários &raquo;</a>
-		                            <ul class="dropdown-menu dropdown-submenu">   
-		                                <li><a class="dropdown-item" href="/usuario/incluir">Cadastro</a></li>
-		                                <li><a class="dropdown-item" href="/usuario/listar">Listagem</a></li>
-		                                <li><a class="dropdown-item" href="/usuario/buscar">Buscar</a></li>
-		                                <li><a class="dropdown-item" href="/usuario">Dados</a></li>
-		                            </ul>
-		                        </li>
-		                    </ul>
-		                </li>
-		            </ul>
-		        </div>
-            </div>
-        </nav>
+        
         
 		<h1>Listagem de usuários</h1>
 		
         <c:if test="${not empty usuario}">
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <div class="alert alert-primary alert-dismissible fade show" role="alert">
                 Usuário <strong>${usuario.getEmail()}</strong> cadastrado com sucesso!
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
