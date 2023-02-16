@@ -1,3 +1,4 @@
+<%@page import="java.util.Collection"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ page import = "br.edu.infnet.atapp.model.domain.Usuario" %>
@@ -29,46 +30,50 @@
         .dropdown-menu > li:hover > .dropdown-submenu {
           display: block;
         }
+        a { text-decoration: none;}
+        a:hover { text-decoration: underline;}
+        th, td {
+		  text-align: center;
+		}
     </style>
 	<title>Listagem de usuários</title>
 </head>
 <body>
 	<div class="container">
-       <nav class="navbar navbar-expand-lg bg-primary navbar-dark mb-4">
-          <div class="container-fluid">
-            <a class="navbar-brand" href="/home">Home</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNavDropdown">
-              <ul class="navbar-nav">
-                <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Menu
-                  </a>
-                  <ul class="dropdown-menu">
-                    <li>
-                        <a class="dropdown-item" href="#">Geral &raquo;</a>
-                        <ul class="dropdown-menu dropdown-submenu">
-                            <li><a class="dropdown-item" href="/login">Login</a></li>
-                            <li><a class="dropdown-item" href="/error">Pagina de erro</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a class="dropdown-item" href="#">Usuários &raquo;</a>
-                        <ul class="dropdown-menu dropdown-submenu">   
-                            <li><a class="dropdown-item" href="/usuario/incluir">Cadastro</a></li>
-                            <li><a class="dropdown-item" href="/usuario/listar">Listagem</a></li>
-                            <li><a class="dropdown-item" href="/usuario/buscar">Buscar</a></li>
-                            <li><a class="dropdown-item" href="/usuario">Dados</a></li>
-                        </ul>
-                    </li>
-                  </ul>
-                  
-                </li>
-              </ul>
+        <nav class="navbar navbar-expand-lg bg-primary navbar-dark mb-4">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="/home">Home</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDarkDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavDropdown">
+	                <ul class="navbar-nav">
+	                    <li class="nav-item dropdown">
+	                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+	                            Menu
+	                        </a>
+	                        <ul class="dropdown-menu">
+		                        <li>
+		                            <a class="dropdown-item" href="#">Geral &raquo;</a>
+		                            <ul class="dropdown-menu dropdown-submenu">
+		                                <li><a class="dropdown-item" href="/login">Login</a></li>
+		                                <li><a class="dropdown-item" href="/error">Pagina de erro</a></li>
+		                            </ul>
+		                        </li>
+		                        <li>
+		                            <a class="dropdown-item" href="#">Usuários &raquo;</a>
+		                            <ul class="dropdown-menu dropdown-submenu">   
+		                                <li><a class="dropdown-item" href="/usuario/incluir">Cadastro</a></li>
+		                                <li><a class="dropdown-item" href="/usuario/listar">Listagem</a></li>
+		                                <li><a class="dropdown-item" href="/usuario/buscar">Buscar</a></li>
+		                                <li><a class="dropdown-item" href="/usuario">Dados</a></li>
+		                            </ul>
+		                        </li>
+		                    </ul>
+		                </li>
+		            </ul>
+		        </div>
             </div>
-          </div>
         </nav>
         
 		<h1>Listagem de usuários</h1>
@@ -81,29 +86,52 @@
 		<table class="table table-hover">
 			<thead>
 				<tr>
+				    <th scope="col">Id</th>
 					<th scope="col">Nome</th>
 					<th scope="col">E-mail</th>
 					<th scope="col">Tipo</th>
 					<th scope="col">Caracteristicas</th>
-					<th scope="col">Setor</th>
+                    <th scope="col">Setor</th>
+                    <th scope="col">Ação</th>
 				</tr>
 			</thead>
 			<tbody>
 				<%
-					List<Usuario> usuarios = UsuarioRepository.findAll(); 
+					Collection<Usuario> usuarios = UsuarioRepository.findAll(); 
 					
 					for (Usuario usuario: usuarios) {
-						%>
-						<tr>
-							<td><%= usuario.getNome() %></td>
-							<td><%= usuario.getEmail() %></td>
-							<td><%= usuario.getTipo() %></td>
-							<td><%= usuario.getCaracteristicas() %></td>
-							<td><%= usuario.getSetor() %></td>
-						</tr>
-					   <%
+				%>
 						
-					}
+				    <tr>
+                       <td>
+                            <%= usuario.getId() %>
+                       </td>
+					   <td>
+					       <%= usuario.getNome() %>
+					   </td>
+					   <td>
+                           <%= usuario.getEmail() %>
+                       </td>
+					   <td>
+                           <%= usuario.getTipo() %>
+                       </td>
+					   <td>
+                           <%= usuario.getCaracteristicas() %>
+					   </td>
+                       <td>
+                           <%= usuario.getSetor() %>
+                       </td>
+                       <td>
+                           <a href="/usuario?email=<%= usuario.getEmail() %>">
+                               Editar
+                           </a>
+                           <a href="/usuario/<%= usuario.getId() %>/excluir">
+                               Excluir
+                           </a>
+                       </td>
+					</tr>
+				   <%
+				}
 				%>
 					
 	
