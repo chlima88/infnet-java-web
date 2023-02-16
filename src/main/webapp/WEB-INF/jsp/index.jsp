@@ -24,12 +24,7 @@
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
 
-
-        <h3>App</h3>
-        <ul>
-            <li><a href="/login">Login</a></li>
-        </ul>
-        
+       
         <h3>Usuários</h3>
         <ul>
             <li><a href="/usuario/incluir">Cadastro</a></li>
