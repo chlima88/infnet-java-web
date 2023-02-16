@@ -14,7 +14,7 @@ import br.edu.infnet.atapp.model.repository.LoginRepository;
 public class LoginController {
 
 	@GetMapping("/login")
-	public String telaLogin() {
+	public String telaLogin(Model model) {
 		return "login";
 	}
 	
@@ -35,9 +35,9 @@ public class LoginController {
 			return "redirect:/home";
 			
 		} catch(Exception error) {
-			model.addAttribute("erro", error.getMessage());
+			redirectAttrs.addFlashAttribute("erro","Usuário ou senha inválidos");
+			return "redirect:/error";
 		}
-		return "/error";
 		
 	}
 }
