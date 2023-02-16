@@ -22,7 +22,7 @@
 		
         <c:if test="${not empty erro}">
             <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                <strong>${erro}</strong>
+                ${erro}
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         </c:if>
