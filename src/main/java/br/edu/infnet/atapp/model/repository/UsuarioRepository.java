@@ -79,21 +79,24 @@ public class UsuarioRepository {
 		return usuarios.values();
 	};
 	
-//	public static void update(String email, Usuario usuario) throws Exception {
-//		
-//		Usuario usuarioEncontrado = findByEmail(email);
-//		
-//		try {
-//			if (email != usuario.getEmail()) findByEmail(usuario.getEmail());
-//		} catch(Exception error) {
-//			int usuarioIndex = usuarios.indexOf(usuarioEncontrado);
-//			usuarios.set(usuarioIndex, usuario);		
-//			return;
-//		}
-//		throw new Exception("O e-mail informado já está em uso!");
-//		
-//		
-//	};
+	public static void update(String emailBuscado, Usuario usuario) throws Exception {
+		
+		try {
+			if (emailBuscado.equalsIgnoreCase(usuario.getEmail())) {
+				usuarios.put(usuario.getId(), usuario);
+				return;
+			} else {
+				findByEmail(usuario.getEmail());
+			}
+		} catch(Exception error) {
+			usuarios.put(usuario.getId(), usuario);
+			return;
+		}
+		
+		throw new Exception("O e-mail informado já está em uso!");
+		
+		
+	};
 	
 	public static int count() {
 		return usuarios.size();
