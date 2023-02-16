@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.edu.infnet.atapp.model.domain.Usuario;
 import br.edu.infnet.atapp.model.repository.UsuarioRepository;
@@ -35,6 +36,7 @@ public class UsuarioController {
 
 	@GetMapping("/usuario/listar")
 	public String telaLista(Model model) throws Exception {
+		model.addAttribute("usuarios", UsuarioRepository.findAll());
 		return "usuario/lista";
 	}
 	
@@ -49,14 +51,19 @@ public class UsuarioController {
 	}
 			
 	@PostMapping("/usuario/incluir")
-	public String incluir(Usuario usuario, Model model) throws Exception {
+	public String incluir(
+			Usuario usuario, 
+			Model modelm, 
+			RedirectAttributes redirectAttrs
+		) throws Exception {
 		
 		try {
-			UsuarioRepository.save(usuario);
-			System.out.println("Inclusão realizada com sucesso: " + usuario);
+			Usuario usuarioCadastrado = UsuarioRepository.save(usuario);
+			System.out.println("Inclusão realizada com sucesso: " + usuarioCadastrado);
+			redirectAttrs.addFlashAttribute("usuario", usuarioCadastrado);
 			return "redirect:/usuario/listar";
 		} catch(Exception error) {
-			model.addAttribute("erro", error.getMessage());
+			modelm.addAttribute("erro", error.getMessage());
 			return "/error";
 		}
 		
