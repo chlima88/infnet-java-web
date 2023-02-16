@@ -28,7 +28,6 @@
         <h3>App</h3>
         <ul>
             <li><a href="/login">Login</a></li>
-            <li><a href="/error">Pagina de erro</a></li>
         </ul>
         
         <h3>Usuários</h3>
@@ -36,7 +35,6 @@
             <li><a href="/usuario/incluir">Cadastro</a></li>
             <li><a href="/usuario/listar">Listagem</a></li>
             <li><a href="/usuario/buscar">Buscar</a></li>
-            <li><a href="/usuario">Dados</a></li>
         </ul>
         
     </div>
