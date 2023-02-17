@@ -62,12 +62,11 @@ public class UsuarioController {
 		
 		try {
 			Usuario usuarioCadastrado = UsuarioRepository.save(usuario);
-			System.out.println("Inclusão realizada com sucesso: " + usuarioCadastrado);
-			redirectAttrs.addFlashAttribute("usuario", usuarioCadastrado);
+			String msg = "Usuário <strong>" + usuarioCadastrado.getEmail() + "</strong> cadastrado com sucesso!";
+			redirectAttrs.addFlashAttribute("msg", msg);
 			return "redirect:/usuario/listar";
 		} catch(Exception error) {
 			redirectAttrs.addFlashAttribute("erro", error.getMessage());
-			System.out.println(error.getMessage());
 			return "redirect:/usuario/incluir";
 		}
 		
@@ -82,10 +81,11 @@ public class UsuarioController {
 		
 		try {
 			UsuarioRepository.update(emailBuscado, usuario);
+			String msg = "Usuário <strong>" + usuario.getEmail() + "</strong> atualizado com sucesso!";
+			redirectAttrs.addFlashAttribute("msg", msg);
 			return "redirect:/usuario/listar";			 
 		} catch(Exception error) {
 			redirectAttrs.addFlashAttribute("erro", error.getMessage());
-			System.out.println(error.getMessage());
 			return "redirect:/usuario?email="+emailBuscado;
 		}
 	}
@@ -93,16 +93,18 @@ public class UsuarioController {
 	@GetMapping("/usuario/{id}/excluir")
 	public String excluir(
 				@PathVariable("id") Integer id, 
-				Model model
+				Model model,
+				RedirectAttributes redirectAttrs
 			) {
 		
 		try {
 			Usuario usuario = UsuarioRepository.delete(id);
-			System.out.println(usuario);
+			String msg = "Usuário <strong>" + usuario.getEmail() + "</strong> excluido com sucesso!";
+			redirectAttrs.addFlashAttribute("msg", msg);
 			return "redirect:/usuario/listar"; 
 		} catch(Exception error) {
-			model.addAttribute("erro", error.getMessage());
-			return "/error";
+			redirectAttrs.addFlashAttribute("erro", error.getMessage());
+			return "redirect:/usuario/listar"; 
 		}
 	}
 }
