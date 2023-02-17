@@ -24,11 +24,11 @@
 		<form method="post" action="login">
 			<div class="form-outline mb-4">
 				<label class="form-label" for="email">E-mail</label>
-				<input type="text" name="email" id="email" class="form-control">
+				<input  class="form-control" type="text" name="email" id="email" value="admin@carservices">
 			</div>
 			<div class="form-outline mb-4">
 				<label class="form-label" for="senha">Senha</label>
-				<input type="password" name="senha" id="senha" class="form-control">
+				<input  class="form-control" type="password" name="senha" id="senha" value="123">
 			</div>
 			<button type="submit" class="w-25 btn btn-primary">Acessar</button>
 			<a class="w-25 btn btn-primary" role="button" href="javascript:void(0)" onClick="history.go(-1); return false;">Voltar</a>
