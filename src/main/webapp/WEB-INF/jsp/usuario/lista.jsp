@@ -22,9 +22,9 @@
         
 		<h1>Listagem de usuários</h1>
 		
-        <c:if test="${not empty usuario}">
+        <c:if test="${not empty msg}">
             <div class="alert alert-primary alert-dismissible fade show" role="alert">
-                Usuário <strong>${usuario.getEmail()}</strong> cadastrado com sucesso!
+                ${msg}
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         </c:if>
