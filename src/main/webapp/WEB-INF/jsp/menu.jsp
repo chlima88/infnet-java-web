@@ -40,31 +40,39 @@
                  </li>
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Menu
+                    Usuarios
                   </a>
-                  <ul class="dropdown-menu">
-                    <li>
-                        <a class="dropdown-item" href="#">Geral &raquo;</a>
-                        <ul class="dropdown-menu dropdown-submenu">
-                            <li><a class="dropdown-item" href="/login">Login</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a class="dropdown-item" href="#">Usuários &raquo;</a>
-                        <ul class="dropdown-menu dropdown-submenu">   
-                            <li><a class="dropdown-item" href="/usuario/incluir">Cadastro</a></li>
-                            <li><a class="dropdown-item" href="/usuario/listar">Listagem</a></li>
-                            <li><a class="dropdown-item" href="/usuario/buscar">Buscar</a></li>
-                        </ul>
-                    </li>
+                  <ul class="dropdown-menu">  
+                      <li><a class="dropdown-item" href="/usuario/incluir">Cadastro</a></li>
+                      <li><a class="dropdown-item" href="/usuario/listar">Listagem</a></li>
+                      <li><a class="dropdown-item" href="/usuario/buscar">Buscar</a></li>
                   </ul>
-                  
+                </li>
+                                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Serviços
+                  </a>
+                  <ul class="dropdown-menu">  
+                      <li><a class="dropdown-item" href="/usuario/incluir">Cadastro</a></li>
+                      <li><a class="dropdown-item" href="/usuario/listar">Listagem</a></li>
+                      <li><a class="dropdown-item" href="/usuario/buscar">Buscar</a></li>
+                  </ul>
+                </li>
+                                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Agendamentos
+                  </a>
+                  <ul class="dropdown-menu">  
+                      <li><a class="dropdown-item" href="/usuario/incluir">Cadastro</a></li>
+                      <li><a class="dropdown-item" href="/usuario/listar">Listagem</a></li>
+                      <li><a class="dropdown-item" href="/usuario/buscar">Buscar</a></li>
+                  </ul>
                 </li>
               </ul>
             </div>
             
             <ul class="nav navbar-nav navbar-right">
-                <li><a class="nav-link" href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                <li><a class="nav-link" href="/usuario/incluir"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
                 <li><a class="nav-link" href="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
             </ul>
           </div>
