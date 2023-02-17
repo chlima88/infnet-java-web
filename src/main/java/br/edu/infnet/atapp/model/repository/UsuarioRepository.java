@@ -15,7 +15,7 @@ public class UsuarioRepository {
 	private static Map<Integer, Usuario> usuarios = new HashMap<Integer, Usuario>();
 	private static Integer id = 0;
 	
-	private static Usuario usuario = new Usuario("Usuario", "1@1.com", "123", new ArrayList<String>(Arrays.asList("Dev")), "P", "1");
+	private static Usuario usuario = new Usuario("Admin", "admin@carservices", "123", new ArrayList<String>(Arrays.asList("Dev")), "P", "1");
 	
 	static {
 		try {
