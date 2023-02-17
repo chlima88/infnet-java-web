@@ -1,6 +1,7 @@
 package br.edu.infnet.atapp.model.repository;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import br.edu.infnet.atapp.model.domain.Usuario;
@@ -8,13 +9,8 @@ import br.edu.infnet.atapp.model.domain.Usuario;
 public class LoginRepository {
 	
 
-	static List<Usuario> logins = new ArrayList<Usuario>();
-	
-	static {
-		Usuario admin = new Usuario("Admin", "admin","123");
-		logins.add(admin);		
-	}
-	
+	static Collection<Usuario> logins = UsuarioRepository.findAll();
+		
 	
 	public static Usuario autenticar(Usuario usuario) throws Exception {
 		
