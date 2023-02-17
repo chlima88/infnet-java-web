@@ -9,7 +9,7 @@ public class AppController {
 
 	@GetMapping("/")
 	public String telaIndex() {
-		return "redirect:/login";
+		return "redirect:/home";
 	}
 	
 	@GetMapping("/home")
