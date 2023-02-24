@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,49 +31,55 @@
 		    <div class="navbar-header">
 		      <a class="navbar-brand" href="/home">CarServices</a>
 		    </div>
-            <div class="collapse navbar-collapse" id="navbarNavDropdown">
-              <ul class="nav navbar-nav">
-                <li class="nav-item">
-                  <a class="nav-link" href="/home">
-                    Home
-                  </a>
-                 </li>
-                <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Usuarios
-                  </a>
-                  <ul class="dropdown-menu">  
-                      <li><a class="dropdown-item" href="/usuario/incluir">Cadastro</a></li>
-                      <li><a class="dropdown-item" href="/usuario/listar">Listagem</a></li>
-                      <li><a class="dropdown-item" href="/usuario/buscar">Buscar</a></li>
-                  </ul>
-                </li>
-                                <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Serviços
-                  </a>
-                  <ul class="dropdown-menu">  
-                      <li><a class="dropdown-item" href="/usuario/incluir">Cadastro</a></li>
-                      <li><a class="dropdown-item" href="/usuario/listar">Listagem</a></li>
-                      <li><a class="dropdown-item" href="/usuario/buscar">Buscar</a></li>
-                  </ul>
-                </li>
-                                <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Agendamentos
-                  </a>
-                  <ul class="dropdown-menu">  
-                      <li><a class="dropdown-item" href="/usuario/incluir">Cadastro</a></li>
-                      <li><a class="dropdown-item" href="/usuario/listar">Listagem</a></li>
-                      <li><a class="dropdown-item" href="/usuario/buscar">Buscar</a></li>
-                  </ul>
-                </li>
-              </ul>
-            </div>
-            
+	            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+	              <ul class="nav navbar-nav">
+	                <li class="nav-item">
+	                  <a class="nav-link" href="/home">
+	                    Home
+	                  </a>
+	                 </li>
+                    <c:if test="${ not empty usuario }">
+	                <li class="nav-item dropdown">
+	                  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+	                    Usuarios
+	                  </a>
+	                  <ul class="dropdown-menu">  
+	                      <li><a class="dropdown-item" href="/usuario/incluir">Cadastro</a></li>
+	                      <li><a class="dropdown-item" href="/usuario/listar">Listagem</a></li>
+	                      <li><a class="dropdown-item" href="/usuario/buscar">Buscar</a></li>
+	                  </ul>
+	                </li>
+                    <li class="nav-item dropdown">
+	                  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+	                    Serviços
+	                  </a>
+	                  <ul class="dropdown-menu">  
+	                      <li><a class="dropdown-item" href="/usuario/incluir">Cadastro</a></li>
+	                      <li><a class="dropdown-item" href="/usuario/listar">Listagem</a></li>
+	                      <li><a class="dropdown-item" href="/usuario/buscar">Buscar</a></li>
+	                  </ul>
+	                </li>
+                    <li class="nav-item dropdown">
+	                  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+	                    Agendamentos
+	                  </a>
+	                  <ul class="dropdown-menu">  
+	                      <li><a class="dropdown-item" href="/usuario/incluir">Cadastro</a></li>
+	                      <li><a class="dropdown-item" href="/usuario/listar">Listagem</a></li>
+	                      <li><a class="dropdown-item" href="/usuario/buscar">Buscar</a></li>
+	                  </ul>
+	                </li>
+                   </c:if>
+	              </ul>
+	            </div>
             <ul class="nav navbar-nav navbar-right">
-                <li><a class="nav-link" href="/usuario/incluir"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-                <li><a class="nav-link" href="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                <c:if test="${empty usuario}">
+	                <li><a class="nav-link" href="/usuario/incluir"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+	                <li><a class="nav-link" href="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+	            </c:if>
+                <c:if test="${not empty usuario}">
+                    <li><a class="nav-link" href="/logout"><span class="glyphicon glyphicon-log-in"></span> Logout, ${usuario.nome}</a></li>
+                </c:if>
             </ul>
           </div>
         </nav>
