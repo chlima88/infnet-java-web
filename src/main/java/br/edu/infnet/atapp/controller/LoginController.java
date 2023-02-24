@@ -5,12 +5,16 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.edu.infnet.atapp.model.domain.Usuario;
 import br.edu.infnet.atapp.model.repository.LoginRepository;
+import jakarta.servlet.http.HttpSession;
 
 @Controller
+@SessionAttributes("usuario")
 public class LoginController {
 
 	@GetMapping("/login")
@@ -31,7 +35,7 @@ public class LoginController {
 		try {
 			
 			Usuario usuario = LoginRepository.autenticar(credentials);
-			redirectAttrs.addFlashAttribute("usuario", usuario);
+			model.addAttribute(usuario);
 			return "redirect:/home";
 			
 		} catch(Exception error) {
@@ -40,4 +44,15 @@ public class LoginController {
 		}
 		
 	}
+	
+	@GetMapping("/logout")
+	public String logout(
+			HttpSession session,
+			SessionStatus status
+		) {
+		
+		status.setComplete();
+		session.removeAttribute("usuario");
+		return "redirect:/";
+	} 
 }
