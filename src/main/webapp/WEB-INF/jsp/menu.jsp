@@ -40,15 +40,25 @@
 	                 </li>
                     <c:if test="${ not empty usuario }">
 	                <li class="nav-item dropdown">
-	                  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-	                    Usuarios
-	                  </a>
-	                  <ul class="dropdown-menu">  
-	                      <li><a class="dropdown-item" href="/usuario/incluir">Cadastro</a></li>
-	                      <li><a class="dropdown-item" href="/usuario/listar">Listagem</a></li>
-	                      <li><a class="dropdown-item" href="/usuario/buscar">Buscar</a></li>
-	                  </ul>
-	                </li>
+                      <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Usuários
+                      </a>
+                      <ul class="dropdown-menu">  
+                          <li><a class="dropdown-item" href="/usuario/incluir">Cadastro</a></li>
+                          <li><a class="dropdown-item" href="/usuario/listar">Listagem</a></li>
+                          <li><a class="dropdown-item" href="/usuario/buscar">Buscar</a></li>
+                      </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                      <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Clientes
+                      </a>
+                      <ul class="dropdown-menu">  
+                          <li><a class="dropdown-item" href="/cliente/incluir">Cadastro</a></li>
+                          <li><a class="dropdown-item" href="/cliente/listar">Listagem</a></li>
+                          <li><a class="dropdown-item" href="/cliente/buscar">Buscar</a></li>
+                      </ul>
+                    </li>
                     <li class="nav-item dropdown">
 	                  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
 	                    Serviços
@@ -64,9 +74,9 @@
 	                    Agendamentos
 	                  </a>
 	                  <ul class="dropdown-menu">  
-	                      <li><a class="dropdown-item" href="/usuario/incluir">Cadastro</a></li>
-	                      <li><a class="dropdown-item" href="/usuario/listar">Listagem</a></li>
-	                      <li><a class="dropdown-item" href="/usuario/buscar">Buscar</a></li>
+	                      <li><a class="dropdown-item" href="/agendamento/incluir">Cadastro</a></li>
+	                      <li><a class="dropdown-item" href="/agendamento/listar">Listagem</a></li>
+	                      <li><a class="dropdown-item" href="/agendamento/buscar">Buscar</a></li>
 	                  </ul>
 	                </li>
                    </c:if>
