@@ -19,20 +19,11 @@
         <h2 class="mb-4">Home</h2>
         
         <div class="alert alert-primary alert-dismissible fade show" role="alert">
-            <p>Bem-vindo de volta <strong>${usuario.getNome()}</strong>!</p>
-            <p>Utilize os links abaixo ou o menu no superior para navegar entre as páginas</p>
+            <p>Bem-vindo de volta <strong>${usuario.nome}</strong>!</p>
+            <p>Utilize o menu no superior para navegar entre as páginas</p>
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
 
-       
-        <h3>Usuários</h3>
-        <ul>
-            <li><a href="/usuario/incluir">Cadastro</a></li>
-            <li><a href="/usuario/listar">Listagem</a></li>
-            <li><a href="/usuario/buscar">Buscar</a></li>
-        </ul>
-        
-    </div>
 
 </body>
 </html>
