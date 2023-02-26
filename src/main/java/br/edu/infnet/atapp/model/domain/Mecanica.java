@@ -13,7 +13,6 @@ public class Mecanica extends Servico {
 	private String categoriaServico; // revisao, troca, manutencao
 	private boolean problemaMotor;
 
-
 	public Mecanica(String nome, String codigo, float precoBase, boolean terceirizado) throws PrecoBaseInvalidoException {
 		super(nome, codigo, precoBase, terceirizado);
 		this.problemaMotor = false;

@@ -14,8 +14,8 @@ public class Eletrica extends Servico {
 	private boolean incendio;
 
 
-	public Eletrica(String nome, String codigo, float preco, boolean terceirizado) throws PrecoBaseInvalidoException {
-		super(nome, codigo, preco, terceirizado);
+	public Eletrica(String nome, String codigo, float precoBase, boolean terceirizado) throws PrecoBaseInvalidoException {
+		super(nome, codigo, precoBase, terceirizado);
 		this.incendio = false;
 	}
 
@@ -63,12 +63,12 @@ public class Eletrica extends Servico {
 	public void setCircuitoDanificado(String circuitoDanificado) throws CircuitoInvalidoException {
 		List<String> validOptions = new ArrayList<String>(Arrays.asList("luzes","ignicao","arranque","acessorios"));
 		
-		if (!validOptions.contains(circuitoDanificado)) {
+		if (!validOptions.contains(circuitoDanificado.toLowerCase())) {
 			throw new CircuitoInvalidoException("O circuito informado invalido ["+ circuitoDanificado +"]. "
 					+ "Opcoes validas: " + validOptions);
 		}
 		
-		this.circuitoDanificado = circuitoDanificado;
+		this.circuitoDanificado = circuitoDanificado.toLowerCase();
 	}
 	
 	public boolean isIncendio() {

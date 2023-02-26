@@ -64,9 +64,36 @@
 	                    Serviços
 	                  </a>
 	                  <ul class="dropdown-menu">  
-	                      <li><a class="dropdown-item" href="/usuario/incluir">Cadastro</a></li>
-	                      <li><a class="dropdown-item" href="/usuario/listar">Listagem</a></li>
-	                      <li><a class="dropdown-item" href="/usuario/buscar">Buscar</a></li>
+                          <li>
+                              <a class="dropdown-item" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Elétrica &raquo;
+                              </a>
+                              <ul class="dropdown-menu dropdown-submenu">  
+                                  <li><a class="dropdown-item" href="/eletrica/incluir">Cadastro</a></li>
+                                  <li><a class="dropdown-item" href="/eletrica/listar">Listagem</a></li>
+                                  <li><a class="dropdown-item" href="/eletrica/buscar">Buscar</a></li>
+                              </ul>
+                          </li>  
+                          <li>
+                              <a class="dropdown-item" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Laternagem &raquo;
+                              </a>
+                              <ul class="dropdown-menu dropdown-submenu">  
+                                  <li><a class="dropdown-item" href="/lanternagem/incluir">Cadastro</a></li>
+                                  <li><a class="dropdown-item" href="/lanternagem/listar">Listagem</a></li>
+                                  <li><a class="dropdown-item" href="/lanternagem/buscar">Buscar</a></li>
+                              </ul>
+                          </li>  
+                          <li>
+                              <a class="dropdown-item" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Mecânico &raquo;
+                              </a>
+                              <ul class="dropdown-menu dropdown-submenu">  
+                                  <li><a class="dropdown-item" href="/mecanica/incluir">Cadastro</a></li>
+                                  <li><a class="dropdown-item" href="/mecanica/listar">Listagem</a></li>
+                                  <li><a class="dropdown-item" href="/mecanica/buscar">Buscar</a></li>
+                              </ul>
+                          </li>
 	                  </ul>
 	                </li>
                     <li class="nav-item dropdown">
