@@ -2,30 +2,22 @@ package br.edu.infnet.atapp.model.repository;
 
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.stereotype.Repository;
+
 import br.edu.infnet.atapp.model.domain.Usuario;
 
+@Repository
 public class UsuarioRepository {
 	
 	private static Map<Integer, Usuario> usuarios = new HashMap<Integer, Usuario>();
 	private static Integer id = 0;
 	
-	private static Usuario usuario = new Usuario("Admin", "admin@carservices", "123", new ArrayList<String>(Arrays.asList("Dev")), "P", "1");
-	
-	static {
-		try {
-			save(usuario);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-		
-	public static Usuario save(Usuario usuario) throws Exception {
+	public Usuario save(Usuario usuario) throws Exception {
 		
 		try {
 			findByEmail(usuario.getEmail());			
@@ -38,7 +30,7 @@ public class UsuarioRepository {
 
 	};
 	
-	public static Usuario delete(Integer key) throws Exception {
+	public Usuario delete(Integer key) throws Exception {
 		
 		Usuario usuario = usuarios.remove(key);
 		if (usuario == null) throw new Exception("O id informado é inválido ou não existe!");
@@ -59,7 +51,15 @@ public class UsuarioRepository {
 		
 	};
 	
-	public static Usuario findByEmail(String email) throws Exception {
+	public boolean existsByEmail(String email) {
+		
+		for (Usuario usuario: usuarios.values()) {
+			if (usuario.getEmail().equalsIgnoreCase(email)) return true;
+		}
+		return false;
+	};
+	
+	public Usuario findByEmail(String email) throws Exception {
 		
 		Usuario usuarioEncontrado = null;
 	
@@ -75,11 +75,11 @@ public class UsuarioRepository {
 		
 	};
 	
-	public static Collection<Usuario> findAll() {
+	public Collection<Usuario> findAll() {
 		return usuarios.values();
 	};
 	
-	public static void update(String emailBuscado, Usuario usuario) throws Exception {
+	public void update(String emailBuscado, Usuario usuario) throws Exception {
 		
 		try {
 			if (emailBuscado.equalsIgnoreCase(usuario.getEmail())) {

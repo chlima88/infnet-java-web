@@ -2,15 +2,16 @@ package br.edu.infnet.atapp.model.repository;
 
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import br.edu.infnet.atapp.model.domain.Cliente;
+import org.springframework.stereotype.Repository;
+
 import br.edu.infnet.atapp.model.domain.Cliente;
 
+@Repository
 public class ClienteRepository {
 	
 	private static Map<Integer, Cliente> clientes = new HashMap<Integer, Cliente>();
@@ -18,16 +19,7 @@ public class ClienteRepository {
 	
 	private static Cliente cliente;
 	
-	static {
-		try {
-			cliente = new Cliente("Silvio Santos", "12345678910", "21999887766");
-			save(cliente);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-		
-	public static Cliente save(Cliente cliente) throws Exception {
+	public Cliente save(Cliente cliente) throws Exception {
 		
 		try {
 			findByDocument(cliente.getDocumento());			
@@ -36,11 +28,11 @@ public class ClienteRepository {
 			clientes.put(id++, cliente);
 			return cliente;
 		} 
-		throw new Exception("E-mail ja cadastrado!");
+		throw new Exception("Documento já cadastrado!");
 
 	};
 	
-	public static Cliente delete(Integer key) throws Exception {
+	public Cliente delete(Integer key) throws Exception {
 		
 		Cliente cliente = clientes.remove(key);
 		if (cliente == null) throw new Exception("O id informado é inválido ou não existe!");
@@ -61,7 +53,7 @@ public class ClienteRepository {
 		
 	};
 	
-	public static Cliente findByDocument(String documento) throws Exception {
+	public Cliente findByDocument(String documento) throws Exception {
 		
 		Cliente clienteEncontrado = null;
 	
@@ -77,11 +69,11 @@ public class ClienteRepository {
 		
 	};
 	
-	public static Collection<Cliente> findAll() {
+	public Collection<Cliente> findAll() {
 		return clientes.values();
 	};
 	
-	public static void update(String documento, Cliente cliente) throws Exception {
+	public void update(String documento, Cliente cliente) throws Exception {
 		
 		try {
 			if (documento.equalsIgnoreCase(cliente.getDocumento())) {
@@ -95,7 +87,7 @@ public class ClienteRepository {
 			return;
 		}
 		
-		throw new Exception("O e-mail informado já está em uso!");
+		throw new Exception("O documento informado já está em uso!");
 		
 		
 	};

@@ -1,5 +1,6 @@
 package br.edu.infnet.atapp.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,10 +10,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.edu.infnet.atapp.model.domain.Usuario;
-import br.edu.infnet.atapp.model.repository.UsuarioRepository;
+import br.edu.infnet.atapp.model.service.UsuarioService;
 
 @Controller
 public class UsuarioController {
+	
+	@Autowired
+	private UsuarioService usuarioService;
 	
 	@GetMapping("/usuario")
 	public String telaUsuario(
@@ -26,7 +30,7 @@ public class UsuarioController {
 		} else {
 			
 			try {
-				Usuario usuario = UsuarioRepository.findByEmail(email);
+				Usuario usuario = usuarioService.buscarEmail(email);
 				model.addAttribute("usuario", usuario);
 				return "usuario/dados";
 			} catch(Exception error) {
@@ -39,7 +43,7 @@ public class UsuarioController {
 
 	@GetMapping("/usuario/listar")
 	public String telaLista(Model model) throws Exception {
-		model.addAttribute("usuarios", UsuarioRepository.findAll());
+		model.addAttribute("usuarios", usuarioService.obterLista());
 		return "usuario/lista";
 	}
 	
@@ -61,7 +65,7 @@ public class UsuarioController {
 		) {
 		
 		try {
-			Usuario usuarioCadastrado = UsuarioRepository.save(usuario);
+			Usuario usuarioCadastrado = usuarioService.incluir(usuario);
 			String msg = "Usuário <strong>" + usuarioCadastrado.getEmail() + "</strong> cadastrado com sucesso!";
 			redirectAttrs.addFlashAttribute("msg", msg);
 			return "redirect:/usuario/listar";
@@ -80,7 +84,7 @@ public class UsuarioController {
 			){
 		
 		try {
-			UsuarioRepository.update(emailBuscado, usuario);
+			usuarioService.atualizar(emailBuscado, usuario);
 			String msg = "Usuário <strong>" + usuario.getEmail() + "</strong> atualizado com sucesso!";
 			redirectAttrs.addFlashAttribute("msg", msg);
 			return "redirect:/usuario/listar";			 
@@ -98,7 +102,7 @@ public class UsuarioController {
 			) {
 		
 		try {
-			Usuario usuario = UsuarioRepository.delete(id);
+			Usuario usuario = usuarioService.excluir(id);
 			String msg = "Usuário <strong>" + usuario.getEmail() + "</strong> excluido com sucesso!";
 			redirectAttrs.addFlashAttribute("msg", msg);
 			return "redirect:/usuario/listar"; 

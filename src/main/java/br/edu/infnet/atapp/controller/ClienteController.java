@@ -1,5 +1,6 @@
 package br.edu.infnet.atapp.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,12 +10,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.edu.infnet.atapp.model.domain.Cliente;
-import br.edu.infnet.atapp.model.domain.Cliente;
-import br.edu.infnet.atapp.model.repository.ClienteRepository;
-import br.edu.infnet.atapp.model.repository.ClienteRepository;
+import br.edu.infnet.atapp.model.service.ClienteService;
 
 @Controller
 public class ClienteController {
+	
+	@Autowired
+	ClienteService clienteService;
 	
 	@GetMapping("/cliente")
 	public String telaCliente(
@@ -28,7 +30,7 @@ public class ClienteController {
 		} else {
 			
 			try {
-				Cliente cliente = ClienteRepository.findByDocument(documento);
+				Cliente cliente = clienteService.buscarDocumento(documento);
 				model.addAttribute("cliente", cliente);
 				return "cliente/dados";
 			} catch(Exception error) {
@@ -41,7 +43,7 @@ public class ClienteController {
 
 	@GetMapping("/cliente/listar")
 	public String telaLista(Model model) throws Exception {
-		model.addAttribute("clientes", ClienteRepository.findAll());
+		model.addAttribute("clientes", clienteService.obterLista());
 		return "cliente/lista";
 	}
 	
@@ -63,7 +65,7 @@ public class ClienteController {
 		) {
 		
 		try {
-			Cliente clienteCadastrado = ClienteRepository.save(cliente);
+			Cliente clienteCadastrado = clienteService.incluir(cliente);
 			String msg = "Cliente <strong>" + clienteCadastrado.getNome() + "</strong> cadastrado com sucesso!";
 			redirectAttrs.addFlashAttribute("msg", msg);
 			return "redirect:/cliente/listar";
@@ -82,7 +84,7 @@ public class ClienteController {
 			){
 		
 		try {
-			ClienteRepository.update(documentoBuscado, cliente);
+			clienteService.atualizar(documentoBuscado, cliente);
 			String msg = "Cliente <strong>" + cliente.getNome() + "</strong> atualizado com sucesso!";
 			redirectAttrs.addFlashAttribute("msg", msg);
 			return "redirect:/cliente/listar";			 
@@ -100,7 +102,7 @@ public class ClienteController {
 			) {
 		
 		try {
-			Cliente cliente = ClienteRepository.delete(id);
+			Cliente cliente = clienteService.excluir(id);
 			String msg = "Cliente <strong>" + cliente.getNome() + "</strong> excluido com sucesso!";
 			redirectAttrs.addFlashAttribute("msg", msg);
 			return "redirect:/cliente/listar"; 
