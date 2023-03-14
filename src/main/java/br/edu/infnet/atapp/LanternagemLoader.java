@@ -9,21 +9,20 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
-import br.edu.infnet.atapp.model.domain.Cliente;
-import br.edu.infnet.atapp.model.domain.Mecanica;
-import br.edu.infnet.atapp.model.service.ClienteService;
+import br.edu.infnet.atapp.model.domain.Lanternagem;
+import br.edu.infnet.atapp.model.service.LanternagemService;
 
 @Component
-public class ClienteLoader implements ApplicationRunner {
-
-	@Autowired
-	ClienteService clienteService;
+public class LanternagemLoader implements ApplicationRunner {
 	
+	@Autowired
+	LanternagemService lanternagemService;
+
 	@Override
 	public void run(ApplicationArguments args) throws Exception {
 		
 		try {
-			String arquivo = "loadCliente.txt";
+			String arquivo = "loadLanternagem.txt";
 			
 			try {
 				FileReader fileReader = new FileReader(arquivo);
@@ -36,8 +35,14 @@ public class ClienteLoader implements ApplicationRunner {
 					
 					dados = linha.split(";");
 					
-					Cliente cliente = new Cliente(dados[0],dados[1],dados[2]);
-					clienteService.incluir(cliente);
+					Lanternagem servico = new Lanternagem(
+							dados[0], 
+							dados[1], 
+							Integer.valueOf(dados[2]), 
+							Boolean.valueOf(dados[3])
+						);
+					servico.setTamanhoAvaria(dados[4]);
+					lanternagemService.incluir(servico);
 					
 					linha = file.readLine();
 				}
@@ -45,11 +50,10 @@ public class ClienteLoader implements ApplicationRunner {
 				file.close();
 				fileReader.close();
 			} catch (IOException e) {
-				System.out.println("[Erro] DataLoader Cliente - "+e.getMessage());
+				System.out.println("[Erro] DataLoader Lanternagem - "+e.getMessage());
 			}
 		} finally {
-			System.out.println("[Sucesso] DataLoader Cliente");
-		}
-	}
-
+			System.out.println("[Sucesso] DataLoader Lanternagem");
+		}	
+	}	
 }

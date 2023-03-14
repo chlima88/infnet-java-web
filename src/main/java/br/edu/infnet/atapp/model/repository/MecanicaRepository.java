@@ -7,24 +7,18 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.stereotype.Repository;
+
 import br.edu.infnet.atapp.model.domain.Mecanica;
 
+@Repository
 public class MecanicaRepository {
 	
 	private static Map<Integer, Mecanica> servicos = new HashMap<Integer, Mecanica>();
 	private static Integer id = 0;	
 	
-	static {
-		try {
-			Mecanica servico = new Mecanica("Alinhamento", "M01", 200, false);
-			servico.setCategoriaServico("revisao");
-			save(servico);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-		
-	public static Mecanica save(Mecanica mecanica) throws Exception {
+	
+	public Mecanica save(Mecanica mecanica) throws Exception {
 		
 		try {
 			findByCode(mecanica.getCodigo());			
@@ -37,7 +31,7 @@ public class MecanicaRepository {
 
 	};
 	
-	public static Mecanica delete(Integer key) throws Exception {
+	public Mecanica delete(Integer key) throws Exception {
 		
 		Mecanica mecanica = servicos.remove(key);
 		if (mecanica == null) throw new Exception("O id informado é inválido ou não existe!");
@@ -58,7 +52,7 @@ public class MecanicaRepository {
 		
 	};
 	
-	public static Mecanica findByCode(String codigo) throws Exception {
+	public Mecanica findByCode(String codigo) throws Exception {
 		
 		Mecanica mecanicaEncontrado = null;
 	
@@ -74,11 +68,11 @@ public class MecanicaRepository {
 		
 	};
 	
-	public static Collection<Mecanica> findAll() {
+	public Collection<Mecanica> findAll() {
 		return servicos.values();
 	};
 	
-	public static void update(String codigoBuscado, Mecanica mecanica) throws Exception {
+	public void update(String codigoBuscado, Mecanica mecanica) throws Exception {
 		
 		try {
 			if (codigoBuscado.equalsIgnoreCase(mecanica.getCodigo())) {

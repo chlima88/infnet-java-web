@@ -7,24 +7,18 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.stereotype.Repository;
+
+import br.edu.infnet.atapp.model.domain.Lanternagem;
 import br.edu.infnet.atapp.model.domain.Lanternagem;
 
+@Repository
 public class LanternagemRepository {
 	
 	private static Map<Integer, Lanternagem> servicos = new HashMap<Integer, Lanternagem>();
 	private static Integer id = 0;	
-	
-	static {
-		try {
-			Lanternagem servico = new Lanternagem("Recuperacao de Paralama", "L01", 100, false);
-			servico.setTamanhoAvaria("P");
-			save(servico);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-		
-	public static Lanternagem save(Lanternagem servico) throws Exception {
+
+	public Lanternagem save(Lanternagem servico) throws Exception {
 		
 		try {
 			findByCode(servico.getCodigo());			
@@ -37,7 +31,7 @@ public class LanternagemRepository {
 
 	};
 	
-	public static Lanternagem delete(Integer key) throws Exception {
+	public Lanternagem delete(Integer key) throws Exception {
 		
 		Lanternagem servico = servicos.remove(key);
 		if (servico == null) throw new Exception("O id informado é inválido ou não existe!");
@@ -58,7 +52,7 @@ public class LanternagemRepository {
 		
 	};
 	
-	public static Lanternagem findByCode(String codigo) throws Exception {
+	public Lanternagem findByCode(String codigo) throws Exception {
 		
 		Lanternagem servicoEncontrado = null;
 	
@@ -74,11 +68,11 @@ public class LanternagemRepository {
 		
 	};
 	
-	public static Collection<Lanternagem> findAll() {
+	public Collection<Lanternagem> findAll() {
 		return servicos.values();
 	};
 	
-	public static void update(String codigoBuscado, Lanternagem servico) throws Exception {
+	public void update(String codigoBuscado, Lanternagem servico) throws Exception {
 		
 		try {
 			if (codigoBuscado.equalsIgnoreCase(servico.getCodigo())) {
@@ -97,7 +91,7 @@ public class LanternagemRepository {
 		
 	};
 	
-	public static int count() {
+	public int count() {
 		return servicos.size();
 	}
 }

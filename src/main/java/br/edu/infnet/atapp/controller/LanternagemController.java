@@ -1,5 +1,6 @@
 package br.edu.infnet.atapp.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,10 +17,14 @@ import br.edu.infnet.atapp.model.repository.ClienteRepository;
 import br.edu.infnet.atapp.model.repository.LanternagemRepository;
 import br.edu.infnet.atapp.model.repository.LanternagemRepository;
 import br.edu.infnet.atapp.model.repository.MecanicaRepository;
+import br.edu.infnet.atapp.model.service.LanternagemService;
 import br.edu.infnet.atapp.model.repository.ClienteRepository;
 
 @Controller
 public class LanternagemController {
+	
+	@Autowired
+	LanternagemService lanternagemService;
 	
 	@GetMapping("/lanternagem")
 	public String telaCliente(
@@ -33,7 +38,7 @@ public class LanternagemController {
 		} else {
 			
 			try {
-				Lanternagem servico = LanternagemRepository.findByCode(codigo);
+				Lanternagem servico = lanternagemService.buscarCodigo(codigo);
 				model.addAttribute("servico", servico);
 				return "servicos/lanternagem/dados";
 			} catch(Exception error) {
@@ -46,7 +51,7 @@ public class LanternagemController {
 
 	@GetMapping("/lanternagem/listar")
 	public String telaLista(Model model) throws Exception {
-		model.addAttribute("servicos", LanternagemRepository.findAll());
+		model.addAttribute("servicos", lanternagemService.obterLista());
 		return "servicos/lanternagem/lista";
 	}
 	
@@ -68,7 +73,7 @@ public class LanternagemController {
 		) {
 		
 		try {
-			Lanternagem servicoCadastrado = LanternagemRepository.save(servico);
+			Lanternagem servicoCadastrado = lanternagemService.incluir(servico);
 			String msg = "Servico <strong>" + " ["+ servico.getCodigo() + "] " + 
 					servicoCadastrado.getNome() + "</strong> atualizado com sucesso!";
 			redirectAttrs.addFlashAttribute("msg", msg);
@@ -88,7 +93,7 @@ public class LanternagemController {
 			){
 		
 		try {
-			LanternagemRepository.update(codigoBuscado, servico);
+			lanternagemService.atualizar(codigoBuscado, servico);
 			String msg = "Servico <strong>" + " ["+ servico.getCodigo() + "] " + 
 					servico.getNome() + "</strong> atualizado com sucesso!";
 			redirectAttrs.addFlashAttribute("msg", msg);
@@ -107,7 +112,7 @@ public class LanternagemController {
 			) {
 		
 		try {
-			Lanternagem servico = LanternagemRepository.delete(id);
+			Lanternagem servico = lanternagemService.excluir(id);
 			String msg = "Serviço <strong>" + servico.getNome() + "</strong> excluido com sucesso!";
 			redirectAttrs.addFlashAttribute("msg", msg);
 			return "redirect:/lanternagem/listar"; 

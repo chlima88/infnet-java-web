@@ -1,0 +1,3 @@
+Alinhamento;M01;200;false;revisao
+Troca de oleo;M02;150;true;revisao
+Substituicao bloco motor;L03;800;false;troca

@@ -7,24 +7,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.stereotype.Repository;
+
 import br.edu.infnet.atapp.model.domain.Eletrica;
 
+@Repository
 public class EletricaRepository {
 	
 	private static Map<Integer, Eletrica> servicos = new HashMap<Integer, Eletrica>();
 	private static Integer id = 0;	
-	
-	static {
-		try {
-			Eletrica servico = new Eletrica("Revisão Eletrica", "E01", 100, false);
-			servico.setCircuitoDanificado("luzes");
-			save(servico);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
 		
-	public static Eletrica save(Eletrica mecanica) throws Exception {
+	public Eletrica save(Eletrica mecanica) throws Exception {
 		
 		try {
 			findByCode(mecanica.getCodigo());			
@@ -37,7 +30,7 @@ public class EletricaRepository {
 
 	};
 	
-	public static Eletrica delete(Integer key) throws Exception {
+	public Eletrica delete(Integer key) throws Exception {
 		
 		Eletrica mecanica = servicos.remove(key);
 		if (mecanica == null) throw new Exception("O id informado é inválido ou não existe!");
@@ -58,7 +51,7 @@ public class EletricaRepository {
 		
 	};
 	
-	public static Eletrica findByCode(String codigo) throws Exception {
+	public Eletrica findByCode(String codigo) throws Exception {
 		
 		Eletrica mecanicaEncontrado = null;
 	
@@ -74,11 +67,11 @@ public class EletricaRepository {
 		
 	};
 	
-	public static Collection<Eletrica> findAll() {
+	public Collection<Eletrica> findAll() {
 		return servicos.values();
 	};
 	
-	public static void update(String codigoBuscado, Eletrica mecanica) throws Exception {
+	public void update(String codigoBuscado, Eletrica mecanica) throws Exception {
 		
 		try {
 			if (codigoBuscado.equalsIgnoreCase(mecanica.getCodigo())) {

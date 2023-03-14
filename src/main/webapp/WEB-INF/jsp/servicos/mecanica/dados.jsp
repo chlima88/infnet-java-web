@@ -53,19 +53,19 @@
 
         <form id="form" action="/mecanica/atualizar" method="post">
         
-            <input type="hidden" value="${mecanica.codigo}" name="codigoBuscado" />
-            <input type="hidden" value="${mecanica.id}" name="id" />
+            <input type="hidden" value="${servico.codigo}" name="codigoBuscado" />
+            <input type="hidden" value="${servico.id}" name="id" />
         
             <div class="row row-cols-1 row-cols-md-4">
                 <div class="col mb-3">
                     <label class="form-label" for="nome">Nome:</label>
-                    <input class="form-control enable-disable" value="${mecanica.nome}" type="text" name="nome" disabled/>
+                    <input class="form-control enable-disable" value="${servico.nome}" type="text" name="nome" disabled/>
                     
                     <label class="form-label" for="codigo">Codigo: </label>
-                    <input class="form-control enable-disable" value="${mecanica.codigo}" type="text" name="codigo" disabled/>
+                    <input class="form-control enable-disable" value="${servico.codigo}" type="text" name="codigo" disabled/>
                     
                     <label class="form-label" for="precoBase">Preço Base: </label>
-                    <input class="form-control enable-disable" value="${mecanica.precoBase}" type="text" name="precoBase" disabled/>
+                    <input class="form-control enable-disable" value="${servico.precoBase}" type="text" name="precoBase" disabled/>
                         
                 </div>
                 
@@ -77,7 +77,7 @@
                             value="revisao"
                             type="radio"
                             name="categoriaServico"
-                            ${ mecanica.categoriaServico == "revisao" ? 'checked' : '' }
+                            ${ servico.categoriaServico == "revisao" ? 'checked' : '' }
                             disabled/>
                         <label class="form-check-label" for="tipoRevisao">Revisão</label>
                     </div>
@@ -87,7 +87,7 @@
                             value="troca"
                             type="radio"
                             name="categoriaServico"
-                            ${ mecanica.categoriaServico == "troca" ? 'checked' : '' }
+                            ${ servico.categoriaServico == "troca" ? 'checked' : '' }
                             disabled/>
                         <label class="form-check-label" for="tipoTroca">Troca</label>
                     </div>
@@ -97,7 +97,7 @@
                             value="manutencao"
                             type="radio"
                             name="categoriaServico"
-                            ${ mecanica.categoriaServico == "manutencao" ? 'checked' : '' }
+                            ${ servico.categoriaServico == "manutencao" ? 'checked' : '' }
                             disabled/>
                         <label class="form-check-label" for="tipoManutencao">Manutenção</label>
                     </div>
@@ -115,7 +115,7 @@
 	                        id="terceirizado"
 	                        value="true"
 	                        disabled
-                            ${ mecanica.terceirizado ? 'checked' : '' }
+                            ${ servico.terceirizado ? 'checked' : '' }
                             disabled />
                         <input type="hidden" value="false" name="terceirizado" />
                         <label class="form-check-label" for="caracteristicasDev">Terceirizado</label>

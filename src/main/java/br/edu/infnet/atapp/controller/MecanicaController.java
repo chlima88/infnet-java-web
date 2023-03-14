@@ -1,5 +1,6 @@
 package br.edu.infnet.atapp.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,15 +9,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import br.edu.infnet.atapp.model.domain.Cliente;
 import br.edu.infnet.atapp.model.domain.Mecanica;
-import br.edu.infnet.atapp.model.domain.Cliente;
-import br.edu.infnet.atapp.model.repository.ClienteRepository;
-import br.edu.infnet.atapp.model.repository.MecanicaRepository;
-import br.edu.infnet.atapp.model.repository.ClienteRepository;
+import br.edu.infnet.atapp.model.service.MecanicaService;
 
 @Controller
 public class MecanicaController {
+	
+	@Autowired
+	MecanicaService mecanicaService;
 	
 	@GetMapping("/mecanica")
 	public String telaCliente(
@@ -30,7 +30,7 @@ public class MecanicaController {
 		} else {
 			
 			try {
-				Mecanica servico = MecanicaRepository.findByCode(codigo);
+				Mecanica servico = mecanicaService.buscarCodigo(codigo);
 				model.addAttribute("servico", servico);
 				return "servicos/mecanica/dados";
 			} catch(Exception error) {
@@ -43,7 +43,7 @@ public class MecanicaController {
 
 	@GetMapping("/mecanica/listar")
 	public String telaLista(Model model) throws Exception {
-		model.addAttribute("servicos", MecanicaRepository.findAll());
+		model.addAttribute("servicos", mecanicaService.obterLista());
 		return "servicos/mecanica/lista";
 	}
 	
@@ -65,7 +65,7 @@ public class MecanicaController {
 		) {
 		
 		try {
-			Mecanica servicoCadastrado = MecanicaRepository.save(servico);
+			Mecanica servicoCadastrado = mecanicaService.incluir(servico);
 			String msg = "Servico <strong>" + " ["+ servico.getCodigo() + "] " + 
 					servicoCadastrado.getNome() + "</strong> atualizado com sucesso!";
 			redirectAttrs.addFlashAttribute("msg", msg);
@@ -85,7 +85,7 @@ public class MecanicaController {
 			){
 		
 		try {
-			MecanicaRepository.update(codigoBuscado, servico);
+			mecanicaService.atualizar(codigoBuscado, servico);
 			String msg = "Servico <strong>" + " ["+ servico.getCodigo() + "] " + 
 					servico.getNome() + "</strong> atualizado com sucesso!";
 			redirectAttrs.addFlashAttribute("msg", msg);
@@ -104,7 +104,7 @@ public class MecanicaController {
 			) {
 		
 		try {
-			Mecanica servico = MecanicaRepository.delete(id);
+			Mecanica servico = mecanicaService.excluir(id);
 			String msg = "Serviço <strong>" + servico.getNome() + "</strong> excluido com sucesso!";
 			redirectAttrs.addFlashAttribute("msg", msg);
 			return "redirect:/mecanica/listar"; 

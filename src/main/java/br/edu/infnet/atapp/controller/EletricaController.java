@@ -1,5 +1,6 @@
 package br.edu.infnet.atapp.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,17 +9,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import br.edu.infnet.atapp.model.domain.Cliente;
 import br.edu.infnet.atapp.model.domain.Eletrica;
-import br.edu.infnet.atapp.model.domain.Mecanica;
-import br.edu.infnet.atapp.model.domain.Cliente;
-import br.edu.infnet.atapp.model.repository.ClienteRepository;
-import br.edu.infnet.atapp.model.repository.EletricaRepository;
-import br.edu.infnet.atapp.model.repository.MecanicaRepository;
-import br.edu.infnet.atapp.model.repository.ClienteRepository;
+import br.edu.infnet.atapp.model.service.EletricaService;
 
 @Controller
 public class EletricaController {
+	
+	
+	@Autowired
+	EletricaService eletricaService;
 	
 	@GetMapping("/eletrica")
 	public String telaCliente(
@@ -32,7 +31,7 @@ public class EletricaController {
 		} else {
 			
 			try {
-				Eletrica servico = EletricaRepository.findByCode(codigo);
+				Eletrica servico = eletricaService.buscarCodigo(codigo);
 				model.addAttribute("servico", servico);
 				return "servicos/eletrica/dados";
 			} catch(Exception error) {
@@ -45,7 +44,7 @@ public class EletricaController {
 
 	@GetMapping("/eletrica/listar")
 	public String telaLista(Model model) throws Exception {
-		model.addAttribute("servicos", EletricaRepository.findAll());
+		model.addAttribute("servicos", eletricaService.obterLista());
 		return "servicos/eletrica/lista";
 	}
 	
@@ -67,7 +66,7 @@ public class EletricaController {
 		) {
 		
 		try {
-			Eletrica servicoCadastrado = EletricaRepository.save(servico);
+			Eletrica servicoCadastrado = eletricaService.incluir(servico);
 			String msg = "Servico <strong>" + " ["+ servico.getCodigo() + "] " + 
 					servicoCadastrado.getNome() + "</strong> atualizado com sucesso!";
 			redirectAttrs.addFlashAttribute("msg", msg);
@@ -87,7 +86,7 @@ public class EletricaController {
 			){
 		
 		try {
-			EletricaRepository.update(codigoBuscado, servico);
+			eletricaService.atualizar(codigoBuscado, servico);
 			String msg = "Servico <strong>" + " ["+ servico.getCodigo() + "] " + 
 					servico.getNome() + "</strong> atualizado com sucesso!";
 			redirectAttrs.addFlashAttribute("msg", msg);
@@ -106,7 +105,7 @@ public class EletricaController {
 			) {
 		
 		try {
-			Eletrica servico = EletricaRepository.delete(id);
+			Eletrica servico = eletricaService.excluir(id);
 			String msg = "Serviço <strong>" + servico.getNome() + "</strong> excluido com sucesso!";
 			redirectAttrs.addFlashAttribute("msg", msg);
 			return "redirect:/eletrica/listar"; 
