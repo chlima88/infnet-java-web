@@ -11,7 +11,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="TEletrica")
+@Table(name = "TEletrica")
 public class Eletrica extends Servico {
 	
 	private String circuitoDanificado; // ignição, arranque, luzes, acessorios

@@ -3,6 +3,7 @@ package br.edu.infnet.atapp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import java.io.BufferedReader;
@@ -10,8 +11,10 @@ import java.io.FileReader;
 import java.io.IOException;
 
 import br.edu.infnet.atapp.model.domain.Eletrica;
+import br.edu.infnet.atapp.model.domain.Usuario;
 import br.edu.infnet.atapp.model.service.EletricaService;
 
+@Order(3)
 @Component
 public class EletricaLoader implements ApplicationRunner {
 	
@@ -42,6 +45,9 @@ public class EletricaLoader implements ApplicationRunner {
 							Boolean.valueOf(dados[3])
 						);
 					servico.setCircuitoDanificado(dados[4]);
+					Usuario usuario = new Usuario();
+					usuario.setId(Integer.valueOf(dados[5]));
+					servico.setUsuario(usuario);
 					eletricaService.incluir(servico);
 					
 					linha = file.readLine();

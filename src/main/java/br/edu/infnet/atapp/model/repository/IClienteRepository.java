@@ -10,7 +10,7 @@ public interface IClienteRepository extends CrudRepository<Cliente, Integer>  {
 
 	Cliente findByDocumento(String documento);
 	
-	@Query("from Cliente c where c.usuario.id = :idUsuario")
-	Collection<Cliente> findAllByIdUsuario(Integer idUsuario);
+	@Query("from Cliente c where c.usuario.empresa = :empresa order by c.id")
+	Collection<Cliente> findAllByEmpresa(String empresa);
 
 }

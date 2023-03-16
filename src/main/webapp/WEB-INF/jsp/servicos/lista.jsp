@@ -10,7 +10,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>    
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <meta charset="ISO-8859-1">
-	<title>Listagem de servicos mecanicos</title>
+	<title>Listagem de servicos eletricos</title>
 	<style>
 	td, th { text-align: center; }
     a.disabledLink{
@@ -26,7 +26,7 @@
 	<div class="container">
         
         
-		<h1>Listagem de servicos mecanicos</h1>
+		<h1>Listagem de servicos</h1>
 		
         <c:if test="${not empty msg}">
             <div class="alert alert-primary alert-dismissible fade show" role="alert">
@@ -35,24 +35,13 @@
             </div>
         </c:if>
 		
-		<form method="get" action="/mecanica/incluir">
-			<button 
-              class="w-25 btn btn-primary"
-              ${usuarioLogado.tipo.equals("P") ? "disabled" : ""}
-              type="submit"
-            >Novo Serviço Mecanico</button>
-            <a class="w-25 btn btn-primary" role="button" href="/mecanica/buscar" >Buscar</a>
-		</form>
-		
 		<table class="table table-hover">
 			<thead>
 				<tr>
 				    <th scope="col">Id</th>
 				    <th scope="col">Codigo</th>
 					<th scope="col">Nome</th>
-					<th scope="col">Preço Base</th>
-					<th scope="col">Categoria</th>
-                    <th scope="col">Terceirizado</th>
+                    <th scope="col">Preço</th>
                     <th scope="col">Ação</th>
 				</tr>
 			</thead>
@@ -70,19 +59,13 @@
                             <td>
                                 ${servico.nome}
                            </td>
-                           <td>
-                               ${servico.obterPrecoMaoDeObra()}
-                           </td>
 	                       <td>
-                               ${servico.categoriaServico}
-	                       </td>
-	                       <td>
-	                           ${servico.terceirizado ? "Sim" : "Não"}
+	                           ${servico.obterPrecoMaoDeObra()}
 	                       </td>
                            <td>
                                <c:if test="${!usuarioLogado.tipo.equals(\"P\")}">
-                               <a href="/mecanica?codigo=${servico.codigo}">Editar</a> 
-                               <a href="/mecanica/${servico.id}/excluir">Excluir</a>
+	                               <a href="/eletrica?codigo=${servico.codigo}">Editar</a> 
+	                               <a href="/eletrica/${servico.id}/excluir">Excluir</a>
                                </c:if>
                                <c:if test="${usuarioLogado.tipo.equals(\"P\")}">
                                    <a class="disabledLink" >Editar</a>
@@ -97,7 +80,7 @@
 		
         <c:if test="${empty servicos }">
             <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                Não há servicos cadastarados
+                Não há serviços cadastrados
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         </c:if>

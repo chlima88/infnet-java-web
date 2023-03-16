@@ -7,9 +7,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.edu.infnet.atapp.model.domain.Mecanica;
+import br.edu.infnet.atapp.model.domain.Usuario;
 import br.edu.infnet.atapp.model.service.MecanicaService;
 
 @Controller
@@ -22,6 +24,7 @@ public class MecanicaController {
 	public String telaCliente(
 			@RequestParam("codigo") String codigo, 
 			Model model,
+			@SessionAttribute("usuarioLogado") Usuario usuarioLogado,
 			RedirectAttributes redirectAttrs){
 	
 		if (codigo == ""){
@@ -30,7 +33,7 @@ public class MecanicaController {
 		} else {
 			
 			try {
-				Mecanica servico = mecanicaService.buscarCodigo(codigo);
+				Mecanica servico = mecanicaService.buscarCodigo(codigo, usuarioLogado.getEmpresa());
 				model.addAttribute("servico", servico);
 				return "servicos/mecanica/dados";
 			} catch(Exception error) {
@@ -42,8 +45,11 @@ public class MecanicaController {
 	
 
 	@GetMapping("/mecanica/listar")
-	public String telaLista(Model model) throws Exception {
-		model.addAttribute("servicos", mecanicaService.obterLista());
+	public String telaLista(
+			Model model,
+			@SessionAttribute("usuarioLogado") Usuario usuarioLogado
+		) throws Exception {
+	model.addAttribute("servicos", mecanicaService.obterLista(usuarioLogado));
 		return "servicos/mecanica/lista";
 	}
 	
@@ -59,12 +65,13 @@ public class MecanicaController {
 			
 	@PostMapping("/mecanica/incluir")
 	public String incluir(
-			Mecanica servico, 
-			Model model, 
+			Mecanica servico,   
+			@SessionAttribute("usuarioLogado") Usuario usuarioLogado,
 			RedirectAttributes redirectAttrs
 		) {
 		
 		try {
+			servico.setUsuario(usuarioLogado);
 			Mecanica servicoCadastrado = mecanicaService.incluir(servico);
 			String msg = "Servico <strong>" + " ["+ servico.getCodigo() + "] " + 
 					servicoCadastrado.getNome() + "</strong> atualizado com sucesso!";
@@ -80,11 +87,13 @@ public class MecanicaController {
 	@PostMapping("/mecanica/atualizar")
 	public String atualizar(
 				@RequestParam("codigoBuscado") String codigoBuscado, 
-				Mecanica servico,
+				Mecanica servico,   
+				@SessionAttribute("usuarioLogado") Usuario usuarioLogado,
 				RedirectAttributes redirectAttrs
-			){
+			) {
 		
 		try {
+			servico.setUsuario(usuarioLogado);
 			mecanicaService.atualizar(codigoBuscado, servico);
 			String msg = "Servico <strong>" + " ["+ servico.getCodigo() + "] " + 
 					servico.getNome() + "</strong> atualizado com sucesso!";
@@ -98,8 +107,7 @@ public class MecanicaController {
 	
 	@GetMapping("/mecanica/{id}/excluir")
 	public String excluir(
-				@PathVariable("id") Integer id, 
-				Model model,
+				@PathVariable("id") Integer id,
 				RedirectAttributes redirectAttrs
 			) {
 		

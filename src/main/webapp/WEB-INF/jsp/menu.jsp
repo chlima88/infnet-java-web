@@ -40,11 +40,11 @@
 	                 </li>
                     <c:if test="${ not empty usuarioLogado }">
 	                <li class="nav-item dropdown">
-                      <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      <a class="nav-link dropdown-toggle ${usuarioLogado.tipo.equals('P') ? 'd-none' :''}" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Usuários
                       </a>
                       <ul class="dropdown-menu">  
-                          <li><a class="dropdown-item" href="/usuario/incluir">Cadastro</a></li>
+                          <li><a class="dropdown-item ${usuarioLogado.tipo.equals('D') ? 'disabled' :''}" href="/usuario/incluir">Cadastro</a></li>
                           <li><a class="dropdown-item" href="/usuario/listar">Listagem</a></li>
                           <li><a class="dropdown-item" href="/usuario/buscar">Buscar</a></li>
                       </ul>
@@ -54,7 +54,7 @@
                         Clientes
                       </a>
                       <ul class="dropdown-menu">  
-                          <li><a class="dropdown-item" href="/cliente/incluir">Cadastro</a></li>
+                          <li><a class="dropdown-item ${usuarioLogado.tipo.equals('P') ?'disabled' :''}" href="/cliente/incluir">Cadastro</a></li>
                           <li><a class="dropdown-item" href="/cliente/listar">Listagem</a></li>
                           <li><a class="dropdown-item" href="/cliente/buscar">Buscar</a></li>
                       </ul>
@@ -64,12 +64,13 @@
 	                    Serviços
 	                  </a>
 	                  <ul class="dropdown-menu">  
+	                       <a class="dropdown-item" href="/servico/listar">Listar</a>
                           <li>
                               <a class="dropdown-item" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Elétrica &raquo;
                               </a>
                               <ul class="dropdown-menu dropdown-submenu">  
-                                  <li><a class="dropdown-item" href="/eletrica/incluir">Cadastro</a></li>
+                                  <li><a class="dropdown-item ${usuarioLogado.tipo.equals('P') ?'disabled' :''}" href="/eletrica/incluir">Cadastro</a></li>
                                   <li><a class="dropdown-item" href="/eletrica/listar">Listagem</a></li>
                                   <li><a class="dropdown-item" href="/eletrica/buscar">Buscar</a></li>
                               </ul>
@@ -79,8 +80,8 @@
                                 Laternagem &raquo;
                               </a>
                               <ul class="dropdown-menu dropdown-submenu">  
-                                  <li><a class="dropdown-item" href="/lanternagem/incluir">Cadastro</a></li>
-                                  <li><a class="dropdown-item" href="/lanternagem/listar">Listagem</a></li>
+                                  <li><a class="dropdown-item ${usuarioLogado.tipo.equals('P') ?'disabled' :''}" href="/lanternagem/incluir">Cadastro</a></li>
+                                  <li><a class="dropdown-item" dropdown-item>Listagem</a></li>
                                   <li><a class="dropdown-item" href="/lanternagem/buscar">Buscar</a></li>
                               </ul>
                           </li>  
@@ -89,7 +90,7 @@
                                 Mecânico &raquo;
                               </a>
                               <ul class="dropdown-menu dropdown-submenu">  
-                                  <li><a class="dropdown-item" href="/mecanica/incluir">Cadastro</a></li>
+                                  <li><a class="dropdown-item ${usuarioLogado.tipo.equals('P') ?'disabled' :''}" href="/mecanica/incluir">Cadastro</a></li>
                                   <li><a class="dropdown-item" href="/mecanica/listar">Listagem</a></li>
                                   <li><a class="dropdown-item" href="/mecanica/buscar">Buscar</a></li>
                               </ul>

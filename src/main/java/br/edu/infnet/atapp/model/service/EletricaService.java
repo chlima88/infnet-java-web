@@ -38,10 +38,14 @@ public class EletricaService {
 		return (Collection<Eletrica>) eletricaRepository.findAll();
 	};
 	
-	public Eletrica buscarCodigo(String codigo) throws Exception {
+	public Collection<Eletrica> obterLista(Usuario usuario) {
+		return (Collection<Eletrica>) eletricaRepository.findAllByEmpresa(usuario.getEmpresa());
+	};
+	
+	public Eletrica buscarCodigo(String codigo, String empresa) throws Exception {
 
 		Eletrica servico = eletricaRepository.findByCodigo(codigo);
-		if (servico == null) throw new Exception("Codigo <strong>" + codigo + "</strong> não encontrado");
+		if (servico == null || !servico.getUsuario().getEmpresa().equals(empresa)) throw new Exception("Codigo <strong>" + codigo + "</strong> não encontrado");
 		return servico;
 	};
 	

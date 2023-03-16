@@ -13,7 +13,9 @@
 
 	<div class="container pt-5" style="width:400px;" >
 	
-		<h1 class="mb-4">Login</h1>
+		<div class="mb-4 mx-auto"  style="width: 210px;">
+			<h1>CarServices</h1>
+		</div>
 		
 		<c:if test="${not empty erro}">
 		    <div class="alert alert-danger alert-dismissible fade show" role="alert">

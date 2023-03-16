@@ -7,8 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.edu.infnet.atapp.model.domain.Cliente;
-import br.edu.infnet.atapp.model.domain.Eletrica;
-import br.edu.infnet.atapp.model.domain.Usuario;
 import br.edu.infnet.atapp.model.repository.IClienteRepository;
 
 @Service
@@ -41,13 +39,13 @@ public class ClienteService {
 		return (Collection<Cliente>) clienteRepository.findAll();
 	}
 	
-	public Collection<Cliente> obterLista(Integer id){
-		return (Collection<Cliente>) clienteRepository.findAllByIdUsuario(id);
+	public Collection<Cliente> obterLista(String empresa){
+		return (Collection<Cliente>) clienteRepository.findAllByEmpresa(empresa);
 	}
 	
-	public Cliente buscarDocumento(String documento) throws Exception {
+	public Cliente buscarDocumento(String documento, String empresa) throws Exception {
 		Cliente cliente = clienteRepository.findByDocumento(documento);
-		if (cliente == null) throw new Exception("Documento <strong>" + documento + "</strong> não encontrado");
+		if (cliente == null || !cliente.getUsuario().getEmpresa().equals(empresa)) throw new Exception("Documento <strong>" + documento + "</strong> não encontrado");
 		return cliente;
 	}
 }

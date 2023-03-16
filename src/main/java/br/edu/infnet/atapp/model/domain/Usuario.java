@@ -22,10 +22,13 @@ public class Usuario {
 	private String senha;
 	private List<String> caracteristicas;
 	private String tipo;
-	private String setor;
+	private String empresa;
 	@OneToMany
 	@JoinColumn(name = "idUsuario")
 	private List<Cliente> clientes;
+	@OneToMany
+	@JoinColumn(name = "idUsuario")
+	private List<Servico> servicos;
 
 	public Usuario() {};
 	
@@ -46,12 +49,12 @@ public class Usuario {
 			String senha,
 			List<String> caracteristicas,
 			String tipo,
-			String setor
+			String empresa
 		) {
 		this(nome, email, senha);
 		this.caracteristicas = caracteristicas;
 		this.tipo = tipo;
-		this.setor = setor;
+		this.empresa = empresa;
 	}
 	
 	
@@ -103,12 +106,12 @@ public class Usuario {
 		this.tipo = tipo;
 	}
 
-	public String getSetor() {
-		return setor;
+	public String getEmpresa() {
+		return empresa;
 	}
 
-	public void setSetor(String setor) {
-		this.setor = setor;
+	public void setEmpresa(String empresa) {
+		this.empresa = empresa;
 	}	
 
 	public List<Cliente> getClientes() {
@@ -127,7 +130,7 @@ public class Usuario {
 				"senha: " + this.senha + "; " +
 				"caracteristicas: " + this.caracteristicas + "; " + 
 				"tipo: " + this.tipo + "; " +
-				"setor: " + this.setor;
+				"empresa: " + this.empresa;
 				
 	}
 }

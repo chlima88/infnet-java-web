@@ -6,8 +6,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.edu.infnet.atapp.model.domain.Eletrica;
 import br.edu.infnet.atapp.model.domain.Lanternagem;
+import br.edu.infnet.atapp.model.domain.Usuario;
 import br.edu.infnet.atapp.model.repository.ILanternagemRepository;
 
 @Service
@@ -38,9 +38,13 @@ public class LanternagemService {
 		return (Collection<Lanternagem>) lanternagemRepository.findAll();
 	};
 	
-	public Lanternagem buscarCodigo(String codigo) throws Exception {
+	public Collection<Lanternagem> obterLista(Usuario usuario) {
+		return (Collection<Lanternagem>) lanternagemRepository.findAllByEmpresa(usuario.getEmpresa());
+	};
+	
+	public Lanternagem buscarCodigo(String codigo, String empresa) throws Exception {
 		Lanternagem servico = lanternagemRepository.findByCodigo(codigo);
-		if (servico == null) throw new Exception("Codigo <strong>" + codigo + "</strong> não encontrado");
+		if (servico == null || !servico.getUsuario().getEmpresa().equals(empresa)) throw new Exception("Codigo <strong>" + codigo + "</strong> não encontrado");
 		return servico;
 	};
 	

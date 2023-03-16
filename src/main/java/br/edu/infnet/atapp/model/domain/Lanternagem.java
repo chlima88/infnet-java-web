@@ -11,7 +11,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="TLanternagem")
+@Table(name = "TLanternagem")
 public class Lanternagem extends Servico {
 	
 	private String tamanhoAvaria; //P,M,G

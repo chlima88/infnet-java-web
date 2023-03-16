@@ -50,7 +50,7 @@
 				    <th scope="col">Id</th>
 				    <th scope="col">Codigo</th>
 					<th scope="col">Nome</th>
-					<th scope="col">Preço Base</th>
+                    <th scope="col">Preço</th>
 					<th scope="col">Circuitos</th>
                     <th scope="col">Terceirizado</th>
                     <th scope="col">Ação</th>
@@ -71,7 +71,7 @@
                                 ${servico.nome}
                            </td>
 	                       <td>
-	                           ${servico.precoBase}
+	                           ${servico.obterPrecoMaoDeObra()}
 	                       </td>
 	                       <td>
                                ${servico.circuitoDanificado}

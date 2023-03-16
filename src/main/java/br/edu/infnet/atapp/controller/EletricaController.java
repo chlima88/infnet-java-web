@@ -7,9 +7,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.edu.infnet.atapp.model.domain.Eletrica;
+import br.edu.infnet.atapp.model.domain.Usuario;
 import br.edu.infnet.atapp.model.service.EletricaService;
 
 @Controller
@@ -23,6 +25,7 @@ public class EletricaController {
 	public String telaCliente(
 			@RequestParam("codigo") String codigo, 
 			Model model,
+			@SessionAttribute("usuarioLogado") Usuario usuarioLogado,
 			RedirectAttributes redirectAttrs){
 	
 		if (codigo == ""){
@@ -31,7 +34,7 @@ public class EletricaController {
 		} else {
 			
 			try {
-				Eletrica servico = eletricaService.buscarCodigo(codigo);
+				Eletrica servico = eletricaService.buscarCodigo(codigo, usuarioLogado.getEmpresa());
 				model.addAttribute("servico", servico);
 				return "servicos/eletrica/dados";
 			} catch(Exception error) {
@@ -43,8 +46,11 @@ public class EletricaController {
 	
 
 	@GetMapping("/eletrica/listar")
-	public String telaLista(Model model) throws Exception {
-		model.addAttribute("servicos", eletricaService.obterLista());
+	public String telaLista(
+				Model model,
+				@SessionAttribute("usuarioLogado") Usuario usuarioLogado
+			) throws Exception {
+		model.addAttribute("servicos", eletricaService.obterLista(usuarioLogado));
 		return "servicos/eletrica/lista";
 	}
 	
@@ -60,12 +66,13 @@ public class EletricaController {
 			
 	@PostMapping("/eletrica/incluir")
 	public String incluir(
-			Eletrica servico, 
-			Model model, 
+			Eletrica servico,
+			@SessionAttribute("usuarioLogado") Usuario usuarioLogado,
 			RedirectAttributes redirectAttrs
 		) {
 		
 		try {
+			servico.setUsuario(usuarioLogado);
 			Eletrica servicoCadastrado = eletricaService.incluir(servico);
 			String msg = "Servico <strong>" + " ["+ servico.getCodigo() + "] " + 
 					servicoCadastrado.getNome() + "</strong> atualizado com sucesso!";
@@ -81,11 +88,14 @@ public class EletricaController {
 	@PostMapping("/eletrica/atualizar")
 	public String atualizar(
 				@RequestParam("codigoBuscado") String codigoBuscado, 
-				Eletrica servico,
+				Eletrica servico,   
+				@SessionAttribute("usuarioLogado") Usuario usuarioLogado,
 				RedirectAttributes redirectAttrs
-			){
-		
+			) {
+			
 		try {
+			servico.setUsuario(usuarioLogado);
+			System.out.println(usuarioLogado);
 			eletricaService.atualizar(codigoBuscado, servico);
 			String msg = "Servico <strong>" + " ["+ servico.getCodigo() + "] " + 
 					servico.getNome() + "</strong> atualizado com sucesso!";
@@ -99,8 +109,7 @@ public class EletricaController {
 	
 	@GetMapping("/eletrica/{id}/excluir")
 	public String excluir(
-				@PathVariable("id") Integer id, 
-				Model model,
+				@PathVariable("id") Integer id,
 				RedirectAttributes redirectAttrs
 			) {
 		

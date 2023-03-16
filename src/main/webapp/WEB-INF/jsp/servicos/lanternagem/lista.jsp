@@ -70,9 +70,9 @@
                             <td>
                                 ${servico.nome}
                            </td>
-	                       <td>
-	                           ${servico.precoBase}
-	                       </td>
+                           <td>
+                               ${servico.obterPrecoMaoDeObra()}
+                           </td>
 	                       <td>
                                ${servico.tamanhoAvaria}
 	                       </td>

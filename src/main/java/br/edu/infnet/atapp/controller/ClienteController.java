@@ -13,7 +13,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import br.edu.infnet.atapp.model.domain.Cliente;
 import br.edu.infnet.atapp.model.domain.Usuario;
 import br.edu.infnet.atapp.model.service.ClienteService;
-import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class ClienteController {
@@ -25,15 +24,16 @@ public class ClienteController {
 	public String telaCliente(
 			@RequestParam("documento") String documento, 
 			Model model,
+			@SessionAttribute("usuarioLogado") Usuario usuarioLogado,
 			RedirectAttributes redirectAttrs){
 	
 		if (documento == ""){
-			redirectAttrs.addFlashAttribute("erro", "Um e-mail deve ser especificado na pesquisa");
+			redirectAttrs.addFlashAttribute("erro", "Um documento deve ser especificado na pesquisa");
 			return "redirect:/cliente/buscar"; 
 		} else {
 			
 			try {
-				Cliente cliente = clienteService.buscarDocumento(documento);
+				Cliente cliente = clienteService.buscarDocumento(documento, usuarioLogado.getEmpresa());
 				model.addAttribute("cliente", cliente);
 				return "cliente/dados";
 			} catch(Exception error) {
@@ -49,7 +49,7 @@ public class ClienteController {
 			Model model,
 			@SessionAttribute("usuarioLogado") Usuario usuarioLogado
 			) throws Exception {
-		model.addAttribute("clientes", clienteService.obterLista(usuarioLogado.getId()));
+		model.addAttribute("clientes", clienteService.obterLista(usuarioLogado.getEmpresa()));
 		return "cliente/lista";
 	}
 	
@@ -86,11 +86,13 @@ public class ClienteController {
 	@PostMapping("/cliente/atualizar")
 	public String atualizar(
 				@RequestParam("documentoBuscado") String documentoBuscado, 
-				Cliente cliente,
+				Cliente cliente,   
+				@SessionAttribute("usuarioLogado") Usuario usuarioLogado,
 				RedirectAttributes redirectAttrs
-			){
-		
+			) {
+			
 		try {
+			cliente.setUsuario(usuarioLogado);
 			clienteService.atualizar(documentoBuscado, cliente);
 			String msg = "Cliente <strong>" + cliente.getNome() + "</strong> atualizado com sucesso!";
 			redirectAttrs.addFlashAttribute("msg", msg);

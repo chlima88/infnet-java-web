@@ -6,8 +6,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.edu.infnet.atapp.model.domain.Lanternagem;
 import br.edu.infnet.atapp.model.domain.Mecanica;
+import br.edu.infnet.atapp.model.domain.Usuario;
 import br.edu.infnet.atapp.model.repository.IMecanicaRepository;
 
 @Service
@@ -37,9 +37,13 @@ public class MecanicaService {
 		return (Collection<Mecanica>) mecanicaRepository.findAll();
 	};
 	
-	public Mecanica buscarCodigo(String codigo) throws Exception {
+	public Collection<Mecanica> obterLista(Usuario usuario) {
+		return (Collection<Mecanica>) mecanicaRepository.findAllByEmpresa(usuario.getEmpresa());
+	};
+	
+	public Mecanica buscarCodigo(String codigo, String empresa) throws Exception {
 		Mecanica servico = mecanicaRepository.findByCodigo(codigo);
-		if (servico == null) throw new Exception("Codigo <strong>" + codigo + "</strong> não encontrado");
+		if (servico == null || !servico.getUsuario().getEmpresa().equals(empresa)) throw new Exception("Codigo <strong>" + codigo + "</strong> não encontrado");
 		return servico;
 	};
 	

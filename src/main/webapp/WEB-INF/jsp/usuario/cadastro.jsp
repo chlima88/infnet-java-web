@@ -34,6 +34,10 @@
 					<label class="form-label" for="nome">Nome:</label>
 					<input class="form-control" value="Charles" type="text" name="nome" />
 					
+                    <label class="form-label" for="nome">Empresa:</label>
+                    <input class="form-control" value="CarServices" type="text" name="empresa" />
+                    
+					
 					<label class="form-label" for="contato">E-mail: </label>
 					<input class="form-control" value="1@1.com" type="email" name="email"/>
 					
@@ -63,30 +67,19 @@
 					<p>Características:</p>
 	
 					<div class="form-group">
-						<input class="form-check-input" type="checkbox" name="caracteristicas" id="caracteristicasDev" value="Dev" checked />
-						<label class="form-check-label" for="caracteristicasDev">Developer</label>
+						<input class="form-check-input" type="checkbox" name="caracteristicas" id="caracteristicasDev" value="Ele" checked />
+						<label class="form-check-label" for="caracteristicasDev">Eletrica</label>
 					</div>
 					
 					<div class="form-group">
-						<input class="form-check-input" type="checkbox" name="caracteristicas" id="caracteristicasAnl" value="Anl"/>
-						<label class="form-check-label" for="caracteristicasAnl">Analista</label>
+						<input class="form-check-input" type="checkbox" name="caracteristicas" id="caracteristicasAnl" value="Lan"/>
+						<label class="form-check-label" for="caracteristicasAnl">Lanternagem</label>
 					</div>
 					
 					<div class="form-group">
-						<input class="form-check-input" type="checkbox" name="caracteristicas" id="caracteristicasDb" value="Db" />
-						<label class="form-check-label" for="caracteristicasDb">Database</label>
+						<input class="form-check-input" type="checkbox" name="caracteristicas" id="caracteristicasDb" value="Mec" />
+						<label class="form-check-label" for="caracteristicasDb">Mecanica</label>
 					</div>
-				
-				</div>
-			
-				<div class="col mb-3">
-					<p>Setor:</p>
-					<select name="setor">
-						<option value=1>Comercial</option>
-						<option value=2>Diretoria</option>
-						<option value=3 selected>Desenvolvimento</option>
-					</select>
-					
 				
 				</div>
 			</div>

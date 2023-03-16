@@ -7,11 +7,14 @@ import java.io.IOException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import br.edu.infnet.atapp.model.domain.Mecanica;
+import br.edu.infnet.atapp.model.domain.Usuario;
 import br.edu.infnet.atapp.model.service.MecanicaService;
 
+@Order(3)
 @Component
 public class MecanicaLoader implements ApplicationRunner {
 	
@@ -42,6 +45,9 @@ public class MecanicaLoader implements ApplicationRunner {
 							Boolean.valueOf(dados[3])
 						);
 					servico.setCategoriaServico(dados[4]);
+					Usuario usuario = new Usuario();
+					usuario.setId(Integer.valueOf(dados[5]));
+					servico.setUsuario(usuario);
 					mecanicaService.incluir(servico);
 					
 					linha = file.readLine();

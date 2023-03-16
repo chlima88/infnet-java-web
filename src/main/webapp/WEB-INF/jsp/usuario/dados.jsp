@@ -58,13 +58,16 @@
             <div class="row row-cols-1 row-cols-md-4">
                 <div class="col mb-3">
                     <label class="form-label" for="nome">Nome:</label>
-                    <input class="form-control enable-disable" value="${usuario.getNome()}" type="text" name="nome" disabled/>
+                    <input class="form-control enable-disable" value="${usuario.nome}" type="text" name="nome" disabled/>
+                    
+                    <label class="form-label" for="nome">Empresa:</label>
+                    <input class="form-control enable-disable" value="${usuario.empresa}" type="text" name="empresa" disabled/>
                     
                     <label class="form-label" for="contato">E-mail: </label>
-                    <input class="form-control enable-disable" value="${usuario.getEmail()}" type="email" name="email" disabled/>
+                    <input class="form-control enable-disable" value="${usuario.email}" type="email" name="email" disabled/>
                     
                     <label class="form-label" for="documento">Senha: </label>
-                    <input class="form-control enable-disable" value="${usuario.getSenha()}" type="password" name="senha" disabled/>
+                    <input class="form-control enable-disable" value="${usuario.senha}" type="password" name="senha" disabled/>
     
                 </div>
                 
@@ -76,7 +79,7 @@
                             value="P"
                             type="radio"
                             name="tipo"
-                            ${ usuario.getTipo() == "P" ? 'checked' : '' }
+                            ${ usuario.tipo == "P" ? 'checked' : '' }
                             disabled/>
                         <label class="form-check-label" for="tipoPadrao">Padrão</label>
                     </div>
@@ -86,7 +89,7 @@
                             value="D"
                             type="radio"
                             name="tipo"
-                            ${ usuario.getTipo() == "D" ? 'checked' : '' }
+                            ${ usuario.tipo == "D" ? 'checked' : '' }
                             disabled/>
                         <label class="form-check-label" for="tipoDiretor">Diretor</label>
                     </div>
@@ -96,7 +99,7 @@
                             value="A"
                             type="radio"
                             name="tipo"
-                            ${ usuario.getTipo() == "A" ? 'checked' : '' }
+                            ${ usuario.tipo == "A" ? 'checked' : '' }
                             disabled/>
                         <label class="form-check-label" for="tipoDatabase">Administrador</label>
                     </div>
@@ -111,11 +114,11 @@
                             class="form-check-input enable-disable" 
                             type="checkbox"
                             name="caracteristicas"
-                            id="caracteristicasDev"
-                            value="Dev"
-                            ${ usuario.getCaracteristicas().contains("Dev") ? 'checked' : '' }
+                            id="caracteristicasEle"
+                            value="Ele"
+                            ${ usuario.getCaracteristicas().contains("Ele") ? 'checked' : '' }
                             disabled />
-                        <label class="form-check-label" for="caracteristicasDev">Developer</label>
+                        <label class="form-check-label" for="caracteristicasDev">Eletrica</label>
                     </div>
                     
                     <div class="form-group">
@@ -123,11 +126,11 @@
                             class="form-check-input enable-disable"
                             type="checkbox"
                             name="caracteristicas"
-                            id="caracteristicasAnl"
-                            value="Anl"
-                            ${ usuario.getCaracteristicas().contains("Anl") ? 'checked' : '' }
+                            id="caracteristicasLan"
+                            value="Lan"
+                            ${ usuario.getCaracteristicas().contains("Lan") ? 'checked' : '' }
                             disabled/>
-                        <label class="form-check-label" for="caracteristicasAnl">Analista</label>
+                        <label class="form-check-label" for="caracteristicasAnl">Lanternagem</label>
                     </div>
                     
                     <div class="form-group">
@@ -135,27 +138,16 @@
                             class="form-check-input enable-disable"
                             type="checkbox"
                             name="caracteristicas"
-                            id="caracteristicasDb"
-                            value="Db"
-                            ${ usuario.getCaracteristicas().contains("Db") ? 'checked' : '' }
+                            id="caracteristicasMec"
+                            value="Mec"
+                            ${ usuario.getCaracteristicas().contains("Mec") ? 'checked' : '' }
                             disabled/>
-                        <label class="form-check-label" for="caracteristicasDb">Database</label>
+                        <label class="form-check-label" for="caracteristicasDb">Mecanica</label>
                     </div>
                 
-                </div>
-            
-                <div class="col mb-3">
-                    <p>Setor:</p>
-                    <select class="enable-disable" name="setor" disabled>
-                        <option value=1 ${ usuario.getSetor() == 1 ? 'selected' : '' }>Comercial</option>
-                        <option value=2 ${ usuario.getSetor() == 2 ? 'selected' : '' }>Diretoria</option>
-                        <option value=3 ${ usuario.getSetor() == 3 ? 'selected' : '' }>Desenvolvimento</option>
-                    </select>
-                    
-                
-                </div>
             </div>
 	        
+	        </div>
 	        <button 
                class="w-25 btn btn-primary read-edit"
                type="button"

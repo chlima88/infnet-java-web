@@ -52,7 +52,7 @@
 					<th scope="col">E-mail</th>
 					<th scope="col">Caracteristicas</th>
 					<th scope="col">Tipo</th>
-                    <th scope="col">Setor</th>
+                    <th scope="col">Empresa</th>
                     <th scope="col">Clientes</th>
                     <th scope="col">Ação</th>
 				</tr>
@@ -80,9 +80,7 @@
                                ${usuario.tipo.equals("D") ? "Diretor" : ""}
 	                       </td>
 	                       <td>
-	                           ${usuario.setor.equals("1") ? "Comercial" : ""}
-	                           ${usuario.setor.equals("2") ? "Diretoria" : ""}
-	                           ${usuario.setor.equals("3") ? "Desenvolvimento" : ""}
+	                           ${usuario.empresa}
 	                       </td>
                            <td>
                                ${usuario.clientes.size()}

@@ -93,7 +93,11 @@
                 </div>
 			</div>
 		
-			<button class="w-25 btn btn-primary" type="submit">Cadastrar</button>
+			<button
+              class="w-25 btn btn-primary"
+              ${usuarioLogado.tipo.equals("P") ? "disabled" : ""}
+              type="submit"
+            >Cadastrar</button>
             <a class="w-25 btn btn-primary" role="button" href="/lanternagem/listar" >Cancelar</a>
 			
 		</form>

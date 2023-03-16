@@ -7,11 +7,14 @@ import java.io.IOException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import br.edu.infnet.atapp.model.domain.Lanternagem;
+import br.edu.infnet.atapp.model.domain.Usuario;
 import br.edu.infnet.atapp.model.service.LanternagemService;
 
+@Order(3)
 @Component
 public class LanternagemLoader implements ApplicationRunner {
 	
@@ -42,6 +45,9 @@ public class LanternagemLoader implements ApplicationRunner {
 							Boolean.valueOf(dados[3])
 						);
 					servico.setTamanhoAvaria(dados[4]);
+					Usuario usuario = new Usuario();
+					usuario.setId(Integer.valueOf(dados[5]));
+					servico.setUsuario(usuario);
 					lanternagemService.incluir(servico);
 					
 					linha = file.readLine();

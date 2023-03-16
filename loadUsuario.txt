@@ -1,3 +1,4 @@
-Admin;admin@carservices;123;Dev;A;3
-Java Web;j@carservices;123;Anl;P;1
-Elberth;e@carservices;123;Anl Db;D;2
+Admin;admin@carservices;123;Ele Lan Mec;A;CarServices
+Java Web;j@carservices;123;Lan;P;Oracle
+Elberth;e@carservices;123;Ele;D;CarServices
+Spring;s@carservices;123;Mec;P;Infnet

@@ -39,7 +39,7 @@ public class ClienteLoader implements ApplicationRunner {
 					dados = linha.split(";");
 					
 					Usuario usuario = new Usuario();
-					usuario.setId(3);
+					usuario.setId(Integer.valueOf(dados[3]));
 					
 					Cliente cliente = new Cliente(dados[0],dados[1],dados[2]);
 					cliente.setUsuario(usuario);

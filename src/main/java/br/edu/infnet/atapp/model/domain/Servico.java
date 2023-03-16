@@ -5,17 +5,27 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Inheritance;
+import jakarta.persistence.InheritanceType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name = "TServico")
+@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Servico {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String nome;
 	private String codigo;
 	private float precoBase;
 	private boolean terceirizado;
+	@ManyToOne
+	@JoinColumn(name = "idUsuario")
+	private Usuario usuario;
 	
 	public Servico() {};
 	
@@ -76,6 +86,14 @@ public abstract class Servico {
 	
 	public void setTerceirizado(boolean terceirizado) {
 		this.terceirizado = terceirizado;
+	}
+	
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+	
+	public Usuario getUsuario() {
+		return this.usuario;
 	}
 
 	@Override
