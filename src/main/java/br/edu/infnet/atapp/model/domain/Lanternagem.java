@@ -7,7 +7,11 @@ import java.util.StringJoiner;
 
 import br.edu.infnet.atapp.model.exceptions.PrecoBaseInvalidoException;
 import br.edu.infnet.atapp.model.exceptions.TamanhoInvalidoException;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 
+@Entity
+@Table(name="TLanternagem")
 public class Lanternagem extends Servico {
 	
 	private String tamanhoAvaria; //P,M,G
@@ -18,7 +22,7 @@ public class Lanternagem extends Servico {
 		super(nome, codigo, precoBase, terceirizado);
 	}
 
-	
+	Lanternagem(){}
 
 	@Override
 	public float obterPrecoMaoDeObra() {		

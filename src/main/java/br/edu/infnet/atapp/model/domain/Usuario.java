@@ -2,8 +2,20 @@ package br.edu.infnet.atapp.model.domain;
 
 import java.util.List;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name="TUsuario")
 public class Usuario {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String nome;
 	private String email;
@@ -11,6 +23,9 @@ public class Usuario {
 	private List<String> caracteristicas;
 	private String tipo;
 	private String setor;
+	@OneToMany
+	@JoinColumn(name = "idUsuario")
+	private List<Cliente> clientes;
 
 	public Usuario() {};
 	
@@ -94,6 +109,14 @@ public class Usuario {
 
 	public void setSetor(String setor) {
 		this.setor = setor;
+	}	
+
+	public List<Cliente> getClientes() {
+		return clientes;
+	}
+
+	public void setClientes(List<Cliente> clientes) {
+		this.clientes = clientes;
 	}
 
 	public String toString() {

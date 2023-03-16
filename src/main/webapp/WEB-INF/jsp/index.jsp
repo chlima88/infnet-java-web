@@ -19,7 +19,7 @@
         <h2 class="mb-4">Home</h2>
         
         <div class="alert alert-primary alert-dismissible fade show" role="alert">
-            <p>Bem-vindo de volta <strong>${usuario.nome}</strong>!</p>
+            <p>Bem-vindo de volta <strong>${usuarioLogado.nome}</strong>!</p>
             <p>Utilize o menu no superior para navegar entre as páginas</p>
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>

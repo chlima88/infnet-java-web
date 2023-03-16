@@ -11,15 +11,15 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.edu.infnet.atapp.model.domain.Usuario;
-import br.edu.infnet.atapp.model.service.LoginService;
+import br.edu.infnet.atapp.model.service.UsuarioService;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
-@SessionAttributes("usuario")
+@SessionAttributes("usuarioLogado")
 public class LoginController {
 
 	@Autowired
-	private LoginService loginService;
+	private UsuarioService usuarioService;
 	
 	@GetMapping("/login")
 	public String telaLogin(Model model) {
@@ -30,7 +30,7 @@ public class LoginController {
 	public String login(
 			@RequestParam("email") String email,
 			@RequestParam("senha") String senha,
-			Model model,
+			Model model,			
 			RedirectAttributes redirectAttrs
 		) throws Exception {
 		
@@ -38,8 +38,8 @@ public class LoginController {
 		
 		try {
 			
-			Usuario usuario = loginService.autenticar(credentials);
-			model.addAttribute(usuario);
+			Usuario usuarioLogado = usuarioService.autenticar(credentials);
+			model.addAttribute("usuarioLogado", usuarioLogado);
 			return "redirect:/home";
 			
 		} catch(Exception error) {
@@ -56,7 +56,7 @@ public class LoginController {
 		) {
 		
 		status.setComplete();
-		session.removeAttribute("usuario");
+		session.removeAttribute("usuarioLogado");
 		return "redirect:/";
 	} 
 }

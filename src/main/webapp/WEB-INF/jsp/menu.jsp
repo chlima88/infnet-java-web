@@ -38,7 +38,7 @@
 	                    Home
 	                  </a>
 	                 </li>
-                    <c:if test="${ not empty usuario }">
+                    <c:if test="${ not empty usuarioLogado }">
 	                <li class="nav-item dropdown">
                       <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Usuários
@@ -110,12 +110,12 @@
 	              </ul>
 	            </div>
             <ul class="nav navbar-nav navbar-right">
-                <c:if test="${empty usuario}">
+                <c:if test="${empty usuarioLogado}">
 	                <li><a class="nav-link" href="/usuario/incluir"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
 	                <li><a class="nav-link" href="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
 	            </c:if>
-                <c:if test="${not empty usuario}">
-                    <li><a class="nav-link" href="/logout"><span class="glyphicon glyphicon-log-in"></span> Logout, ${usuario.nome}</a></li>
+                <c:if test="${not empty usuarioLogado}">
+                    <li><a class="nav-link" href="/logout"><span class="glyphicon glyphicon-log-in"></span> Logout, ${usuarioLogado.nome}</a></li>
                 </c:if>
             </ul>
           </div>

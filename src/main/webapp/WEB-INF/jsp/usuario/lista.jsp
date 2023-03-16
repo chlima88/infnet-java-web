@@ -13,6 +13,12 @@
 	<title>Listagem de usuários</title>
 	<style>
 	td, th { text-align: center; }
+	a.disabledLink{
+	    color: currentColor;
+	    cursor: not-allowed;
+	    opacity: 0.5;
+	    text-decoration: none;
+	}
 	</style>
 </head>
 <body>
@@ -30,8 +36,12 @@
         </c:if>
 		
 		<form method="get" action="/usuario/incluir">
-			<button class="w-25 btn btn-primary" type="submit">Novo usuário</button>
-			<a class="w-25 btn btn-primary" role="button" href="javascript:void(0)" onClick="history.go(-1); return false;">Voltar</a>
+			<button 
+              class="w-25 btn btn-primary"
+              ${usuarioLogado.tipo.equals("A") ? "" : "disabled"}
+              type="submit"
+            >Novo usuário</button>
+            <a class="w-25 btn btn-primary" role="button" href="/usuario/buscar" >Buscar</a>
 		</form>
 		
 		<table class="table table-hover">
@@ -43,6 +53,7 @@
 					<th scope="col">Caracteristicas</th>
 					<th scope="col">Tipo</th>
                     <th scope="col">Setor</th>
+                    <th scope="col">Clientes</th>
                     <th scope="col">Ação</th>
 				</tr>
 			</thead>
@@ -52,30 +63,39 @@
 		            <c:forEach items="${usuarios}" var="usuario">
 		                <tr>
                             <td>
-                                ${usuario.getId()}
+                                ${usuario.id}
                             </td>
 	                        <td>
-	                            ${usuario.getNome()}
+	                            ${usuario.nome}
                             </td>
                             <td>
-                                ${usuario.getEmail()}
+                                ${usuario.email}
                            </td>
 	                       <td>
-	                           ${usuario.getCaracteristicas()}
+	                           ${usuario.caracteristicas}
 	                       </td>
 	                       <td>
-                               ${usuario.getTipo().equals("P") ? "Padrão" : ""}
-                               ${usuario.getTipo().equals("A") ? "Administrador" : ""}
-                               ${usuario.getTipo().equals("D") ? "Diretor" : ""}
+                               ${usuario.tipo.equals("P") ? "Padrão" : ""}
+                               ${usuario.tipo.equals("A") ? "Administrador" : ""}
+                               ${usuario.tipo.equals("D") ? "Diretor" : ""}
 	                       </td>
 	                       <td>
-	                           ${usuario.getSetor().equals("1") ? "Comercial" : ""}
-	                           ${usuario.getSetor().equals("2") ? "Diretoria" : ""}
-	                           ${usuario.getSetor().equals("3") ? "Desenvolvimento" : ""}
+	                           ${usuario.setor.equals("1") ? "Comercial" : ""}
+	                           ${usuario.setor.equals("2") ? "Diretoria" : ""}
+	                           ${usuario.setor.equals("3") ? "Desenvolvimento" : ""}
 	                       </td>
+                           <td>
+                               ${usuario.clientes.size()}
+                           </td>
 	                       <td>
-	                           <a href="/usuario?email=${usuario.getEmail()}">Editar</a> 
-	                           <a href="/usuario/${usuario.getId()}/excluir">Excluir</a>
+	                           <c:if test="${usuarioLogado.tipo.equals(\"A\")}">
+	                               <a href="/usuario?email=${usuario.getEmail()}">Editar</a> 
+	                               <a href="/usuario/${usuario.getId()}/excluir">Excluir</a>
+	                           </c:if>
+	                           <c:if test="${!usuarioLogado.tipo.equals(\"A\")}">
+	                               <a class="disabledLink" href="#">Editar</a>
+	                               <a class="disabledLink" href="#">Excluir</a>
+	                           </c:if>
 	                       </td>
 	                    </tr>
 		            </c:forEach> 

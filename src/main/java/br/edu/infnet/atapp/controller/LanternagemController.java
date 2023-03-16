@@ -9,16 +9,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import br.edu.infnet.atapp.model.domain.Cliente;
 import br.edu.infnet.atapp.model.domain.Lanternagem;
-import br.edu.infnet.atapp.model.domain.Mecanica;
-import br.edu.infnet.atapp.model.domain.Cliente;
-import br.edu.infnet.atapp.model.repository.ClienteRepository;
-import br.edu.infnet.atapp.model.repository.LanternagemRepository;
-import br.edu.infnet.atapp.model.repository.LanternagemRepository;
-import br.edu.infnet.atapp.model.repository.MecanicaRepository;
 import br.edu.infnet.atapp.model.service.LanternagemService;
-import br.edu.infnet.atapp.model.repository.ClienteRepository;
 
 @Controller
 public class LanternagemController {

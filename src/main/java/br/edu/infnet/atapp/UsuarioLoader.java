@@ -3,18 +3,19 @@ package br.edu.infnet.atapp;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import br.edu.infnet.atapp.model.domain.Usuario;
 import br.edu.infnet.atapp.model.service.UsuarioService;
 
+@Order(1)
 @Component
 public class UsuarioLoader implements ApplicationRunner {
 

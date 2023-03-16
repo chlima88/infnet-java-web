@@ -30,7 +30,7 @@
 			<label class="form-label" for="email">Informe o documento: </label>
 			<input class="form-control mb-3" type="text" value="12345678910" name="documento" id="documento" />
 			<button class="w-25 btn btn-primary" type="submit">Buscar</button>
-			<a class="w-25 btn btn-primary" role="button" href="javascript:void(0)" onClick="history.go(-1); return false;">Voltar</a>
+            <a class="w-25 btn btn-primary" role="button" href="/cliente/listar" >Cancelar</a>
 		</form>
 	</div>
 	

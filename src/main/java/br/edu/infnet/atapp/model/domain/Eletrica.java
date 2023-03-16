@@ -7,11 +7,17 @@ import java.util.StringJoiner;
 
 import br.edu.infnet.atapp.model.exceptions.CircuitoInvalidoException;
 import br.edu.infnet.atapp.model.exceptions.PrecoBaseInvalidoException;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 
+@Entity
+@Table(name="TEletrica")
 public class Eletrica extends Servico {
 	
 	private String circuitoDanificado; // ignição, arranque, luzes, acessorios
 	private boolean incendio;
+	
+	Eletrica(){}
 
 
 	public Eletrica(String nome, String codigo, float precoBase, boolean terceirizado) throws PrecoBaseInvalidoException {

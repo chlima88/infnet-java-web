@@ -30,7 +30,7 @@
 			<label class="form-label" for="codigo">Informe o codigo: </label>
 			<input class="form-control mb-3" type="text" value="M01" name="codigo" id="codigo" />
 			<button class="w-25 btn btn-primary" type="submit">Buscar</button>
-			<a class="w-25 btn btn-primary" role="button" href="javascript:void(0)" onClick="history.go(-1); return false;">Voltar</a>
+            <a class="w-25 btn btn-primary" role="button" href="/mecanica/listar" >Cancelar</a>
 		</form>
 	</div>
 	

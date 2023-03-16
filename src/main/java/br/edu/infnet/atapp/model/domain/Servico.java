@@ -1,9 +1,16 @@
 package br.edu.infnet.atapp.model.domain;
 
 import br.edu.infnet.atapp.model.exceptions.PrecoBaseInvalidoException;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
+@Entity
 public abstract class Servico {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id;
 	private String nome;
 	private String codigo;

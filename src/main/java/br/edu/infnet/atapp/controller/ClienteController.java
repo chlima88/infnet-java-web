@@ -7,10 +7,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.edu.infnet.atapp.model.domain.Cliente;
+import br.edu.infnet.atapp.model.domain.Usuario;
 import br.edu.infnet.atapp.model.service.ClienteService;
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class ClienteController {
@@ -42,8 +45,11 @@ public class ClienteController {
 	
 
 	@GetMapping("/cliente/listar")
-	public String telaLista(Model model) throws Exception {
-		model.addAttribute("clientes", clienteService.obterLista());
+	public String telaLista(
+			Model model,
+			@SessionAttribute("usuarioLogado") Usuario usuarioLogado
+			) throws Exception {
+		model.addAttribute("clientes", clienteService.obterLista(usuarioLogado.getId()));
 		return "cliente/lista";
 	}
 	
@@ -59,12 +65,13 @@ public class ClienteController {
 			
 	@PostMapping("/cliente/incluir")
 	public String incluir(
-			Cliente cliente, 
-			Model model, 
+			Cliente cliente,
+			@SessionAttribute("usuarioLogado") Usuario usuarioLogado,
 			RedirectAttributes redirectAttrs
 		) {
 		
 		try {
+			cliente.setUsuario(usuarioLogado);
 			Cliente clienteCadastrado = clienteService.incluir(cliente);
 			String msg = "Cliente <strong>" + clienteCadastrado.getNome() + "</strong> cadastrado com sucesso!";
 			redirectAttrs.addFlashAttribute("msg", msg);

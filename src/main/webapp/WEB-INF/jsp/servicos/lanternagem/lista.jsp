@@ -13,6 +13,12 @@
 	<title>Listagem de servicos lanternagem</title>
 	<style>
 	td, th { text-align: center; }
+    a.disabledLink{
+        color: currentColor;
+        cursor: not-allowed;
+        opacity: 0.5;
+        text-decoration: none;
+    }
 	</style>
 </head>
 <body>
@@ -30,8 +36,12 @@
         </c:if>
 		
 		<form method="get" action="/lanternagem/incluir">
-			<button class="w-25 btn btn-primary" type="submit">Novo Serviço Lanternagem</button>
-			<a class="w-25 btn btn-primary" role="button" href="javascript:void(0)" onClick="history.go(-1); return false;">Voltar</a>
+			<button class="w-25 btn btn-primary"  
+              class="w-25 btn btn-primary"
+              ${usuarioLogado.tipo.equals("P") ? "disabled" : ""}
+              type="submit"
+             type="submit">Novo Serviço Lanternagem</button>
+            <a class="w-25 btn btn-primary" role="button" href="/lanternagem/buscar" >Buscar</a>
 		</form>
 		
 		<table class="table table-hover">
@@ -69,10 +79,16 @@
 	                       <td>
 	                           ${servico.terceirizado ? "Sim" : "Não"}
 	                       </td>
-	                       <td>
-	                           <a href="/lanternagem?codigo=${servico.codigo}">Editar</a> 
-	                           <a href="/lanternagem/${servico.id}/excluir">Excluir</a>
-	                       </td>
+                           <td>
+                               <c:if test="${!usuarioLogado.tipo.equals(\"P\")}">
+	                               <a href="/lanternagem?codigo=${servico.codigo}">Editar</a> 
+	                               <a href="/lanternagem/${servico.id}/excluir">Excluir</a>
+                               </c:if>
+                               <c:if test="${usuarioLogado.tipo.equals(\"P\")}">
+                                   <a class="disabledLink" >Editar</a>
+                                   <a class="disabledLink" >Excluir</a>
+                               </c:if>
+                           </td>
 	                    </tr>
 		            </c:forEach> 
 		        </tbody>

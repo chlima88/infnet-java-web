@@ -7,7 +7,11 @@ import java.util.StringJoiner;
 
 import br.edu.infnet.atapp.model.exceptions.CategoriaInvalidaException;
 import br.edu.infnet.atapp.model.exceptions.PrecoBaseInvalidoException;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 
+@Entity
+@Table(name="TMecanica")
 public class Mecanica extends Servico {
 	
 	private String categoriaServico; // revisao, troca, manutencao
@@ -17,6 +21,8 @@ public class Mecanica extends Servico {
 		super(nome, codigo, precoBase, terceirizado);
 		this.problemaMotor = false;
 	}
+	
+	Mecanica(){}
 
 	@Override
 	public float obterPrecoMaoDeObra() {		

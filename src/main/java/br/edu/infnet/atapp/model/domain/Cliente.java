@@ -1,13 +1,26 @@
 package br.edu.infnet.atapp.model.domain;
 
 import br.edu.infnet.atapp.model.exceptions.ClienteInvalidoException;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
+@Entity
+@Table(name="TCliente")
 public class Cliente {
 
+	@Id
+    @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
 	private Integer id;
 	private String nome;
 	private String documento;
 	private String contato;
+	@ManyToOne
+	@JoinColumn(name = "idUsuario")
+	private Usuario usuario;
 	
 	public Cliente() {};
 	
@@ -31,11 +44,11 @@ public class Cliente {
 	}
 	
 	
-	public Integer getId(){
+	public Integer  getId(){
 		return this.id;
 	};
 	
-	public void setId(Integer id) {
+	public void setId(Integer  id) {
 		this.id = id;
 	}
 
@@ -61,6 +74,14 @@ public class Cliente {
 
 	public void setContato(String contato) {
 		this.contato = contato;
+	}
+	
+	public Usuario getUsuario() {
+		return this.usuario;
+	}
+	
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
 	@Override

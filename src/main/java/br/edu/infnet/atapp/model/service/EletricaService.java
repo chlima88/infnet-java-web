@@ -1,37 +1,48 @@
 package br.edu.infnet.atapp.model.service;
 
 import java.util.Collection;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+
 import br.edu.infnet.atapp.model.domain.Eletrica;
-import br.edu.infnet.atapp.model.repository.EletricaRepository;
+import br.edu.infnet.atapp.model.domain.Usuario;
+import br.edu.infnet.atapp.model.repository.IEletricaRepository;
 
 @Service
 public class EletricaService {
 	
 	@Autowired
-	private EletricaRepository eletricaRepository;
+	private IEletricaRepository eletricaRepository;
 
 	public Eletrica incluir(Eletrica servico) throws Exception {
+		Eletrica servicoEncontrado = eletricaRepository.findByCodigo(servico.getCodigo());
+		if (servicoEncontrado != null ) throw new Exception("Codigo <strong>[" + servico.getCodigo() + "]</strong> ja cadastrado!");
 		return eletricaRepository.save(servico);
 	};
 	
 	public Eletrica excluir(Integer key) throws Exception {
-		return eletricaRepository.delete(key);
+		Optional<Eletrica> servico = eletricaRepository.findById(key);
+		if (servico.isEmpty()) throw new Exception("Servico não encontrado!"); 
+		eletricaRepository.deleteById(key);
+		return servico.get();
 	};
 	
 	public void atualizar(String codigo, Eletrica servico) throws Exception {
-		eletricaRepository.update(codigo, servico);
+		eletricaRepository.save(servico);
 	};
 	
 	public Collection<Eletrica> obterLista() {
-		return eletricaRepository.findAll();
+		return (Collection<Eletrica>) eletricaRepository.findAll();
 	};
 	
 	public Eletrica buscarCodigo(String codigo) throws Exception {
-		return eletricaRepository.findByCode(codigo);
+
+		Eletrica servico = eletricaRepository.findByCodigo(codigo);
+		if (servico == null) throw new Exception("Codigo <strong>" + codigo + "</strong> não encontrado");
+		return servico;
 	};
 	
 }

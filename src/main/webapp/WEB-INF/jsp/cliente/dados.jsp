@@ -69,10 +69,15 @@
                 </div>
             </div>
 	        
-	        <button class="w-25 btn btn-primary read-edit" type="button" onClick="editar()">Editar</button>
+	        <button 
+               class="w-25 btn btn-primary read-edit"
+               type="button"
+               onClick="editar()" 
+               ${usuarioLogado.tipo.equals("P") ? "disabled" : ""}
+            >Editar</button>
 	        <button class="w-25 btn btn-primary read-edit hidden">Salvar</button>
 	        <button class="w-25 btn btn-primary read-edit hidden" type="button" onClick="editar()">Cancelar</button>
-	        <a class="w-25 btn btn-primary read-edit" role="button" href="javascript:void(0)" onClick="history.go(-1); return false;">Voltar</a>
+            <a class="w-25 btn btn-primary read-edit" role="button" href="/cliente/listar" >Cancelar</a>
                     
         </form>
 	</div>

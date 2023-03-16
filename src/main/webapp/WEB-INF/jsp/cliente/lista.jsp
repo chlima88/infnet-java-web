@@ -13,6 +13,12 @@
 	<title>Listagem de clientes</title>
 	<style>
 	td, th { text-align: center; }
+    a.disabledLink{
+        color: currentColor;
+        cursor: not-allowed;
+        opacity: 0.5;
+        text-decoration: none;
+    }
 	</style>
 </head>
 <body>
@@ -30,8 +36,12 @@
         </c:if>
 		
 		<form method="get" action="/cliente/incluir">
-			<button class="w-25 btn btn-primary" type="submit">Novo cliente</button>
-			<a class="w-25 btn btn-primary" role="button" href="javascript:void(0)" onClick="history.go(-1); return false;">Voltar</a>
+			<button 
+              class="w-25 btn btn-primary"
+              ${usuarioLogado.tipo.equals("P") ? "disabled" : ""}
+              type="submit"
+            >Novo cliente</button>
+            <a class="w-25 btn btn-primary" role="button" href="/cliente/buscar" >Buscar</a>
 		</form>
 		
 		<table class="table table-hover">
@@ -40,7 +50,8 @@
 				    <th scope="col">Id</th>
 				    <th scope="col">Nome</th>
 					<th scope="col">Documento</th>
-					<th scope="col">Contato</th>
+                    <th scope="col">Contato</th>
+                    <th scope="col">Usuario</th>
                     <th scope="col">Ação</th>
 				</tr>
 			</thead>
@@ -61,10 +72,19 @@
 	                       <td>
 	                           ${cliente.contato}
 	                       </td>
-	                       <td>
-	                           <a href="/cliente?documento=${cliente.documento}">Editar</a> 
-	                           <a href="/cliente/${cliente.id}/excluir">Excluir</a>
-	                       </td>
+                           <td>
+                               ${cliente.usuario.nome}
+                           </td>
+                           <td>
+                               <c:if test="${!usuarioLogado.tipo.equals(\"P\")}">
+	                               <a href="/cliente?documento=${cliente.documento}">Editar</a> 
+	                               <a href="/cliente/${cliente.id}/excluir">Excluir</a>
+                               </c:if>
+                               <c:if test="${usuarioLogado.tipo.equals(\"P\")}">
+                                   <a class="disabledLink" >Editar</a>
+                                   <a class="disabledLink" >Excluir</a>
+                               </c:if>
+                           </td>
 	                    </tr>
 		            </c:forEach> 
 		        </tbody>

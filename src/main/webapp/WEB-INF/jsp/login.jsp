@@ -30,8 +30,7 @@
 				<label class="form-label" for="senha">Senha</label>
 				<input  class="form-control" type="password" name="senha" id="senha" value="123">
 			</div>
-			<button type="submit" class="w-25 btn btn-primary">Acessar</button>
-			<a class="w-25 btn btn-primary" role="button" href="javascript:void(0)" onClick="history.go(-1); return false;">Voltar</a>
+			<button type="submit" class="w-100 btn btn-primary">Acessar</button>
 		</form>
 	</div>
 

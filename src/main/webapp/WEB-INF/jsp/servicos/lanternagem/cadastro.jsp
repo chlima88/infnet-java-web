@@ -94,7 +94,7 @@
 			</div>
 		
 			<button class="w-25 btn btn-primary" type="submit">Cadastrar</button>
-			<a class="w-25 btn btn-primary" role="button" href="javascript:void(0)" onClick="history.go(-1); return false;">Voltar</a>
+            <a class="w-25 btn btn-primary" role="button" href="/lanternagem/listar" >Cancelar</a>
 			
 		</form>
 	</div>
