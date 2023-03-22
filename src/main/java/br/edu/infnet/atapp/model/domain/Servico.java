@@ -1,5 +1,7 @@
 package br.edu.infnet.atapp.model.domain;
 
+import java.util.List;
+
 import br.edu.infnet.atapp.model.exceptions.PrecoBaseInvalidoException;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -8,6 +10,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
@@ -26,33 +29,36 @@ public abstract class Servico {
 	@ManyToOne
 	@JoinColumn(name = "idUsuario")
 	private Usuario usuario;
-	
-	public Servico() {};
-	
+	@ManyToMany(mappedBy = "servicos")
+	private List<Agendamento> agendamentos;
+
+	public Servico() {
+	};
+
 	public Servico(String nome, String codigo, float precoBase, boolean terceirizado) throws PrecoBaseInvalidoException {
-		
-		this(); 
-		
+
+		this();
+
 		if (precoBase <= 0) {
 			throw new PrecoBaseInvalidoException("O preco deve ser superior a zero.");
 		}
-		
+
 		this.nome = nome;
 		this.codigo = codigo;
 		this.precoBase = precoBase;
 		this.terceirizado = terceirizado;
 	}
-	
+
 	public abstract float obterPrecoMaoDeObra();
-	
+
 	public float obterPrecoFinal() {
 		return this.terceirizado ? this.obterPrecoMaoDeObra() * 1.2f : this.obterPrecoMaoDeObra();
-	};	
+	};
 
 	public Integer getId() {
 		return this.id;
 	}
-	
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
@@ -60,10 +66,11 @@ public abstract class Servico {
 	public String getNome() {
 		return this.nome;
 	}
-	
+
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+
 	public String getCodigo() {
 		return this.codigo;
 	}
@@ -71,11 +78,11 @@ public abstract class Servico {
 	public void setCodigo(String codigo) {
 		this.codigo = codigo;
 	}
-	
+
 	public float getPrecoBase() {
 		return this.precoBase;
 	}
-	
+
 	public void setPrecoBase(float precoBase) {
 		this.precoBase = precoBase;
 	}
@@ -83,23 +90,31 @@ public abstract class Servico {
 	public Boolean getTerceirizado() {
 		return this.terceirizado;
 	}
-	
+
 	public void setTerceirizado(boolean terceirizado) {
 		this.terceirizado = terceirizado;
 	}
-	
+
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
-	
+
 	public Usuario getUsuario() {
 		return this.usuario;
+	}
+
+	public List<Agendamento> getAgendamentos() {
+		return agendamentos;
+	}
+
+	public void setAgendamentos(List<Agendamento> agendamentos) {
+		this.agendamentos = agendamentos;
 	}
 
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		
+
 		sb.append(this.codigo);
 		sb.append(";");
 		sb.append(this.nome);
@@ -107,9 +122,8 @@ public abstract class Servico {
 		sb.append(this.precoBase);
 		sb.append(";");
 		sb.append(this.terceirizado);
-		
+
 		return sb.toString();
 	}
-	
-		
+
 }

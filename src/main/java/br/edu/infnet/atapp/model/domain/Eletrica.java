@@ -17,7 +17,7 @@ public class Eletrica extends Servico {
 	private String circuitoDanificado; // ignição, arranque, luzes, acessorios
 	private boolean incendio;
 	
-	Eletrica(){}
+	public Eletrica(){}
 
 
 	public Eletrica(String nome, String codigo, float precoBase, boolean terceirizado) throws PrecoBaseInvalidoException {

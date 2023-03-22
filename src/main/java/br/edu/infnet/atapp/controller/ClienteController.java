@@ -49,7 +49,9 @@ public class ClienteController {
 			Model model,
 			@SessionAttribute("usuarioLogado") Usuario usuarioLogado
 			) throws Exception {
+
 		model.addAttribute("clientes", clienteService.obterLista(usuarioLogado.getEmpresa()));
+
 		return "cliente/lista";
 	}
 	

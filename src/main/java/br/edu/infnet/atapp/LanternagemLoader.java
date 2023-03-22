@@ -1,13 +1,15 @@
 package br.edu.infnet.atapp;
 
 import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.core.annotation.Order;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
 
 import br.edu.infnet.atapp.model.domain.Lanternagem;
@@ -20,15 +22,17 @@ public class LanternagemLoader implements ApplicationRunner {
 	
 	@Autowired
 	LanternagemService lanternagemService;
-
+	
+	@Value("classpath:data/loadLanternagem.txt")
+	Resource resourceFile;
+	
 	@Override
 	public void run(ApplicationArguments args) throws Exception {
 		
 		try {
-			String arquivo = "loadLanternagem.txt";
 			
 			try {
-				FileReader fileReader = new FileReader(arquivo);
+				InputStreamReader fileReader = new InputStreamReader(resourceFile.getInputStream());
 				BufferedReader file = new BufferedReader(fileReader);
 				
 				String linha = file.readLine();

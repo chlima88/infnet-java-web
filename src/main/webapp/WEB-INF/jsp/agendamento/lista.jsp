@@ -11,9 +11,10 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>    
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <meta charset="ISO-8859-1">
-	<title>Listagem de servicos lanternagem</title>
+	<title>Listagem de agendamentos</title>
 	<style>
 	td, th { text-align: center; }
+	td ul li {list-style: none;}
     a.disabledLink{
         color: currentColor;
         cursor: not-allowed;
@@ -28,7 +29,7 @@
 	<div class="container">
         
         
-		<h1>Listagem de servicos lanternagem</h1>
+		<h1>Listagem de agendamentos</h1>
 		
         <c:if test="${not empty msg}">
             <div class="alert alert-primary alert-dismissible fade show" role="alert">
@@ -37,54 +38,63 @@
             </div>
         </c:if>
 		
-		<form method="get" action="/lanternagem/incluir">
-			<button class="w-25 btn btn-primary"  
+		<form method="get" action="/agendamento/incluir">
+			<button 
               class="w-25 btn btn-primary"
               ${usuarioLogado.tipo.equals("P") ? "disabled" : ""}
               type="submit"
-             type="submit">Novo Serviço Lanternagem</button>
-            <a class="w-25 btn btn-primary" role="button" href="/lanternagem/buscar" >Buscar</a>
+            >Novo Agendamento</button>
+            <a class="w-25 btn btn-primary" role="button" href="/agendamento/buscar" >Buscar</a>
 		</form>
 		
 		<table class="table table-hover">
 			<thead>
 				<tr>
-				    <th scope="col">Id</th>
-				    <th scope="col">Codigo</th>
-					<th scope="col">Nome</th>
-					<th scope="col">Preço Base</th>
-					<th scope="col">Tam. Avaria</th>
-                    <th scope="col">Terceirizado</th>
+				    <th scope="col">Data</th>
+					<th scope="col">Duracao</th>
+					<th scope="col">Servicos</th>
+					<th scope="col">Preço total</th>
+                    <th scope="col">Cliente</th>
+                    <th scope="col">Atendente</th>
                     <th scope="col">Ação</th>
 				</tr>
 			</thead>
 			
-		    <c:if test="${not empty servicos}" >
+		    <c:if test="${not empty agendamentos}" >
 		        <tbody>
-		            <c:forEach items="${servicos}" var="servico">
+		            <c:forEach items="${agendamentos}" var="agendamento">
 		                <tr>
-                            <td>
-                                ${servico.id}
-                            </td>
 	                        <td>
-	                            ${servico.codigo}
+	                           <fmt:parseDate value="${ agendamento.data }" pattern="yyyy-MM-dd'T'HH:mm" var="parsedDateTime" type="both" />
+                               <fmt:formatDate pattern="dd-MM-yyyy HH:mm" value="${ parsedDateTime }" />
                             </td>
                             <td>
-                                ${servico.nome}
+                                ${agendamento.duracaoEmMinutos} min
                            </td>
                            <td>
-                               <fmt:formatNumber type = "currency" value="${servico.obterPrecoMaoDeObra()}" />
+                               <ul>
+	                               <c:forEach items="${agendamento.servicos}" var="servico">
+	                                  <li>${servico.codigo} - ${servico.nome}</li>
+	                               </c:forEach>
+	                           </ul>
+                           </td>
+                           <td>
+                               <c:set var="total" value="0" />
+                               <c:forEach items="${agendamento.servicos}" var="servico">
+                                  <c:set var="total" value="${total + servico.obterPrecoFinal()}" />
+                               </c:forEach>
+                               <fmt:formatNumber type = "currency" value="${total}" />                             
                            </td>
 	                       <td>
-                               ${servico.tamanhoAvaria}
+	                           ${agendamento.cliente.nome}
 	                       </td>
-	                       <td>
-	                           ${servico.terceirizado ? "Sim" : "Não"}
-	                       </td>
+                           <td>
+                               ${agendamento.usuario.nome}
+                           </td>
                            <td>
                                <c:if test="${!usuarioLogado.tipo.equals(\"P\")}">
-	                               <a href="/lanternagem?codigo=${servico.codigo}">Editar</a> 
-	                               <a href="/lanternagem/${servico.id}/excluir">Excluir</a>
+	                               <a href="/agendamento?documento=${agendamento.cliente.documento}&data=${agendamento.data}">Editar</a> 
+	                               <a href="/agendamento/${agendamento.id}/excluir">Excluir</a>
                                </c:if>
                                <c:if test="${usuarioLogado.tipo.equals(\"P\")}">
                                    <a class="disabledLink" >Editar</a>
@@ -97,9 +107,9 @@
 		    </c:if>
 		</table>
 		
-        <c:if test="${empty servicos }">
+        <c:if test="${empty agendamentos }">
             <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                Não há serviços cadastrados
+                Não há agendamentos cadastarados
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         </c:if>

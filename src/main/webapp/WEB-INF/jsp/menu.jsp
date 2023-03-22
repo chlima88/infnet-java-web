@@ -81,7 +81,7 @@
                               </a>
                               <ul class="dropdown-menu dropdown-submenu">  
                                   <li><a class="dropdown-item ${usuarioLogado.tipo.equals('P') ?'disabled' :''}" href="/lanternagem/incluir">Cadastro</a></li>
-                                  <li><a class="dropdown-item" dropdown-item>Listagem</a></li>
+                                  <li><a class="dropdown-item" href="/lanternagem/listar">Listagem</a></li>
                                   <li><a class="dropdown-item" href="/lanternagem/buscar">Buscar</a></li>
                               </ul>
                           </li>  
@@ -102,7 +102,7 @@
 	                    Agendamentos
 	                  </a>
 	                  <ul class="dropdown-menu">  
-	                      <li><a class="dropdown-item" href="/agendamento/incluir">Cadastro</a></li>
+	                      <li><a class="dropdown-item ${usuarioLogado.tipo.equals('P') ?'disabled' :''}" href="/agendamento/incluir">Cadastro</a></li>
 	                      <li><a class="dropdown-item" href="/agendamento/listar">Listagem</a></li>
 	                      <li><a class="dropdown-item" href="/agendamento/buscar">Buscar</a></li>
 	                  </ul>

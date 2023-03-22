@@ -7,15 +7,37 @@ import java.util.List;
 import br.edu.infnet.atapp.model.exceptions.ClienteIndefinidoException;
 import br.edu.infnet.atapp.model.exceptions.DuracaoAtendimentoException;
 import br.edu.infnet.atapp.model.exceptions.ServicoIndefinidoException;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
 
+@Entity
+@Table(name = "TAgendamento")
 public class Agendamento {
-	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Integer id;
 	private LocalDateTime data;
 	private boolean confirmado;
 	private int duracaoEmMinutos;
+	@OneToOne(cascade = CascadeType.DETACH)
+	@JoinColumn(name = "idCliente")
 	private Cliente cliente;
+	@ManyToMany(cascade = CascadeType.DETACH)
+	@JoinColumn(name = "agendamentos_id")
 	private List<Servico> servicos;
+	@ManyToOne
+	@JoinColumn(name = "idUsuario")
+	private Usuario usuario;
 	
+	public Agendamento() {};
 	
 	public Agendamento(Cliente cliente, List<Servico> servicos) throws ClienteIndefinidoException, ServicoIndefinidoException {
 		
@@ -45,13 +67,52 @@ public class Agendamento {
 		this.duracaoEmMinutos = duracaoEmMinutos;
 	}
 
-	public Cliente getCliente() {
-		return this.cliente;
+
+
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+	
+	public void setData(LocalDateTime data) {
+		this.data = data;
 	}
 	
 	public LocalDateTime getData() {
 		return this.data;
 	}	
+
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
+
+	public Cliente getCliente() {
+		return this.cliente;
+	}
+
+
+	public void setServicos(List<Servico> servicos) {
+		this.servicos = servicos;
+	}
+	
+	public List<Servico> getServicos() {
+		return this.servicos;
+	}
 	
 	public boolean getConfirmado() {
 		return this.confirmado;
@@ -59,10 +120,6 @@ public class Agendamento {
 	
 	public void setConfirmado(boolean confirmado) {
 		this.confirmado = confirmado;
-	}
-	
-	public List<Servico> getServicos() {
-		return this.servicos;
 	}
 
 
@@ -118,4 +175,6 @@ public class Agendamento {
 			System.out.println("   - " + servico.getNome() );
 		}
 	}
+
+
 }

@@ -86,7 +86,7 @@
 		
 			<button
 			  class="w-25 btn btn-primary" 
-              ${usuarioLogado.tipo.equals("A") ? "" : "disabled"}
+              ${empty usuarioLogado || usuarioLogado.tipo.equals("A") ? "" : "disabled"}
               type="submit"
             >Cadastrar</button>
 			<a class="w-25 btn btn-primary" role="button" href="/usuario/listar" >Cancelar</a>

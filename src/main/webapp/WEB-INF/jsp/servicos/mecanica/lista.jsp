@@ -1,4 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -22,6 +23,7 @@
 	</style>
 </head>
 <body>
+    <fmt:setLocale value = "pt_BR"/>
     <c:import url="/WEB-INF/jsp/menu.jsp" />
 	<div class="container">
         
@@ -71,7 +73,7 @@
                                 ${servico.nome}
                            </td>
                            <td>
-                               ${servico.obterPrecoMaoDeObra()}
+                               <fmt:formatNumber type = "currency" value="${servico.obterPrecoMaoDeObra()}" />
                            </td>
 	                       <td>
                                ${servico.categoriaServico}
