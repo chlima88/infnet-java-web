@@ -2,7 +2,9 @@ package br.edu.infnet.atapp.model.repository;
 
 import java.time.LocalDateTime;
 import java.util.Collection;
+import java.util.List;
 
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -12,10 +14,12 @@ public interface IAgendamentoRepository extends JpaRepository<Agendamento, Integ
 
 	Agendamento findByData(LocalDateTime data);
 	
-	@Query("from Agendamento a where a.usuario.empresa = :empresa order by a.data desc")
-	Collection<Agendamento> findAllByEmpresa(String empresa);
+	List<Agendamento> findAll(Sort sort);
+	
+	@Query("from Agendamento a where a.usuario.empresa = :empresa ")
+	Collection<Agendamento> findAllByEmpresa(String empresa, Sort sort);
 
-	Collection<Agendamento> findAllByData(LocalDateTime data);
+	Collection<Agendamento> findAllByData(LocalDateTime data, Sort sort);
 	
 }
 

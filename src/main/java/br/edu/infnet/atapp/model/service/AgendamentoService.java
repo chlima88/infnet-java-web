@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import br.edu.infnet.atapp.model.domain.Agendamento;
@@ -26,9 +27,15 @@ public class AgendamentoService {
 
 	public Agendamento incluir(Agendamento agendamento) throws Exception {
 		
-		Agendamento agendamentoEncontrado = agendamentoRepository.findByData(agendamento.getData());
-		if (agendamentoEncontrado != null ) throw new Exception("Codigo <strong>[" + agendamento.getId() + "]</strong> ja cadastrado!");
+		Collection<Agendamento> agendamentos = agendamentoRepository.findAllByData(agendamento.getData(), Sort.by(Sort.Direction.DESC, "data"));
+		
+		for (Agendamento agendamentoEncontrado: agendamentos) {
+			if (agendamento.getCliente().getNome() == agendamentoEncontrado.getCliente().getNome() ) 
+				throw new Exception("Codigo <strong>[" + agendamento.getId() + "]</strong> ja cadastrado!");
+		}
+		
 		return agendamentoRepository.save(agendamento);
+			
 	};
 	
 public Agendamento incluir(Integer usuarioId, Integer clienteId, List<Servico> servicos, Agendamento agendamento) throws Exception {
@@ -43,7 +50,10 @@ public Agendamento incluir(Integer usuarioId, Integer clienteId, List<Servico> s
 		agendamento.setServicos(servicos);
 	
 		Agendamento agendamentoEncontrado = agendamentoRepository.findByData(agendamento.getData());
-		if (agendamentoEncontrado != null ) throw new Exception("Codigo <strong>[" + agendamento.getId() + "]</strong> ja cadastrado!");
+		if (agendamentoEncontrado != null ) 
+			throw new Exception("Já existe um agendamento para o cliente no dia <strong>[" +
+								agendamento.getData()  + "]</strong> !");
+		
 		return agendamentoRepository.save(agendamento);
 	};
 	
@@ -81,15 +91,19 @@ public Agendamento incluir(Integer usuarioId, Integer clienteId, List<Servico> s
 	};
 	
 	public Collection<Agendamento> obterLista() {
-		return (Collection<Agendamento>) agendamentoRepository.findAll();
+		return agendamentoRepository.findAll();
 	};
 	
-	public Collection<Agendamento> obterLista(String empresa) {
-		return (Collection<Agendamento>) agendamentoRepository.findAllByEmpresa(empresa);
+	public Collection<Agendamento> obterLista(Usuario usuarioLogado) {
+		if (usuarioLogado.isMasterAdmin()) {
+			return agendamentoRepository.findAll();
+		} else {
+			return agendamentoRepository.findAllByEmpresa(usuarioLogado.getEmpresa(), Sort.by(Sort.Direction.ASC, "data"));			
+		}
 	};
 	
 	public Agendamento buscarDataDocumento(LocalDateTime data, String documento) throws Exception {
-		Collection<Agendamento> agendamentos = agendamentoRepository.findAllByData(data);
+		Collection<Agendamento> agendamentos = agendamentoRepository.findAllByData(data, Sort.by(Sort.Direction.ASC, "data"));
 		
 		if (agendamentos.isEmpty()) throw new Exception("Agendamento nao encontrado!");
 		

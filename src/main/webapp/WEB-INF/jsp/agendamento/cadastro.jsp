@@ -34,31 +34,25 @@
 	
 		<h1>Cadastrar agendamento</h1>
 		
-        <c:if test="${not empty erro}">
-            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                ${erro}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-        </c:if>
+        <c:import url="/WEB-INF/jsp/alertas.jsp" />
         
-	    <div class="row">
-	        <form class="col-md-4">
-	            
-	        </form>
-	    </div>
-	    
-
-	
 		<form action="/agendamento/incluir" method="post">
-		
+		    
+		    <c:set var="estadoBotao" value=""/>
 			<div class="row row-cols-1 row-cols-md-4">
 				<div class="col mb-3">				
                     
 					<label class="form-label">Cliente</label>
 			        <select name="clienteId" class="form-select select-box">
+                        <c:if test="${not empty clientes }">
 			            <c:forEach items="${clientes}" var="cliente">
 			               <option value="${ cliente.id }">${cliente.nome}</option> 
 			            </c:forEach>
+			            </c:if>
+                        <c:if test="${empty clientes }">
+                            <option selected >Não há items para exibir</option>
+                            <c:set var="estadoBotao" value="disabled" />
+                        </c:if>
 			        </select>
 			        
                     <label name="data" class="form-label">Data</label>
@@ -72,22 +66,35 @@
                 <div class="col mb-3">   
                     <label class="form-label">Atendente</label>
                     <select name="usuarioId" class="form-select select-box" >
+                        <c:if test="${not empty usuarios }">
                         <c:forEach items="${usuarios}" var="usuario">
                            <option value="${ usuario.id }">${usuario.nome}</option> 
                         </c:forEach>
+                        </c:if>
+                        <c:if test="${empty usuarios }">
+                            <option selected >Não há items para exibir</option>
+                            <c:set var="estadoBotao" value="disabled" />
+                        </c:if>
                     </select>   
                     
                     <label class="form-label">Serviço</label>
                     <select name="servicoCodigos" class="form-select select-box" required multiple>
+                    
+                        <c:if test="${not empty servicos }">
                         <c:forEach items="${servicos}" var="servico">
                            <option value="${ servico.codigo }">${servico.codigo} | ${servico.nome}</option> 
                         </c:forEach>
+                        </c:if>
+                        <c:if test="${empty servicos }">
+                            <option selected >Não há items para exibir</option>
+                            <c:set var="estadoBotao" value="disabled" />
+                        </c:if>
                     </select>
 	
 				</div>
 			</div>
 		
-			<button class="w-25 btn btn-primary" type="submit">Cadastrar</button>
+			<button class="w-25 btn btn-primary ${estadoBotao}" type="submit">Cadastrar</button>
             <a class="w-25 btn btn-primary" role="button" href="/agendamento/listar" >Cancelar</a>
 			
 		</form>

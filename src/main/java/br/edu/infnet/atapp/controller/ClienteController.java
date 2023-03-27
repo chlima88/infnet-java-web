@@ -1,6 +1,7 @@
 package br.edu.infnet.atapp.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.edu.infnet.atapp.model.domain.Cliente;
+import br.edu.infnet.atapp.model.domain.Endereco;
 import br.edu.infnet.atapp.model.domain.Usuario;
 import br.edu.infnet.atapp.model.service.ClienteService;
 
@@ -32,9 +34,8 @@ public class ClienteController {
 			return "redirect:/cliente/buscar"; 
 		} else {
 			
-			try {
-				Cliente cliente = clienteService.buscarDocumento(documento, usuarioLogado.getEmpresa());
-				model.addAttribute("cliente", cliente);
+			try {				
+				model.addAttribute("cliente", clienteService.buscarDocumento(documento, usuarioLogado));
 				return "cliente/dados";
 			} catch(Exception error) {
 				redirectAttrs.addFlashAttribute("erro", error.getMessage());
@@ -49,9 +50,7 @@ public class ClienteController {
 			Model model,
 			@SessionAttribute("usuarioLogado") Usuario usuarioLogado
 			) throws Exception {
-
-		model.addAttribute("clientes", clienteService.obterLista(usuarioLogado.getEmpresa()));
-
+		model.addAttribute("clientes", clienteService.obterLista(usuarioLogado));
 		return "cliente/lista";
 	}
 	
@@ -68,20 +67,22 @@ public class ClienteController {
 	@PostMapping("/cliente/incluir")
 	public String incluir(
 			Cliente cliente,
+			Endereco endereco,
 			@SessionAttribute("usuarioLogado") Usuario usuarioLogado,
 			RedirectAttributes redirectAttrs
 		) {
 		
 		try {
 			cliente.setUsuario(usuarioLogado);
+			cliente.setEndereco(endereco);
 			Cliente clienteCadastrado = clienteService.incluir(cliente);
 			String msg = "Cliente <strong>" + clienteCadastrado.getNome() + "</strong> cadastrado com sucesso!";
 			redirectAttrs.addFlashAttribute("msg", msg);
-			return "redirect:/cliente/listar";
 		} catch(Exception error) {
 			redirectAttrs.addFlashAttribute("erro", error.getMessage());
 			return "redirect:/cliente/incluir";
 		}
+		return "redirect:/cliente/listar";
 		
 	}
 	
@@ -95,7 +96,7 @@ public class ClienteController {
 			
 		try {
 			cliente.setUsuario(usuarioLogado);
-			clienteService.atualizar(documentoBuscado, cliente);
+			clienteService.atualizar(cliente);
 			String msg = "Cliente <strong>" + cliente.getNome() + "</strong> atualizado com sucesso!";
 			redirectAttrs.addFlashAttribute("msg", msg);
 			return "redirect:/cliente/listar";			 
@@ -116,10 +117,11 @@ public class ClienteController {
 			Cliente cliente = clienteService.excluir(id);
 			String msg = "Cliente <strong>" + cliente.getNome() + "</strong> excluido com sucesso!";
 			redirectAttrs.addFlashAttribute("msg", msg);
-			return "redirect:/cliente/listar"; 
+		} catch(DataIntegrityViolationException error) {
+			redirectAttrs.addFlashAttribute("erro", "Não foi possível excluir: <strong>O cliente está associado a um agendamento.</strong>");
 		} catch(Exception error) {
-			redirectAttrs.addFlashAttribute("erro", error.getMessage());
-			return "redirect:/cliente/listar"; 
+			redirectAttrs.addFlashAttribute("erro", error.getMessage()); 
 		}
+		return "redirect:/cliente/listar"; 
 	}
 }

@@ -36,6 +36,7 @@
 	<title>Dados do servico - mecanica</title>
 </head>
 <body>
+    <fmt:setLocale value = "pt_BR"/>
     <c:import url="/WEB-INF/jsp/menu.jsp" />
 	<div class="container">
  
@@ -43,12 +44,7 @@
 	
     <h1 class="md-5">Informações do Servico Mecanico</h1>
     
-        <c:if test="${not empty erro}">
-            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                ${erro}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-        </c:if>
+        <c:import url="/WEB-INF/jsp/alertas.jsp" />
 	       
 
         <form id="form" action="/mecanica/atualizar" method="post">

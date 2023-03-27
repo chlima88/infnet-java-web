@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <!DOCTYPE html>
@@ -18,12 +18,23 @@
         
         <h2 class="mb-4">Home</h2>
         
+        <c:import url="/WEB-INF/jsp/alertas.jsp" />
+        
         <div class="alert alert-primary alert-dismissible fade show" role="alert">
             <p>Bem-vindo de volta <strong>${usuarioLogado.nome}</strong>!</p>
-            <p>Utilize o menu no superior para navegar entre as p�ginas</p>
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
+        
+        <p>Utilize o menu no superior para navegar entre as páginas</p>
+        <p>Esse projeto foi desenvolvido:
+        <ul>
+        <li>na disciplina <strong>Desenvolvimento Web com Java EE 🎉</strong></li>
+        <li>com o prof. <strong>Elberth de Moraes🤩</strong></li>
+        <li>do curso <strong>Engenharia de Software</strong>💻</li>
+        <li>no <strong>Infnet</strong>🎓</p></li>
+        </ul>
+        <p>O repositório é: <a href="https://github.com/chlima88/infnet-java-web">https://github.com/chlima88/infnet-java-web</a></p>
 
-
+        
 </body>
 </html>

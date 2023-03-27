@@ -20,12 +20,7 @@
 	
 		<h1>Cadastrar servico mecanico</h1>
 		
-        <c:if test="${not empty erro}">
-            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                ${erro}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-        </c:if>
+        <c:import url="/WEB-INF/jsp/alertas.jsp" />
 	
 		<form action="/mecanica/incluir" method="post">
 		

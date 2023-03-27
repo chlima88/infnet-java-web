@@ -1,7 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,7 +9,9 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>    
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-    <meta charset="ISO-8859-1">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" rel="stylesheet" />
+    <meta charset="UTF-8">
 	<title>Listagem de servicos lanternagem</title>
 	<style>
 	td, th { text-align: center; }
@@ -27,24 +28,22 @@
     <c:import url="/WEB-INF/jsp/menu.jsp" />
 	<div class="container">
         
+		<h1>${usuarioLogado.empresa} - Servicos de lanternagem</h1>
+        <hr class="mb-4">
         
-		<h1>Listagem de servicos lanternagem</h1>
-		
-        <c:if test="${not empty msg}">
-            <div class="alert alert-primary alert-dismissible fade show" role="alert">
-                ${msg}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-        </c:if>
-		
-		<form method="get" action="/lanternagem/incluir">
-			<button class="w-25 btn btn-primary"  
-              class="w-25 btn btn-primary"
-              ${usuarioLogado.tipo.equals("P") ? "disabled" : ""}
-              type="submit"
-             type="submit">Novo Serviço Lanternagem</button>
-            <a class="w-25 btn btn-primary" role="button" href="/lanternagem/buscar" >Buscar</a>
-		</form>
+        <c:import url="/WEB-INF/jsp/alertas.jsp" />
+        
+        <div class="d-flex align-items-center justify-content-between mb-4">
+            <form class="d-flex gap-1 col-4" method="get" action="/lanternagem/incluir">
+                <button 
+                  class="btn col btn-primary"
+                  ${usuarioLogado.tipo.equals("P") ? "disabled" : ""}
+                  type="submit"
+                >Novo ServiÃ§o</button>
+                <a class="btn col btn-primary" role="button" href="/lanternagem/buscar" >Buscar</a>
+            </form>
+            <strong class="text-end col-3">Total de serviÃ§os: ${servicos.size()}</strong>
+        </div>
 		
 		<table class="table table-hover">
 			<thead>
@@ -52,10 +51,10 @@
 				    <th scope="col">Id</th>
 				    <th scope="col">Codigo</th>
 					<th scope="col">Nome</th>
-					<th scope="col">Preço Base</th>
+					<th scope="col">PreÃ§o Base</th>
 					<th scope="col">Tam. Avaria</th>
                     <th scope="col">Terceirizado</th>
-                    <th scope="col">Ação</th>
+                    <th scope="col">AÃ§Ã£o</th>
 				</tr>
 			</thead>
 			
@@ -71,27 +70,43 @@
                             </td>
                             <td>
                                 ${servico.nome}
-                           </td>
-                           <td>
-                               <fmt:formatNumber type = "currency" value="${servico.obterPrecoMaoDeObra()}" />
-                           </td>
-	                       <td>
-                               ${servico.tamanhoAvaria}
-	                       </td>
-	                       <td>
-	                           ${servico.terceirizado ? "Sim" : "Não"}
-	                       </td>
-                           <td>
-                               <c:if test="${!usuarioLogado.tipo.equals(\"P\")}">
-	                               <a href="/lanternagem?codigo=${servico.codigo}">Editar</a> 
-	                               <a href="/lanternagem/${servico.id}/excluir">Excluir</a>
-                               </c:if>
-                               <c:if test="${usuarioLogado.tipo.equals(\"P\")}">
-                                   <a class="disabledLink" >Editar</a>
-                                   <a class="disabledLink" >Excluir</a>
-                               </c:if>
-                           </td>
-	                    </tr>
+                            </td>
+                            <td>
+                                <fmt:formatNumber type = "currency" value="${servico.obterPrecoMaoDeObra()}" />
+                            </td>
+                            <td>
+                                ${servico.tamanhoAvaria}
+                            </td>
+                            <td>
+                                ${servico.terceirizado ? "Sim" : "NÃ£o"}
+                            </td>
+                            <td>
+                                <c:if test="${!usuarioLogado.tipo.equals(\"P\")}">
+                                    <a class="btn btn-sm btn-primary"
+                                        role="button"
+                                        href="/lanternagem?codigo=${servico.codigo}">
+                                        <i class="fa-regular fa-pen-to-square"></i>
+                                    </a> 
+                                    <a class="btn btn-sm btn-danger"
+                                        role="button"
+                                        href="/lanternagem/${servico.id}/excluir">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </a>
+                                </c:if>
+                                <c:if test="${usuarioLogado.tipo.equals(\"P\")}">
+                                    <a class="btn btn-sm btn-primary disabled"
+                                        role="button"
+                                        href="#">
+                                        <i class="fa-regular fa-pen-to-square"></i>
+                                    </a>
+                                    <a class="btn btn-sm btn-danger disabled"
+                                        role="button"
+                                        href="#">
+                                        <i class="fa-solid fa-trash"></i>
+                                    </a>
+                                </c:if>
+                            </td>
+                        </tr>
 		            </c:forEach> 
 		        </tbody>
 		    </c:if>
@@ -99,7 +114,7 @@
 		
         <c:if test="${empty servicos }">
             <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                Não há serviços cadastrados
+                NÃ£o hÃ¡ serviÃ§os cadastrados
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         </c:if>

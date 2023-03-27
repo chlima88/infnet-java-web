@@ -1,29 +1,30 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="ISO-8859-1">
-	<title>Insert title here</title>
-    <style>
-        .dropdown-menu li {
-            position: relative;
-        }
-        .dropdown-menu .dropdown-submenu {
-            display: none;
-            position: absolute;
-            left: 100%;
-            top: -7px;
-        }
-        .dropdown-menu .dropdown-submenu-left {
-            right: 100%;
-            left: auto;
-        }
-        .dropdown-menu > li:hover > .dropdown-submenu {
-          display: block;
-        }
-    </style>
-</head>
+
+<style>
+    .dropdown-menu li {
+        position: relative;
+    }
+    .dropdown-menu .dropdown-submenu {
+        display: none;
+        position: absolute;
+        left: 100%;
+        top: -7px;
+    }
+    .dropdown-menu .dropdown-submenu-left {
+        right: 100%;
+        left: auto;
+    }
+    .dropdown-menu > li:hover > .dropdown-submenu {
+      display: block;
+    }
+
+	.avatar {
+		border: 2px solid lime;
+		height: 40px;
+		width: 40px;
+	}
+</style>
 <body>
 
        <nav class="navbar navbar-expand-lg bg-primary navbar-dark mb-4">
@@ -41,7 +42,7 @@
                     <c:if test="${ not empty usuarioLogado }">
 	                <li class="nav-item dropdown">
                       <a class="nav-link dropdown-toggle ${usuarioLogado.tipo.equals('P') ? 'd-none' :''}" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Usuários
+                        UsuÃ¡rios
                       </a>
                       <ul class="dropdown-menu">  
                           <li><a class="dropdown-item ${usuarioLogado.tipo.equals('D') ? 'disabled' :''}" href="/usuario/incluir">Cadastro</a></li>
@@ -61,40 +62,47 @@
                     </li>
                     <li class="nav-item dropdown">
 	                  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-	                    Serviços
+	                    ServiÃ§os
 	                  </a>
 	                  <ul class="dropdown-menu">  
-	                       <a class="dropdown-item" href="/servico/listar">Listar</a>
-                          <li>
-                              <a class="dropdown-item" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Elétrica &raquo;
-                              </a>
-                              <ul class="dropdown-menu dropdown-submenu">  
-                                  <li><a class="dropdown-item ${usuarioLogado.tipo.equals('P') ?'disabled' :''}" href="/eletrica/incluir">Cadastro</a></li>
-                                  <li><a class="dropdown-item" href="/eletrica/listar">Listagem</a></li>
-                                  <li><a class="dropdown-item" href="/eletrica/buscar">Buscar</a></li>
-                              </ul>
-                          </li>  
-                          <li>
-                              <a class="dropdown-item" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Laternagem &raquo;
-                              </a>
-                              <ul class="dropdown-menu dropdown-submenu">  
-                                  <li><a class="dropdown-item ${usuarioLogado.tipo.equals('P') ?'disabled' :''}" href="/lanternagem/incluir">Cadastro</a></li>
-                                  <li><a class="dropdown-item" href="/lanternagem/listar">Listagem</a></li>
-                                  <li><a class="dropdown-item" href="/lanternagem/buscar">Buscar</a></li>
-                              </ul>
-                          </li>  
-                          <li>
-                              <a class="dropdown-item" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Mecânico &raquo;
-                              </a>
-                              <ul class="dropdown-menu dropdown-submenu">  
-                                  <li><a class="dropdown-item ${usuarioLogado.tipo.equals('P') ?'disabled' :''}" href="/mecanica/incluir">Cadastro</a></li>
-                                  <li><a class="dropdown-item" href="/mecanica/listar">Listagem</a></li>
-                                  <li><a class="dropdown-item" href="/mecanica/buscar">Buscar</a></li>
-                              </ul>
-                          </li>
+	                       <a class="dropdown-item" href="/servico/listar">Listar</a>  
+                         
+                          <c:if test="${usuarioLogado.caracteristicas.contains('Ele')}" >
+	                          <li>
+	                              <a class="dropdown-item" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+	                                ElÃ©trica &raquo;
+	                              </a>
+	                              <ul class="dropdown-menu dropdown-submenu">  
+	                                  <li><a class="dropdown-item ${usuarioLogado.tipo.equals('P') ?'disabled' :''}" href="/eletrica/incluir">Cadastro</a></li>
+	                                  <li><a class="dropdown-item" href="/eletrica/listar">Listagem</a></li>
+	                                  <li><a class="dropdown-item" href="/eletrica/buscar">Buscar</a></li>
+	                              </ul>
+	                          </li>    
+                          </c:if>
+                          <c:if test="${usuarioLogado.caracteristicas.contains('Lan')}" >
+	                          <li>
+	                              <a class="dropdown-item" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+	                                Laternagem &raquo;
+	                              </a>
+	                              <ul class="dropdown-menu dropdown-submenu">  
+	                                  <li><a class="dropdown-item ${usuarioLogado.tipo.equals('P') ?'disabled' :''}" href="/lanternagem/incluir">Cadastro</a></li>
+	                                  <li><a class="dropdown-item" href="/lanternagem/listar">Listagem</a></li>
+	                                  <li><a class="dropdown-item" href="/lanternagem/buscar">Buscar</a></li>
+	                              </ul>
+	                          </li>  
+                          </c:if>
+                          <c:if test="${usuarioLogado.caracteristicas.contains('Mec')}" >
+	                          <li>
+	                              <a class="dropdown-item" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+	                                MecÃ¢nico &raquo;
+	                              </a>
+	                              <ul class="dropdown-menu dropdown-submenu">  
+	                                  <li><a class="dropdown-item ${usuarioLogado.tipo.equals('P') ?'disabled' :''}" href="/mecanica/incluir">Cadastro</a></li>
+	                                  <li><a class="dropdown-item" href="/mecanica/listar">Listagem</a></li>
+	                                  <li><a class="dropdown-item" href="/mecanica/buscar">Buscar</a></li>
+	                              </ul>
+	                          </li>
+                          </c:if>
 	                  </ul>
 	                </li>
                     <li class="nav-item dropdown">
@@ -111,13 +119,18 @@
 	              </ul>
 	            </div>
             <ul class="nav navbar-nav navbar-right">
-                <c:if test="${empty usuarioLogado}">
-	                <li><a class="nav-link" href="/usuario/incluir"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-	                <li><a class="nav-link" href="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-	            </c:if>
-                <c:if test="${not empty usuarioLogado}">
-                    <li><a class="nav-link" href="/logout"><span class="glyphicon glyphicon-log-in"></span> Logout, ${usuarioLogado.nome}</a></li>
-                </c:if>
+							<c:if test="${empty usuarioLogado}">
+								<li><a class="nav-link" href="/usuario/incluir"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+								<li><a class="nav-link" href="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+							</c:if>
+							<c:if test="${not empty usuarioLogado}">
+								<li class="row">
+									<a class="nav-link col" href="/logout">
+										Logout, ${usuarioLogado.nome}
+										<img class="rounded-circle avatar" src="${usuarioLogado.imagemUrl!=null ? usuarioLogado.imagemUrl : 'https://cj-lab.s3.us-east-1.amazonaws.com/fallback-user.jpeg'}" />
+									</a>
+								</li>
+							</c:if>
             </ul>
           </div>
         </nav>

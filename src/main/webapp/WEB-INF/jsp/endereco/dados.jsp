@@ -37,10 +37,13 @@
 <body>
     <c:import url="/WEB-INF/jsp/menu.jsp" />
 	<div class="container">
-         	
+ 
+        	
+	
     <h1 class="md-5">Informações do cliente</h1>
     
         <c:import url="/WEB-INF/jsp/alertas.jsp" />
+	       
 
         <form action="/cliente/atualizar" method="post">
         

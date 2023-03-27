@@ -1,16 +1,17 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
     <script type="text/javascript" src="https://livejs.com/live.js"></script>
-  
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>    
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" rel="stylesheet" />
     <meta charset="ISO-8859-1">
-	<title>Listagem de usu·rios</title>
+	<title>Listagem de usu√°rios</title>
 	<style>
 	td, th { text-align: center; }
 	a.disabledLink{
@@ -23,28 +24,26 @@
 </head>
 <body>
     <c:import url="/WEB-INF/jsp/menu.jsp" />
-	<div class="container">
+	<div class="container">     
         
-        
-		<h1>Listagem de usu·rios</h1>
+		<h1>Usu√°rios</h1>
+		<p class="fw-bold">${usuarioLogado.empresa} </p>
+        <hr class="mb-4">
+        <c:import url="/WEB-INF/jsp/alertas.jsp" />
 		
-        <c:if test="${not empty msg}">
-            <div class="alert alert-primary alert-dismissible fade show" role="alert">
-                ${msg}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-        </c:if>
+        <div class="d-flex align-items-center justify-content-between mb-4">
+            <form class="d-flex gap-1 col-4" method="get" action="/usuario/incluir">
+                <button 
+                  class="btn col btn-primary"
+                  ${usuarioLogado.tipo.equals("P") ? "disabled" : ""}
+                  type="submit"
+                >Novo usu√°rio</button>
+                <a class="btn col btn-primary" role="button" href="/usuario/buscar" >Buscar</a>
+            </form>
+            <strong class="text-end col-3">Total de usu√°rios: ${usuarios.size()}</strong>
+        </div>
 		
-		<form method="get" action="/usuario/incluir">
-			<button 
-              class="w-25 btn btn-primary"
-              ${usuarioLogado.tipo.equals("A") ? "" : "disabled"}
-              type="submit"
-            >Novo usu·rio</button>
-            <a class="w-25 btn btn-primary" role="button" href="/usuario/buscar" >Buscar</a>
-		</form>
-		
-		<table class="table table-hover">
+		<table class="table table-sm align-middle table-hover">
 			<thead>
 				<tr>
 				    <th scope="col">Id</th>
@@ -54,7 +53,7 @@
 					<th scope="col">Tipo</th>
                     <th scope="col">Empresa</th>
                     <th scope="col">Clientes</th>
-                    <th scope="col">AÁ„o</th>
+                    <th scope="col">A√ß√£o</th>
 				</tr>
 			</thead>
 			
@@ -75,9 +74,16 @@
 	                           ${usuario.caracteristicas}
 	                       </td>
 	                       <td>
-                               ${usuario.tipo.equals("P") ? "Padr„o" : ""}
-                               ${usuario.tipo.equals("A") ? "Administrador" : ""}
-                               ${usuario.tipo.equals("D") ? "Diretor" : ""}
+	                           <c:if test="${usuario.tipo.equals('A')}">
+	                               <span class="badge bg-success rounded-pill d-inline">Admin</span>
+	                           </c:if>
+	                           <c:if test="${usuario.tipo.equals('D')}">
+	                               <span class="badge bg-primary rounded-pill d-inline">Diretor</span>
+	                           </c:if>
+	                           <c:if test="${usuario.tipo.equals('P')}">
+	                               <span class="badge bg-secondary rounded-pill d-inline">Padr√£o</span>
+	                           </c:if>
+	                           
 	                       </td>
 	                       <td>
 	                           ${usuario.empresa}
@@ -86,14 +92,50 @@
                                ${usuario.clientes.size()}
                            </td>
 	                       <td>
-	                           <c:if test="${usuarioLogado.tipo.equals(\"A\")}">
-	                               <a href="/usuario?email=${usuario.getEmail()}">Editar</a> 
-	                               <a href="/usuario/${usuario.getId()}/excluir">Excluir</a>
-	                           </c:if>
-	                           <c:if test="${!usuarioLogado.tipo.equals(\"A\")}">
-	                               <a class="disabledLink" href="#">Editar</a>
-	                               <a class="disabledLink" href="#">Excluir</a>
-	                           </c:if>
+	                           <c:choose>
+	                           <c:when test="${usuarioLogado.id == usuario.id }">
+	                               <a 
+	                                   class="btn btn-sm btn-primary " 
+	                                   role="button" 
+	                                   href="/usuario?email=${usuario.getEmail()}" 
+	                                   ><i class="fa-regular fa-pen-to-square"></i>
+	                              </a> 
+	                               <a 
+	                                   class="btn btn-sm btn-danger disabled"
+	                                   role="button"
+	                                   href="/usuario/${usuario.getId()}/excluir"
+	                                   ><i class="fa-solid fa-trash"></i>
+	                               </a>
+	                           </c:when>
+                               <c:when test="${usuarioLogado.tipo.equals(\"A\") && !usuario.masterAdmin }">
+                                   <a
+	                                   class="btn btn-sm btn-primary"
+	                                   role="button"
+	                                   href="/usuario?email=${usuario.getEmail()}"
+	                                   ><i class="fa-regular fa-pen-to-square"></i>
+                                   </a> 
+                                   <a
+	                                   class="btn btn-sm btn-danger"
+	                                   role="button"
+	                                   href="/usuario/${usuario.getId()}/excluir"
+	                                   ><i class="fa-solid fa-trash"></i>
+                                   </a>
+                               </c:when>
+	                           <c:otherwise>
+	                               <a
+		                               class="btn btn-sm btn-primary disabled"
+		                               role="button"
+		                               href="#"
+		                               ><i class="fa-regular fa-pen-to-square"></i>
+	                               </a>
+	                               <a
+		                               class="btn btn-sm btn-danger disabled"
+		                               role="button"
+		                               href="#"
+		                               ><i class="fa-solid fa-trash"></i>
+	                               </a>
+	                           </c:otherwise>
+	                           </c:choose>
 	                       </td>
 	                    </tr>
 		            </c:forEach> 
@@ -103,7 +145,7 @@
 		
         <c:if test="${empty usuarios }">
             <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                N„o h· usuarios cadastarados
+                N√£o h√° usuarios cadastarados
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         </c:if>

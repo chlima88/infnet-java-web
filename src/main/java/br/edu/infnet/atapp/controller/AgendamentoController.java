@@ -52,9 +52,9 @@ public class AgendamentoController {
 				Agendamento agendamento = agendamentoService.buscarDataDocumento(data, documento);
 				
 				model.addAttribute("agendamento", agendamento);
-				model.addAttribute("clientes", clienteService.obterLista(usuarioLogado.getEmpresa()));
-				model.addAttribute("servicos", servicoService.obterLista(usuarioLogado.getEmpresa()));
-				model.addAttribute("usuarios", usuarioService.obterLista(usuarioLogado.getEmpresa()));
+				model.addAttribute("clientes", clienteService.obterLista(usuarioLogado));
+				model.addAttribute("servicos", servicoService.obterLista(usuarioLogado));
+				model.addAttribute("usuarios", usuarioService.obterLista(usuarioLogado));
 				return "agendamento/dados";
 			} catch(Exception error) {
 				redirectAttrs.addFlashAttribute("erro", error.getMessage());
@@ -71,7 +71,7 @@ public class AgendamentoController {
 			RedirectAttributes redirectAttrs
 		) throws Exception {
 		try {
-			model.addAttribute("agendamentos", agendamentoService.obterLista(usuarioLogado.getEmpresa()));
+			model.addAttribute("agendamentos", agendamentoService.obterLista(usuarioLogado));
 			return "agendamento/lista";
 		} catch(Exception error) {
 			redirectAttrs.addFlashAttribute("erro", error.getMessage());
@@ -89,9 +89,9 @@ public class AgendamentoController {
 			Model model,
 			@SessionAttribute("usuarioLogado") Usuario usuarioLogado
 		) {
-		model.addAttribute("clientes", clienteService.obterLista(usuarioLogado.getEmpresa()));
-		model.addAttribute("servicos", servicoService.obterLista(usuarioLogado.getEmpresa()));
-		model.addAttribute("usuarios", usuarioService.obterLista(usuarioLogado.getEmpresa()));
+		model.addAttribute("clientes", clienteService.obterLista(usuarioLogado));
+		model.addAttribute("servicos", servicoService.obterLista(usuarioLogado));
+		model.addAttribute("usuarios", usuarioService.obterLista(usuarioLogado));
 		return "agendamento/cadastro";
 	}
 			

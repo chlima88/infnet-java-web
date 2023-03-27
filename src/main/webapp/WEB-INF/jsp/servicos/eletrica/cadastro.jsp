@@ -1,6 +1,6 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,16 +16,9 @@
     <c:import url="/WEB-INF/jsp/menu.jsp" />
 	<div class="container">
 	
-
-	
 		<h1>Cadastrar servico eletrico</h1>
 		
-        <c:if test="${not empty erro}">
-            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                ${erro}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-        </c:if>
+        <c:import url="/WEB-INF/jsp/alertas.jsp" />
 	
 		<form action="/eletrica/incluir" method="post">
 		

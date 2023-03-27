@@ -4,9 +4,11 @@ import java.util.Collection;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import br.edu.infnet.atapp.model.domain.Servico;
+import br.edu.infnet.atapp.model.domain.Usuario;
 import br.edu.infnet.atapp.model.repository.IServicoRepository;
 
 @Service
@@ -27,8 +29,12 @@ public class ServicoService {
 		return (Collection<Servico>) servicoRepository.findAll();
 	};
 
-	public Collection<Servico> obterLista(String empresa) {
-		return (Collection<Servico>) servicoRepository.findAllByEmpresa(empresa);
+	public Collection<Servico> obterLista(Usuario usuarioLogado) {
+		if (usuarioLogado.isMasterAdmin()) {
+			return (Collection<Servico>) servicoRepository.findAll(Sort.by(Sort.Direction.ASC, "codigo"));			
+		} else {
+			return (Collection<Servico>) servicoRepository.findAllByEmpresa(usuarioLogado.getEmpresa(), Sort.by(Sort.Direction.ASC, "codigo"));			
+		}
 	};
 
 	public Servico buscarCodigo(String codigo, String empresa) throws Exception {

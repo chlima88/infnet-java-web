@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 
@@ -35,11 +36,11 @@ public class EletricaService {
 	};
 	
 	public Collection<Eletrica> obterLista() {
-		return (Collection<Eletrica>) eletricaRepository.findAll();
+		return (Collection<Eletrica>) eletricaRepository.findAll(Sort.by(Sort.Direction.ASC, "codigo"));
 	};
 	
 	public Collection<Eletrica> obterLista(Usuario usuario) {
-		return (Collection<Eletrica>) eletricaRepository.findAllByEmpresa(usuario.getEmpresa());
+		return (Collection<Eletrica>) eletricaRepository.findAllByEmpresa(usuario.getEmpresa(), Sort.by(Sort.Direction.ASC, "codigo"));
 	};
 	
 	public Eletrica buscarCodigo(String codigo, String empresa) throws Exception {

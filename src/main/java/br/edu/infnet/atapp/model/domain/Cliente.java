@@ -1,11 +1,17 @@
 package br.edu.infnet.atapp.model.domain;
 
+import java.util.List;
+
 import br.edu.infnet.atapp.model.exceptions.ClienteInvalidoException;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -13,7 +19,7 @@ import jakarta.persistence.Table;
 public class Cliente {
 
 	@Id
-    @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String nome;
 	private String documento;
@@ -21,6 +27,11 @@ public class Cliente {
 	@ManyToOne
 	@JoinColumn(name = "idUsuario")
 	private Usuario usuario;
+	@OneToMany(mappedBy="cliente")
+	private List<Agendamento> agendamento;
+	@OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+	@JoinColumn(name = "idEndereco")
+	private Endereco endereco;
 	
 	public Cliente() {};
 	
@@ -43,14 +54,6 @@ public class Cliente {
 		this.contato = contato;
 	}
 	
-	
-	public Integer  getId(){
-		return this.id;
-	};
-	
-	public void setId(Integer  id) {
-		this.id = id;
-	}
 
 	public String getNome() {
 		return this.nome;
@@ -82,6 +85,30 @@ public class Cliente {
 	
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
+	}
+	
+	public List<Agendamento> getAgendamento() {
+	return agendamento;
+	}
+	
+	public void setAgendamento(List<Agendamento> agendamento) {
+		this.agendamento = agendamento;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public Endereco getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
 	}
 
 	@Override

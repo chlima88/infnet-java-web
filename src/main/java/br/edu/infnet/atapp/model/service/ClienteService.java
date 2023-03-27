@@ -4,9 +4,11 @@ import java.util.Collection;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import br.edu.infnet.atapp.model.domain.Cliente;
+import br.edu.infnet.atapp.model.domain.Usuario;
 import br.edu.infnet.atapp.model.repository.IClienteRepository;
 
 @Service
@@ -16,10 +18,10 @@ public class ClienteService {
 	@Autowired
 	private IClienteRepository clienteRepository;
 	
-	public Cliente incluir(Cliente usuario) throws Exception {
-		Cliente servicoEncontrado = clienteRepository.findByDocumento(usuario.getDocumento());
-		if (servicoEncontrado != null ) throw new Exception("Documento <strong>[" + usuario.getDocumento() + "]</strong> ja cadastrado!");
-		return clienteRepository.save(usuario);
+	public Cliente incluir(Cliente cliente) throws Exception {
+		Cliente servicoEncontrado = clienteRepository.findByDocumento(cliente.getDocumento(), Sort.by(Sort.Direction.ASC, "nome"));
+		if (servicoEncontrado != null ) throw new Exception("Documento <strong>[" + cliente.getDocumento() + "]</strong> ja cadastrado!");
+		return clienteRepository.save(cliente);
 	}
 	
 	public Cliente excluir(Integer key) throws Exception {
@@ -31,21 +33,29 @@ public class ClienteService {
 			
 	}
 	
-	public void atualizar(String email, Cliente usuario) throws Exception {
-		clienteRepository.save(usuario);
+	public void atualizar(Cliente cliente) throws Exception {
+		clienteRepository.save(cliente);
 	}
 	
 	public Collection<Cliente> obterLista(){
 		return (Collection<Cliente>) clienteRepository.findAll();
 	}
 	
-	public Collection<Cliente> obterLista(String empresa){
-		return (Collection<Cliente>) clienteRepository.findAllByEmpresa(empresa);
+	public Collection<Cliente> obterLista(Usuario usuarioLogado){
+		if (usuarioLogado.isMasterAdmin()) {
+			return (Collection<Cliente>) clienteRepository.findAll(Sort.by(Sort.Direction.ASC, "nome"));			
+		} else {
+			return (Collection<Cliente>) clienteRepository.findAllByEmpresa(usuarioLogado.getEmpresa(), Sort.by(Sort.Direction.ASC, "nome"));			
+		}
 	}
 	
-	public Cliente buscarDocumento(String documento, String empresa) throws Exception {
-		Cliente cliente = clienteRepository.findByDocumento(documento);
-		if (cliente == null || !cliente.getUsuario().getEmpresa().equals(empresa)) throw new Exception("Documento <strong>" + documento + "</strong> não encontrado");
+	public Cliente buscarDocumento(String documento, Usuario usuarioLogado) throws Exception {
+		Cliente cliente = clienteRepository.findByDocumento(documento, Sort.by(Sort.Direction.ASC, "nome"));
+		if (cliente == null ) throw new Exception("Documento <strong>" + documento + "</strong> não encontrado");
+		if (! usuarioLogado.isMasterAdmin() 
+				&& !cliente.getUsuario().getEmpresa().equals(usuarioLogado.getEmpresa())) 
+			throw new Exception("Documento <strong>" + documento + "</strong> não encontrado");
 		return cliente;
 	}
+
 }

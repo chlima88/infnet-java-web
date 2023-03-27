@@ -43,13 +43,7 @@
 	
     <h1 class="md-5">Informações do Servico Eletrico</h1>
     
-        <c:if test="${not empty erro}">
-            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                ${erro}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-        </c:if>
-	       
+        <c:import url="/WEB-INF/jsp/alertas.jsp" />
 
         <form id="form" action="/eletrica/atualizar" method="post">
         

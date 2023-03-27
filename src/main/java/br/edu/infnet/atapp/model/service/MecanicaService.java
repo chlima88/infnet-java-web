@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import br.edu.infnet.atapp.model.domain.Mecanica;
@@ -34,11 +35,11 @@ public class MecanicaService {
 	};
 	
 	public Collection<Mecanica> obterLista() {
-		return (Collection<Mecanica>) mecanicaRepository.findAll();
+		return (Collection<Mecanica>) mecanicaRepository.findAll(Sort.by(Sort.Direction.ASC, "nome"));
 	};
 	
 	public Collection<Mecanica> obterLista(Usuario usuario) {
-		return (Collection<Mecanica>) mecanicaRepository.findAllByEmpresa(usuario.getEmpresa());
+		return (Collection<Mecanica>) mecanicaRepository.findAllByEmpresa(usuario.getEmpresa(), Sort.by(Sort.Direction.ASC, "codigo"));
 	};
 	
 	public Mecanica buscarCodigo(String codigo, String empresa) throws Exception {

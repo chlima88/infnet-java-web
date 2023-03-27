@@ -2,12 +2,14 @@ package br.edu.infnet.atapp.model.domain;
 
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -15,7 +17,7 @@ import jakarta.persistence.Table;
 public class Usuario {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String nome;
 	private String email;
@@ -23,15 +25,19 @@ public class Usuario {
 	private List<String> caracteristicas;
 	private String tipo;
 	private String empresa;
+	private String imagemUrl;
 	@OneToMany
 	@JoinColumn(name = "idUsuario")
 	private List<Cliente> clientes;
 	@OneToMany
 	@JoinColumn(name = "idUsuario")
 	private List<Servico> servicos;
-	@OneToMany
-	@JoinColumn(name = "idUsuario")
+	@OneToMany(mappedBy="usuario")
 	private List<Agendamento> agendamentos;
+	@OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+	@JoinColumn(name = "idEndereco")
+	private Endereco endereco;
+	private boolean masterAdmin = false;
 
 	public Usuario() {};
 	
@@ -50,6 +56,7 @@ public class Usuario {
 			String nome,
 			String email,
 			String senha,
+			boolean masterAdmin,
 			List<String> caracteristicas,
 			String tipo,
 			String empresa
@@ -58,16 +65,10 @@ public class Usuario {
 		this.caracteristicas = caracteristicas;
 		this.tipo = tipo;
 		this.empresa = empresa;
+		this.masterAdmin = masterAdmin;
 	}
 	
 	
-	public Integer getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
 		
 	public String getNome() {
 		return nome;
@@ -117,6 +118,14 @@ public class Usuario {
 		this.empresa = empresa;
 	}	
 
+	public String getImagemUrl() {
+		return imagemUrl;
+	}
+
+	public void setImagemUrl(String imagemUrl) {
+		this.imagemUrl = imagemUrl;
+	}
+
 	public List<Cliente> getClientes() {
 		return clientes;
 	}
@@ -142,15 +151,42 @@ public class Usuario {
 		this.agendamentos = agendamentos;
 	}
 
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public Endereco getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
+	}
+	
+
+	public boolean isMasterAdmin() {
+		return masterAdmin;
+	}
+
+	public void setMasterAdmin(boolean masterAdmin) {
+		this.masterAdmin = masterAdmin;
+	}
+
 	public String toString() {
 		
-		return "id: " + this.id + "; " +
+		return 
 				"nome: " + this.nome + "; " +
 				"email: " + this.email + "; " +
 				"senha: " + this.senha + "; " +
 				"caracteristicas: " + this.caracteristicas + "; " + 
 				"tipo: " + this.tipo + "; " +
-				"empresa: " + this.empresa;
+				"empresa: " + this.empresa + "; " +
+				"endereco: " + this.getEndereco();
+			
 				
 	}
 }

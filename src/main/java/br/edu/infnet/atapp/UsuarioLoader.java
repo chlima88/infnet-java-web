@@ -14,6 +14,7 @@ import org.springframework.core.annotation.Order;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
 
+import br.edu.infnet.atapp.model.domain.Endereco;
 import br.edu.infnet.atapp.model.domain.Usuario;
 import br.edu.infnet.atapp.model.service.UsuarioService;
 
@@ -25,7 +26,9 @@ public class UsuarioLoader implements ApplicationRunner {
 	UsuarioService usuarioService;
 		
 	@Value("classpath:data/loadUsuario.txt")
-	Resource resourceFile;	
+	Resource arquivoUsuarios;	
+	@Value("classpath:data/loadEndereco.txt")
+	Resource arquivoEnderecos;	
 	
 	@Override
 	public void run(ApplicationArguments args) throws Exception {
@@ -33,19 +36,44 @@ public class UsuarioLoader implements ApplicationRunner {
 		try {
 			
 			try {
-				InputStreamReader fileReader = new InputStreamReader(resourceFile.getInputStream());
+				InputStreamReader fileReader = new InputStreamReader(arquivoUsuarios.getInputStream());
 				BufferedReader file = new BufferedReader(fileReader);
 				
 				String linha = file.readLine();
 				String[] dados = null; 
 				
+				
+				String[] enderecoDados = new BufferedReader(
+						new InputStreamReader(arquivoEnderecos.getInputStream())
+						).readLine().split(";");
+				
+				
 				while (linha != null) {
 					
 					dados = linha.split(";");
 					
-					List<String> caracteristicas = Arrays.asList(dados[3].split(" "));
-					
-					Usuario usuario = new Usuario(dados[0],dados[1],dados[2],caracteristicas,dados[4],dados[5]);
+					boolean masterAdmin = Boolean.valueOf(dados[3]);
+					List<String> caracteristicas = Arrays.asList(dados[4].split(" "));
+
+					Endereco endereco = new Endereco(
+							enderecoDados[0],
+							enderecoDados[1],
+							enderecoDados[2],
+							enderecoDados[3],
+							enderecoDados[4]
+						);
+
+					Usuario usuario = new Usuario(
+							dados[0],
+							dados[1],
+							dados[2],
+							masterAdmin,
+							caracteristicas,
+							dados[5],
+							dados[6]
+						);
+					usuario.setEndereco(endereco);
+					usuario.setImagemUrl(dados[7]);
 					usuarioService.incluir(usuario);
 					
 					linha = file.readLine();

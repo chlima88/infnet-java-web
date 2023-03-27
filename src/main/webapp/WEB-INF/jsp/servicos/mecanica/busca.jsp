@@ -19,12 +19,7 @@
        
 		<h1>Busca de servicos mecanicos</h1>
 		
-        <c:if test="${not empty erro}">
-            <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                ${erro}
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-        </c:if>
+        <c:import url="/WEB-INF/jsp/alertas.jsp" />
 		
 		<form method="get" action="/mecanica">
 			<label class="form-label" for="codigo">Informe o codigo: </label>

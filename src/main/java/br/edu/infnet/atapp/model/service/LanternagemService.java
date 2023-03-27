@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import br.edu.infnet.atapp.model.domain.Lanternagem;
@@ -35,11 +36,11 @@ public class LanternagemService {
 	};
 	
 	public Collection<Lanternagem> obterLista() {
-		return (Collection<Lanternagem>) lanternagemRepository.findAll();
+		return (Collection<Lanternagem>) lanternagemRepository.findAll(Sort.by(Sort.Direction.ASC, "nome"));
 	};
 	
 	public Collection<Lanternagem> obterLista(Usuario usuario) {
-		return (Collection<Lanternagem>) lanternagemRepository.findAllByEmpresa(usuario.getEmpresa());
+		return (Collection<Lanternagem>) lanternagemRepository.findAllByEmpresa(usuario.getEmpresa(), Sort.by(Sort.Direction.ASC, "codigo"));
 	};
 	
 	public Lanternagem buscarCodigo(String codigo, String empresa) throws Exception {

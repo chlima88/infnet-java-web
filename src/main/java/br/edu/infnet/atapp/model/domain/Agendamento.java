@@ -15,7 +15,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -27,11 +26,11 @@ public class Agendamento {
 	private LocalDateTime data;
 	private boolean confirmado;
 	private int duracaoEmMinutos;
-	@OneToOne(cascade = CascadeType.DETACH)
+	@ManyToOne(cascade = CascadeType.DETACH)
 	@JoinColumn(name = "idCliente")
 	private Cliente cliente;
 	@ManyToMany(cascade = CascadeType.DETACH)
-	@JoinColumn(name = "agendamentos_id")
+	@JoinColumn(name = "idAgendamento")
 	private List<Servico> servicos;
 	@ManyToOne
 	@JoinColumn(name = "idUsuario")

@@ -1,13 +1,14 @@
 package br.edu.infnet.atapp.model.repository;
 
 import java.util.Collection;
+import java.util.List;
 
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.CrudRepository;
 
 import br.edu.infnet.atapp.model.domain.Usuario;
 
-public interface IUsuarioRepository extends CrudRepository<Usuario, Integer>  {
+public interface IUsuarioRepository extends JpaRepository<Usuario, Integer>  {
 
 
 	Usuario findByEmail(String email);
@@ -17,5 +18,9 @@ public interface IUsuarioRepository extends CrudRepository<Usuario, Integer>  {
 
 	@Query("from Usuario u where u.empresa = :empresa order by u.id")
 	Collection<Usuario> findAllByEmpresa(String empresa);
+	
+	@Query("from Usuario u order by u.empresa asc, u.tipo asc")
+	List<Usuario> findAll();
+
 	
 }
