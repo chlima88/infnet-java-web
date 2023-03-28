@@ -11,7 +11,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" rel="stylesheet" />
     <meta charset="UTF-8">
-	<title>Listagem de servicos mecanicos</title>
+	<title>Listagem de serviços mecânicos</title>
 	<style>
 	td, th { text-align: center; }
     a.disabledLink{
@@ -27,10 +27,9 @@
     <c:import url="/WEB-INF/jsp/menu.jsp" />
 	<div class="container">
         
-		<h1>${usuarioLogado.empresa} - Servicos mecânicos</h1>
-        <hr class="mb-4">
-        
-        <c:import url="/WEB-INF/jsp/alertas.jsp" />
+        <c:import url="/WEB-INF/jsp/header.jsp" >
+            <c:param name="title" value="Servicos mecânicos" />
+        </c:import>	
         
         <div class="d-flex align-items-center justify-content-between mb-4">
             <form class="d-flex gap-1 col-4" method="get" action="/mecanica/incluir">
@@ -48,7 +47,7 @@
 			<thead>
 				<tr>
 				    <th scope="col">Id</th>
-				    <th scope="col">Codigo</th>
+				    <th scope="col">Código</th>
 					<th scope="col">Nome</th>
 					<th scope="col">Preço Base</th>
 					<th scope="col">Categoria</th>
@@ -113,7 +112,7 @@
 		
         <c:if test="${empty servicos }">
             <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                Não há servicos cadastrados
+                Não há serviços cadastrados
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         </c:if>

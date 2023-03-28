@@ -34,7 +34,7 @@ public class Usuario {
 	private List<Servico> servicos;
 	@OneToMany(mappedBy="usuario")
 	private List<Agendamento> agendamentos;
-	@OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+	@OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
 	@JoinColumn(name = "idEndereco")
 	private Endereco endereco;
 	private boolean masterAdmin = false;
@@ -179,6 +179,7 @@ public class Usuario {
 	public String toString() {
 		
 		return 
+				"id: " + this.id + "; " +
 				"nome: " + this.nome + "; " +
 				"email: " + this.email + "; " +
 				"senha: " + this.senha + "; " +

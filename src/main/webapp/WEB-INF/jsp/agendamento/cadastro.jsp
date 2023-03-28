@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
@@ -13,7 +12,7 @@
     <link rel="stylesheet" href="https://unpkg.com/@jarstone/dselect/dist/css/dselect.css">
     <script src="https://unpkg.com/@jarstone/dselect/dist/js/dselect.js"></script>
   
-    <meta charset="ISO-8859-1">
+    <meta charset="UTF-8">
 	<title>Cadastro de agendamentos</title>
 	
 	<style>
@@ -30,12 +29,10 @@
     <c:import url="/WEB-INF/jsp/menu.jsp" />
 	<div class="container">
 	
-
-	
-		<h1>Cadastrar agendamento</h1>
-		
-        <c:import url="/WEB-INF/jsp/alertas.jsp" />
-        
+        <c:import url="/WEB-INF/jsp/header.jsp" >
+            <c:param name="title" value="Cadastrar Agendamento" />
+        </c:import>
+                
 		<form action="/agendamento/incluir" method="post">
 		    
 		    <c:set var="estadoBotao" value=""/>
@@ -50,7 +47,7 @@
 			            </c:forEach>
 			            </c:if>
                         <c:if test="${empty clientes }">
-                            <option selected >Não há items para exibir</option>
+                            <option selected >Nï¿½o hï¿½ items para exibir</option>
                             <c:set var="estadoBotao" value="disabled" />
                         </c:if>
 			        </select>
@@ -58,7 +55,7 @@
                     <label name="data" class="form-label">Data</label>
                     <input type="datetime-local" value="2023-03-17T08:00" name="data" class="form-control">	
                     
-                    <label class="form-label">Duração</label>
+                    <label class="form-label">Duraï¿½ï¿½o</label>
                     <input type="number" value=30 min="30" step="30" name="duracaoEmMinutos" class="form-control">           		       
                     
                 </div>
@@ -72,12 +69,12 @@
                         </c:forEach>
                         </c:if>
                         <c:if test="${empty usuarios }">
-                            <option selected >Não há items para exibir</option>
+                            <option selected >Nï¿½o hï¿½ items para exibir</option>
                             <c:set var="estadoBotao" value="disabled" />
                         </c:if>
                     </select>   
                     
-                    <label class="form-label">Serviço</label>
+                    <label class="form-label">Serviï¿½o</label>
                     <select name="servicoCodigos" class="form-select select-box" required multiple>
                     
                         <c:if test="${not empty servicos }">
@@ -86,7 +83,7 @@
                         </c:forEach>
                         </c:if>
                         <c:if test="${empty servicos }">
-                            <option selected >Não há items para exibir</option>
+                            <option selected >Nï¿½o hï¿½ items para exibir</option>
                             <c:set var="estadoBotao" value="disabled" />
                         </c:if>
                     </select>

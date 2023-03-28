@@ -37,7 +37,6 @@ public class UsuarioController {
 			try {
 				Usuario usuario = usuarioService.buscarEmail(email, usuarioLogado);
 				model.addAttribute("usuario", usuario);
-//				model.addAttribute("endereco", usuario.getEndereco());
 				return "usuario/dados";
 			} catch(Exception error) {
 				redirectAttrs.addFlashAttribute("erro", error.getMessage());

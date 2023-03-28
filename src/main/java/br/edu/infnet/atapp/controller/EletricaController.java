@@ -119,7 +119,7 @@ public class EletricaController {
 			String msg = "Serviço <strong>" + servico.getNome() + "</strong> excluido com sucesso!";
 			redirectAttrs.addFlashAttribute("msg", msg);
 		} catch(DataIntegrityViolationException error) {
-			redirectAttrs.addFlashAttribute("erro", "Impossivel excluir: Servico associado a agendamento");
+			redirectAttrs.addFlashAttribute("erro", "Não foi possível excluir: <strong>O servico está associado a um agendamento.</strong>");
 		} catch(Exception error) {
 			redirectAttrs.addFlashAttribute("erro", "Não foi possivel excluir o serviço"); 
 		}

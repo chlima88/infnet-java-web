@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
@@ -13,7 +12,7 @@
     <link rel="stylesheet" href="https://unpkg.com/@jarstone/dselect/dist/css/dselect.css">
     <script src="https://unpkg.com/@jarstone/dselect/dist/js/dselect.js"></script>
   
-    <meta charset="ISO-8859-1">
+    <meta charset="UTF-8">
     <style>
        
      .hidden {
@@ -26,14 +25,11 @@
 <body>
     <c:import url="/WEB-INF/jsp/menu.jsp" />
 	<div class="container">
- 
-        	
-	
-    <h1 class="md-5">Informações do agendamento</h1>
     
-        <c:import url="/WEB-INF/jsp/alertas.jsp" />
-	       
-
+        <c:import url="/WEB-INF/jsp/header.jsp" >
+            <c:param name="title" value="InformaÃ§Ãµes do Agendamento" />
+        </c:import>
+        	
         <form action="/agendamento/atualizar" method="post">
         
             <input type="hidden" value="${agendamento.cliente.documento}" name="documentoBuscado" />
@@ -52,7 +48,7 @@
                     <label name="data" class="form-label">Data</label>
                     <input type="datetime-local" value="${agendamento.data }" name="data" class="form-control enable-disable" disabled> 
                     
-                    <label class="form-label">Duração</label>
+                    <label class="form-label">Duraï¿½ï¿½o</label>
                     <input type="number" value=${agendamento.duracaoEmMinutos } min="30" step="30" name="duracaoEmMinutos" class="form-control enable-disable" disabled>                         
                     
                 </div>
@@ -65,7 +61,7 @@
                         </c:forEach>
                     </select>   
 
-                    <label class="form-label">Serviço</label>
+                    <label class="form-label">Serviï¿½o</label>
                     <select name="servicoCodigos" class="form-select select-box enable-disable" multiple disabled>
                         <c:forEach items="${servicos}" var="servico">
                            <option value="${ servico.codigo }"  ${agendamento.servicos.contains(servico) ? "selected" : "" }>${servico.codigo} | ${servico.nome}</option> 

@@ -37,9 +37,9 @@
     <c:import url="/WEB-INF/jsp/menu.jsp" />
 	<div class="container">
  
-        	
-	
-    <h1 class="md-5">Informações do usuário</h1>
+    <c:import url="/WEB-INF/jsp/header.jsp" >
+        <c:param name="title" value="Informações do usuário" />
+    </c:import>	
     
         <c:import url="/WEB-INF/jsp/alertas.jsp" />
 	       

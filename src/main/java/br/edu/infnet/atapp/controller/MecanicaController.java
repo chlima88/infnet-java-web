@@ -1,6 +1,7 @@
 package br.edu.infnet.atapp.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -115,10 +116,11 @@ public class MecanicaController {
 			Mecanica servico = mecanicaService.excluir(id);
 			String msg = "Serviço <strong>" + servico.getNome() + "</strong> excluido com sucesso!";
 			redirectAttrs.addFlashAttribute("msg", msg);
-			return "redirect:/mecanica/listar"; 
+		} catch(DataIntegrityViolationException error) {
+			redirectAttrs.addFlashAttribute("erro", "Não foi possível excluir: <strong>O servico está associado a um agendamento.</strong>"); 
 		} catch(Exception error) {
-			redirectAttrs.addFlashAttribute("erro", error.getMessage());
-			return "redirect:/mecanica/listar"; 
+			redirectAttrs.addFlashAttribute("erro", error.getMessage()); 
 		}
+		return "redirect:/mecanica/listar";
 	}
 }

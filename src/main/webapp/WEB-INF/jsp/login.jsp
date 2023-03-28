@@ -1,12 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
 	<script type="text/javascript" src="https://livejs.com/live.js"></script>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-	<meta charset="ISO-8859-1">
+	<meta charset="UTF-8">
 	<title>Login</title>
 	<style>
         body {
@@ -25,11 +24,6 @@
 <body>
 
 	<div class="container pt-5 vh-100 d-flex flex-column justify-content-center" style="width:400px;" >
-	
-
-		
-
-		
 		<form class="bg-white rounded-4 p-5" method="post" action="login">
 	        <div class="text-center mb-4 mx-auto">
 	            <h1>CarServices</h1>

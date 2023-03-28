@@ -9,7 +9,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" rel="stylesheet" />
-    <meta charset="ISO-8859-1">
+    <meta charset="UTF-8">
 	<title>Listagem de agendamentos</title>
 	<style>
 	td, th { text-align: center; }
@@ -27,10 +27,9 @@
     <c:import url="/WEB-INF/jsp/menu.jsp" />
 	<div class="container">
         
-		<h1>${usuarioLogado.empresa} - Agendamentos</h1>
-        <hr class="mb-4">
-		
-        <c:import url="/WEB-INF/jsp/alertas.jsp" />
+        <c:import url="/WEB-INF/jsp/header.jsp" >
+            <c:param name="title" value="Agendamentos" />
+        </c:import>
         
         <div class="d-flex align-items-center justify-content-between mb-4">
             <form class="d-flex gap-1 col-4" method="get" action="/agendamento/incluir">

@@ -47,7 +47,7 @@ public class UsuarioService {
 				usuarioEncontrado.getId() != usuario.getId())
 			throw new Exception("E-mail <strong>[" + usuario.getEmail() + "]</strong> ja cadastrado!");
 		
-		System.out.println(usuario);
+		System.out.println(usuario.getId());
 		usuarioRepository.save(usuario);
 	}
 

@@ -12,7 +12,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" rel="stylesheet" />
     <meta charset="UTF-8">
-    <title>Listagem de servicos eletricos</title>
+    <title>Listagem de serviços</title>
     <style>
         td, th {
             text-align: center;
@@ -31,22 +31,22 @@
     <c:import url="/WEB-INF/jsp/menu.jsp" />
     <div class="container">
 
-
-        <h1>${usuarioLogado.empresa} - Servicos</h1>
-        <hr class="mb-4">
+        <c:import url="/WEB-INF/jsp/header.jsp" >
+            <c:param name="title" value="Serviços" />
+        </c:import>	
+        
         <div class="d-flex align-items-center justify-content-end mb-4">
-            <strong class="text-end col-3">Total de servicos: ${servicos.size()}</strong>
+            <strong class="text-end col-3">Total de serviços: ${servicos.size()}</strong>
         </div>
-        <c:import url="/WEB-INF/jsp/alertas.jsp" />
 
 
         <table class="table table-sm align-middle table-hover mb-4">
             <thead>
                 <tr>
                     <th scope="col">Id</th>
-                    <th scope="col">Codigo</th>
+                    <th scope="col">Código</th>
                     <th scope="col">Nome</th>
-                    <th scope="col">Preçoo</th>
+                    <th scope="col">Preço</th>
                     <th scope="col">Ação</th>
                 </tr>
             </thead>
